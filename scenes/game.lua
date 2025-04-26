@@ -13,12 +13,12 @@ end
 function scene.update()
   function love.keypressed(key, unicode)
     if key == "n" then
-      SSM.remove("game")
-      SSM.add("intro")
+      SceneManager.remove("game")
+      SceneManager.add("intro")
     end
   end
 
-  if SSM.isFrozen(SSM.current) ~= true then
+  if SceneManager.isFrozen(SceneManager.current) ~= true then
     x = x + 1
   end
 end
@@ -29,10 +29,10 @@ function scene.draw()
   love.graphics.setFont(font)
   love.graphics.print(
     "Scene file: \"game.lua\"\n\n" ..
-    "Scene called by SSM.add(\"game\"), in \"scenes/inventory.lua\",\n" ..
+    "Scene called by SceneManager.add(\"game\"), in \"scenes/inventory.lua\",\n" ..
     "Press `n` add the next scene, and remove the current scene.\n" ..
     "All keys are mapped in \"scenes/game.lua\".\n\n" ..
-    "For more info on SSM please refer to the README or source code, thanks.",
+    "For more info on SceneManager please refer to the README or source code, thanks.",
     20,
     20
   )

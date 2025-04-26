@@ -1,26 +1,33 @@
-SSM = require "lib.StackingSceneMgr".newManager()
+-- debugging and logging
+if arg[#arg] == "vsc_debug" then require("lldebugger").start() end
+if love.filesystem then io.stdout:setvbuf("no") end
+
+InputManager = require "lib.InputManager"
+SceneManager = require "lib.SceneManager".newManager()
+EventBus = require "lib.EventBus"
 Button = require "src.components.Button"
 Colors = require "config.Colors"
 Fonts = require "config.Fonts"
 
 -- You can also seperate out the function call as shown in the comments below.
--- local SSM = require "lib.StackingSceneMgr"
--- local SSM = SSM.newManager()
+-- local SceneManager = require "lib.StackingSceneMgr"
+-- local SceneManager = SceneManager.newManager()
 
 function love.load()
-  -- Set path of your scene files
-  SSM.setPath("scenes/")
+  SceneManager.setPath("scenes/")
+  SceneManager.add("debug")
+  SceneManager.add("intro")
 
-  -- Add scene "intro" to scene table
-  SSM.add("intro")
+
+  SceneManager.modify("debug", { visible = false })
 end
 
 function love.update(dt)
-  -- Update the scene table
-  SSM.update(dt)
+  SceneManager.update(dt)
+
+  love.keyboard.resetInputStates()
 end
 
 function love.draw()
-  -- Render the scene table
-  SSM.draw()
+  SceneManager.draw()
 end

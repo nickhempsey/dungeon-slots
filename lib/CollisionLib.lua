@@ -1,5 +1,5 @@
-local collision = {}   -- Returned collision table
-local distance = nil   -- Funciton that gets distance between two points
+local collision = {} -- Returned collision table
+local distance = nil -- Function that gets distance between two points
 
 
 --                     --
@@ -10,33 +10,39 @@ local distance = nil   -- Funciton that gets distance between two points
 
 function collision.pointPoint(point1, point2)
   if point1.x == point2.x and point1.y == point2.y
-  then return true end
+  then
+    return true
+  end
 
   return false
 end
 
 function collision.rectRect(rect1, rect2)
-  if rect1.x + rect1.w > rect2.x and       -- right  rect1 > left   rect2
-     rect1.y + rect1.h > rect2.y and       -- bottom rect1 > top    rect2
-     rect1.x < rect2.x + rect2.w and       -- left   rect1 > left   rect2
-     rect1.y < rect2.y + rect2.h           -- top    rect1 > bottom rect2
-  then return true end
+  if rect1.x + rect1.w > rect2.x and -- right  rect1 > left   rect2
+      rect1.y + rect1.h > rect2.y and -- bottom rect1 > top    rect2
+      rect1.x < rect2.x + rect2.w and -- left   rect1 > left   rect2
+      rect1.y < rect2.y + rect2.h    -- top    rect1 > bottom rect2
+  then
+    return true
+  end
 
   return false
 end
 
 function collision.pointRect(point, rect)
   if point.x > rect.x and
-     point.y > rect.y and
-     point.x < rect.x + rect.w and
-     point.y < rect.y + rect.h
-  then return true end
+      point.y > rect.y and
+      point.x < rect.x + rect.w and
+      point.y < rect.y + rect.h
+  then
+    return true
+  end
 
   return false
 end
 
 function collision.circCirc(circ1, circ2)
-  if distance(circ1, circ2) < circ1.r+circ2.r then
+  if distance(circ1, circ2) < circ1.r + circ2.r then
     return true
   end
   return false
@@ -50,22 +56,21 @@ function collision.pointCirc(point, circ)
 end
 
 function collision.circRect(circ, rect)
-
-  local test = {x, y}
+  local test = { x, y }
   test.x = circ.x
   test.y = circ.y
 
   -- Find closest edges to check against
   if circ.x < rect.x then
-    test.x = rect.x          -- left edge
-  elseif circ.x > rect.x+rect.w then
-    test.x = rect.x+rect.w   -- right edge
+    test.x = rect.x        -- left edge
+  elseif circ.x > rect.x + rect.w then
+    test.x = rect.x + rect.w -- right edge
   end
 
   if circ.y < rect.y then
-    test.y = rect.y          -- top edge
-  elseif circ.y > rect.y+rect.h then
-    test.y = rect.y+rect.h   -- bottom edge
+    test.y = rect.y        -- top edge
+  elseif circ.y > rect.y + rect.h then
+    test.y = rect.y + rect.h -- bottom edge
   end
 
   if distance(circ, test) < circ.r then
@@ -81,15 +86,15 @@ function collision.pointSeg(point, seg, buffer)
   end
 
   -- The two points that make up a segment
-  local lp1 = {x=seg.x1, y=seg.y1}
-  local lp2 = {x=seg.x2, y=seg.y2}
+  local lp1 = { x = seg.x1, y = seg.y1 }
+  local lp2 = { x = seg.x2, y = seg.y2 }
 
   -- Distance between our point and our seg points
   local d1 = distance(point, lp1) -- Point to one seg point
   local d2 = distance(point, lp2) -- Point to other seg point
-  local d3 = distance(lp1,   lp2) -- Line length
+  local d3 = distance(lp1, lp2)   -- Line length
 
-  if d1+d2 >= d3-buffer and d1+d2 <= d3+buffer then
+  if d1 + d2 >= d3 - buffer and d1 + d2 <= d3 + buffer then
     return true
   end
   return false
@@ -108,13 +113,13 @@ function collision.segCirc(seg, circ, buffer)
 
   -- Circle with buffer added to radius
   bCirc = {}
-  bCirc.r = circ.r+buffer
+  bCirc.r = circ.r + buffer
   bCirc.x = circ.x
   bCirc.y = circ.y
 
   -- The two points that make up a segment
-  local lp1 = {x=seg.x1, y=seg.y1}
-  local lp2 = {x=seg.x2, y=seg.y2}
+  local lp1 = { x = seg.x1, y = seg.y1 }
+  local lp2 = { x = seg.x2, y = seg.y2 }
 
   -- Check if collision with either point on the segment
   if collision.pointCirc(lp1, bCirc) or collision.pointCirc(lp2, bCirc) then
@@ -123,16 +128,16 @@ function collision.segCirc(seg, circ, buffer)
 
   local distX = lp1.x - lp2.x
   local distY = lp1.y - lp2.y
-  local len = math.sqrt( (distX*distX) + (distY*distY) )
+  local len = math.sqrt((distX * distX) + (distY * distY))
 
   -- Dot product of segment and circle
   local dot = (
-    ((bCirc.x-lp1.x)*(lp2.x-lp1.x)) + ((bCirc.y-lp1.y)*(lp2.y-lp1.y))
-  ) / math.pow(len,2)
+    ((bCirc.x - lp1.x) * (lp2.x - lp1.x)) + ((bCirc.y - lp1.y) * (lp2.y - lp1.y))
+  ) / math.pow(len, 2)
 
   local closest = {}
-  closest.x = lp1.x + (dot * (lp2.x-lp1.x))
-  closest.y = lp1.y + (dot * (lp2.y-lp1.y))
+  closest.x = lp1.x + (dot * (lp2.x - lp1.x))
+  closest.y = lp1.y + (dot * (lp2.y - lp1.y))
 
   -- Make sure you are on the segment
   if not collision.pointSeg(closest, seg) then
@@ -165,7 +170,7 @@ function collision.lineLine(line1, line2)
   if denominator == 0 then
     print "Parallel"
 
-    if A1/C1 == A2/C2 and B1/C1 == B2/C2 then
+    if A1 / C1 == A2 / C2 and B1 / C1 == B2 / C2 then
       print "Colinear"
     end
   end
@@ -209,7 +214,7 @@ function collision.segSeg(seg1, seg2)
   local ry2 = (intersectY - seg2.y1) / (seg2.y2 - seg2.y1)
 
   if (rx1 >= 0 and rx1 <= 1) or (ry1 >= 0 and ry1 <= 1) then
-     if (rx2 >= 0 and rx2 <= 1) or (ry2 >= 0 and ry2 <= 1) then
+    if (rx2 >= 0 and rx2 <= 1) or (ry2 >= 0 and ry2 <= 1) then
       return true
     end
   end
@@ -245,7 +250,7 @@ function distance(point1, point2)
   local px, py, dist
   px = math.abs(point1.x - point2.x)
   py = math.abs(point1.y - point2.y)
-  dist = math.sqrt((px*px) + (py*py))
+  dist = math.sqrt((px * px) + (py * py))
 
   return dist
 end

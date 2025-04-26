@@ -2,7 +2,7 @@ local scene = {}
 
 local x = 10
 local font = love.graphics.newFont(20)
-local cur = SSM.current
+local cur = SceneManager.current
 
 -- Stacking Scene Manager can be used to call a scenes modify function.
 -- The modify function is intended to be used for changing specific
