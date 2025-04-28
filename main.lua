@@ -2,32 +2,46 @@
 if arg[#arg] == "vsc_debug" then require("lldebugger").start() end
 if love.filesystem then io.stdout:setvbuf("no") end
 
-InputManager = require "lib.InputManager"
-SceneManager = require "lib.SceneManager".newManager()
-EventBus = require "lib.EventBus"
-Button = require "src.components.Button"
+-- Debug
+Debug = require "config.Debug"
+
+-- Config
 Colors = require "config.Colors"
 Fonts = require "config.Fonts"
 
--- You can also seperate out the function call as shown in the comments below.
--- local SceneManager = require "lib.StackingSceneMgr"
--- local SceneManager = SceneManager.newManager()
+-- Library
+InputManager = require "lib.InputManager"
+SceneManager = require "lib.SceneManager".newManager()
+EventBus = require "lib.EventBus"
+Logger = require "lib.Logger"
+
+-- Components
+Button = require "src.components.Button"
+
+-- Entities
+Reel = require "src.entities.Reel"
+Player = require "src.entities.Player"
+GameState = require "src.entities.GameState"
+
 
 function love.load()
-  SceneManager.setPath("scenes/")
-  SceneManager.add("debug")
-  SceneManager.add("intro")
-
-
-  SceneManager.modify("debug", { visible = false })
+  Logger.startSession()
+  Logger.info("Game booting...")
+  GameState:load()
 end
 
 function love.update(dt)
+  GameState:update(dt)
   SceneManager.update(dt)
 
   love.keyboard.resetInputStates()
 end
 
 function love.draw()
+  GameState:draw()
   SceneManager.draw()
+end
+
+function love.quit()
+  Logger.shutdown()
 end

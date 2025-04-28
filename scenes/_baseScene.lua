@@ -1,7 +1,7 @@
+--------------------
+--  SCENE NAME    --
+--------------------
 local scene = {}
-
-local x = 10
-local font = love.graphics.newFont(20)
 local cur = SceneManager.current
 
 -- Stacking Scene Manager can be used to call a scenes modify function.
@@ -21,23 +21,11 @@ function scene.load()
 end
 
 -- Scene updates loop
-function scene.update()
-  function love.keypressed(key, unicode)
-  end
+function scene.update(dt)
 end
 
 -- Scene draw loop
 function scene.draw()
-  love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.setFont(font)
-  love.graphics.print(
-    'Base Scene',
-    20,
-    20
-  )
-
-  love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.rectangle("fill", x, 200, 150, 100)
 end
 
 return scene

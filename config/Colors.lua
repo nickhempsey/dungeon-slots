@@ -1,4 +1,4 @@
-local Colors = {}
+Colors = {}
 Colors.__index = Colors
 
 

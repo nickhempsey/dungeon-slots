@@ -1,22 +1,23 @@
--- Error checking functions
-local funcDefined = nil -- does the scene file contain the passed function name
-local pathDefined = nil -- does the scene file or folder exist
+--------------------
+-- ERROR CHECKERS --
+--------------------
+local funcDefined = require "utils.funcDefined"
+local pathDefined = require "utils.pathDefined"
 
 local module = {}
 
 function module.newManager()
   -- Scene and properties
-  local scene = {}
-  scene.dir = nil         -- The directory for your scenes (string)
-  scene.current = nil     -- current scene file name (string) (top scene)
-  scene.previous = nil    -- previous scene file name (string) (scene before top scene)
-  scene.table = {}        -- A table of all the target files in a key value pair
+  local scene    = {}
+  scene.dir      = nil -- The directory for your scenes (string)
+  scene.current  = nil -- current scene file name (string) (top scene)
+  scene.previous = nil -- previous scene file name (string) (scene before top scene)
+  scene.table    = {}  -- A table of all the target files in a key value pair
 
-  --                     --
+
   -------------------------
   -- SCENE MANAGER CALLS --
   -------------------------
-  --                     --
 
   -- Used to set the path to your scenes folder
   function scene.setPath(path)
@@ -24,8 +25,9 @@ function module.newManager()
 
     -- Add trailing "/" if none is found (47 = /)
     if string.byte(path, #path) ~= 47 then
-      path = path.."/"
+      path = path .. "/"
     end
+
 
     if pathDefined(path) then
       scene.dir = path
@@ -52,12 +54,12 @@ function module.newManager()
   function scene.add(fileName)
     assert(type(fileName) == "string", "Function 'add': parameter must be a string.")
 
-    local path = scene.dir..fileName
+    local path = scene.dir .. fileName
 
     scene.previous = scene.current
     scene.current = fileName
 
-    if pathDefined(path..".lua") then
+    if pathDefined(path .. ".lua") then
       scene.table[scene.current] = require(path) -- key value
 
       if funcDefined("load", scene) then
@@ -70,9 +72,9 @@ function module.newManager()
   function scene.remove(fileName)
     assert(type(fileName) == "string", "Function 'remove': parameter must be a string.")
 
-    local path = scene.dir..fileName
+    local path = scene.dir .. fileName
 
-    if pathDefined(path..".lua") then
+    if pathDefined(path .. ".lua") then
       if package.loaded[path] then
         scene.table[fileName] = nil
       end
@@ -83,9 +85,9 @@ function module.newManager()
   function scene.purge(fileName)
     assert(type(fileName) == "string", "Function 'remove': parameter must be a string.")
 
-    local path = scene.dir..fileName
+    local path = scene.dir .. fileName
 
-    if pathDefined(path..".lua") then
+    if pathDefined(path .. ".lua") then
       if package.loaded[path] then
         package.loaded[path] = nil
         scene.table[fileName] = nil
@@ -103,7 +105,7 @@ function module.newManager()
   -- Removes all scenes from scene table and unloads their data
   function scene.purgeAll()
     for k, v in pairs(scene.table) do
-      local path = scene.dir..k
+      local path = scene.dir .. k
 
       if package.loaded[path] then
         package.loaded[path] = nil
@@ -159,55 +161,6 @@ function module.newManager()
   end
 
   return scene
-end
-
---                --
---------------------
--- ERROR CHECKERS --
---------------------
---                --
-funcDefined = function(func, scene)
-  -- Make sure our scene exists
-  if scene.current == nil then
-    if #scene.table == 0 then
-      error("Scene table is empty, no scenes found.")
-    else
-      error("Current scene is nil.")
-    end
-  end
-
-  -- Make sure function is defined
-  if scene.table[scene.current][func] then
-    if type(scene.table[scene.current][func]) == 'function' then
-      return true
-    else
-      error("\'"..scene.dir..scene.current..".lua\': "..func.." should be a function.")
-    end
-  else
-    error("\'"..scene.dir..scene.current..".lua\': "..func.." function is not defined.")
-  end
-end
-
-pathDefined = function(path)
-  local major, minor, revision, _ = love.getVersion()
-
-  if major == 0 and minor == 9 and revision >= 1 then
-    -- File system calls for love 0.9.1 and up to 0.11.0
-    if love.filesystem.exists(path) then
-      return true
-    else
-      error("Can't "..debug.getinfo(2).name.." \'"..path.."\': No such file or directory.")
-    end
-  elseif major == 11 and minor >= 0 and revision >= 0 then
-    -- File system calls for love 0.11.0 and up to most recent
-    if love.filesystem.getInfo(path, filtertype) then
-      return true
-    else
-      error("Can't "..debug.getinfo(2).name.." \'"..path.."\': No such file or directory.")
-    end
-  else
-    error("Love versions prior to 0.9.1 are not supported by this module..")
-  end
 end
 
 return module

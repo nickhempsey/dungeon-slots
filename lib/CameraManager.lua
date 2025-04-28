@@ -1,9 +1,10 @@
+local lerp = require "utils.lerp"
+
 -- Stalker-X provided almost all inspiration for this camera lib, check it out
 -- https://github.com/adnzzzzZ/STALKER-X
 
-local module = {}
 
-local function lerp(a, b, x) return a + (b - a)*x end
+local module = {}
 
 function module.newManager()
   local camera = {}
@@ -40,7 +41,7 @@ function module.newManager()
   --                      --
   function camera.attach()
     love.graphics.push()
-    love.graphics.translate(camera.w/2, camera.h/2)
+    love.graphics.translate(camera.w / 2, camera.h / 2)
     love.graphics.scale(camera.scale)
     love.graphics.rotate(camera.rotation)
     love.graphics.translate(-camera.x, -camera.y)
@@ -119,8 +120,8 @@ function module.newManager()
     camera.deadzone.y = y
 
     -- Force deadzone w&h to be a max of camera w&h
-    if w == nil or w > camera.w/2 then w = (camera.w/2)/camera.scale end
-    if h == nil or h > camera.h/2 then h = (camera.h/2)/camera.scale end
+    if w == nil or w > camera.w / 2 then w = (camera.w / 2) / camera.scale end
+    if h == nil or h > camera.h / 2 then h = (camera.h / 2) / camera.scale end
     camera.deadzone.w = w
     camera.deadzone.h = h
   end
@@ -182,8 +183,8 @@ function module.newManager()
     assert(type(x) == "number" or type(y) == "number", "Function 'toWorldCoords': parameters must be a number.")
 
     local cos, sin = math.cos(camera.rotation), math.sin(camera.rotation)
-    x, y = (x - camera.w/2)/camera.scale, (y - camera.h/2)/camera.scale
-    x, y = cos*x - sin*y, sin*x + cos*y
+    x, y = (x - camera.w / 2) / camera.scale, (y - camera.h / 2) / camera.scale
+    x, y = cos * x - sin * y, sin * x + cos * y
     return x + camera.x, y + camera.y
   end
 
@@ -192,8 +193,8 @@ function module.newManager()
 
     local cos, sin = math.cos(camera.rotation), math.sin(camera.rotation)
     x, y = x - camera.x, y - camera.y
-    x, y = cos*x - sin*y, sin*x + cos*y
-    return x*camera.scale + camera.w/2, y*camera.scale + camera.h/2
+    x, y = cos * x - sin * y, sin * x + cos * y
+    return x * camera.scale + camera.w / 2, y * camera.scale + camera.h / 2
   end
 
   --             --
@@ -213,14 +214,14 @@ function module.newManager()
     camera.h = love.graphics.getHeight()
 
     -- Figure out how much the camera needs to scroll
-    if tx < x + dx then scrollX = tx - ( x + dx ) end
-    if tx > x + dw then scrollX = tx - ( x + dw ) end
-    if ty < y + dy then scrollY = ty - ( y + dy ) end
-    if ty > y + dh then scrollY = ty - ( y + dh ) end
+    if tx < x + dx then scrollX = tx - (x + dx) end
+    if tx > x + dw then scrollX = tx - (x + dw) end
+    if ty < y + dy then scrollY = ty - (y + dy) end
+    if ty > y + dh then scrollY = ty - (y + dh) end
 
     if not camera.otx and not camera.oty then camera.otx, camera.oty = camera.x, camera.y end
-    scrollX = scrollX + (camera.tx - camera.otx)*camera.offsetX
-    scrollY = scrollY + (camera.ty - camera.oty)*camera.offsetY
+    scrollX = scrollX + (camera.tx - camera.otx) * camera.offsetX
+    scrollY = scrollY + (camera.ty - camera.oty) * camera.offsetY
     camera.otx, camera.oty = camera.tx, camera.ty
 
     -- Move the camera smoothly
@@ -230,15 +231,15 @@ function module.newManager()
     -- Keep camera in bounds
     if camera.bounds.active then
       -- Camera is centered so offset by half camera w/h.
-      camera.x = math.min(math.max(camera.x, camera.bounds.x + camera.w/2), camera.bounds.w - camera.w/2)
-      camera.y = math.min(math.max(camera.y, camera.bounds.y + camera.h/2), camera.bounds.h - camera.h/2)
+      camera.x = math.min(math.max(camera.x, camera.bounds.x + camera.w / 2), camera.bounds.w - camera.w / 2)
+      camera.y = math.min(math.max(camera.y, camera.bounds.y + camera.h / 2), camera.bounds.h - camera.h / 2)
     end
   end
 
   -- Used to show debug info
   function camera.debug()
     local font = love.graphics.newFont(20)
-    local x, y = camera.x*camera.scale, camera.y*camera.scale
+    local x, y = camera.x * camera.scale, camera.y * camera.scale
     local dx, dy = camera.toCameraCoords(camera.deadzone.x, camera.deadzone.y)
     local dw, dh = camera.toCameraCoords(camera.deadzone.w, camera.deadzone.h)
     local tlx, tly = camera.offsetX, camera.offsetY
@@ -246,18 +247,18 @@ function module.newManager()
     if tlx > 0 then tlx = tlx - 11 end
     if tly > 0 then tly = tly - 11 end
 
-    love.graphics.setColor(255,255,255,255)
+    love.graphics.setColor(255, 255, 255, 255)
     love.graphics.setFont(font)
-    love.graphics.print("Scale: "..camera.scale, 0,0)
-    love.graphics.print("OffsetX, OffsetY: "..tlx..", "..tly, 0,28)
-    love.graphics.print("Rotation: "..camera.rotation, 0,56)
-    love.graphics.print("LerpX, LerpY: "..camera.lerpX..", "..camera.lerpY, 0,84)
-    love.graphics.setColor(255,255,255,255)
+    love.graphics.print("Scale: " .. camera.scale, 0, 0)
+    love.graphics.print("OffsetX, OffsetY: " .. tlx .. ", " .. tly, 0, 28)
+    love.graphics.print("Rotation: " .. camera.rotation, 0, 56)
+    love.graphics.print("LerpX, LerpY: " .. camera.lerpX .. ", " .. camera.lerpY, 0, 84)
+    love.graphics.setColor(255, 255, 255, 255)
     love.graphics.setLineWidth(2)
-    love.graphics.line(dx+x, dy+y, dw+x, dy+y)
-    love.graphics.line(dw+x, dy+y, dw+x, dh+y)
-    love.graphics.line(dw+x, dh+y, dx+x, dh+y)
-    love.graphics.line(dx+x, dh+y, dx+x, dy+y)
+    love.graphics.line(dx + x, dy + y, dw + x, dy + y)
+    love.graphics.line(dw + x, dy + y, dw + x, dh + y)
+    love.graphics.line(dw + x, dh + y, dx + x, dh + y)
+    love.graphics.line(dx + x, dh + y, dx + x, dy + y)
   end
 
   return camera

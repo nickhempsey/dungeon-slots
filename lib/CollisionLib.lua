@@ -1,7 +1,7 @@
-local collision = {} -- Returned collision table
-local distance = nil -- Function that gets distance between two points
+local distance = require "utils.distance"
 
 
+local collision = {}
 --                     --
 -------------------------
 -- COLLISION FUNCTIONS --
@@ -18,10 +18,10 @@ function collision.pointPoint(point1, point2)
 end
 
 function collision.rectRect(rect1, rect2)
-  if rect1.x + rect1.w > rect2.x and -- right  rect1 > left   rect2
+  if rect1.x + rect1.w > rect2.x and  -- right  rect1 > left   rect2
       rect1.y + rect1.h > rect2.y and -- bottom rect1 > top    rect2
       rect1.x < rect2.x + rect2.w and -- left   rect1 > left   rect2
-      rect1.y < rect2.y + rect2.h    -- top    rect1 > bottom rect2
+      rect1.y < rect2.y + rect2.h     -- top    rect1 > bottom rect2
   then
     return true
   end
@@ -62,13 +62,13 @@ function collision.circRect(circ, rect)
 
   -- Find closest edges to check against
   if circ.x < rect.x then
-    test.x = rect.x        -- left edge
+    test.x = rect.x          -- left edge
   elseif circ.x > rect.x + rect.w then
     test.x = rect.x + rect.w -- right edge
   end
 
   if circ.y < rect.y then
-    test.y = rect.y        -- top edge
+    test.y = rect.y          -- top edge
   elseif circ.y > rect.y + rect.h then
     test.y = rect.y + rect.h -- bottom edge
   end
@@ -241,18 +241,5 @@ end
 -- end
 
 
---                  --
-----------------------
--- HELPER FUNCTIONS --
-----------------------
---                  --
-function distance(point1, point2)
-  local px, py, dist
-  px = math.abs(point1.x - point2.x)
-  py = math.abs(point1.y - point2.y)
-  dist = math.sqrt((px * px) + (py * py))
-
-  return dist
-end
 
 return collision

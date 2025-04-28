@@ -1,18 +1,20 @@
--- Error checking functions
-local funcDefined = nil   -- does the transition file contain the passed function name
-local pathDefined = nil   -- does the transition file or folder exist
+--------------------
+-- ERROR CHECKERS --
+--------------------
+local funcDefined = require "utils.funcDefined"
+local pathDefined = require "utils.pathDefined"
 
 local module = {}
 
 function module.newManager()
   -- Transition properties
-  local transition = {}
+  local transition    = {}
 
-  transition.dir    = nil     -- The directory for your transitions
-  transition.name   = nil     -- Identity in error checkers
-  transition.effect = nil     -- The transition effect
-  transition.response = nil   -- The result post transition effect
-  transition.params = nil     -- The results params
+  transition.dir      = nil -- The directory for your transitions
+  transition.name     = nil -- Identity in error checkers
+  transition.effect   = nil -- The transition effect
+  transition.response = nil -- The result post transition effect
+  transition.params   = nil -- The results params
 
 
   --                          --
@@ -25,7 +27,7 @@ function module.newManager()
 
     -- Add trailing "/" if none is found (47 = /)
     if string.byte(path, #path) ~= 47 then
-      path = path.."/"
+      path = path .. "/"
     end
 
     if pathDefined(path) then
@@ -40,17 +42,17 @@ function module.newManager()
   function transition.unload(fileName)
     assert(type(fileName) == "string", "Function 'unload': parameter must be a string.")
 
-    local path = transition.dir..fileName
+    local path          = transition.dir .. fileName
 
-    transition.name   = nil
-    transition.effect = nil
+    transition.name     = nil
+    transition.effect   = nil
     transition.response = nil
-    transition.params = nil
+    transition.params   = nil
 
     -- Remove required transition
-    if pathDefined(path..".lua") then
-      if package.loaded[transition.dir..effect] then
-        package.loaded[transition.dir..effect] = nil
+    if pathDefined(path .. ".lua") then
+      if package.loaded[transition.dir .. effect] then
+        package.loaded[transition.dir .. effect] = nil
       end
     end
   end
@@ -59,11 +61,11 @@ function module.newManager()
     assert(type(fileName) == "string", "Function 'load': First parameter must be a string.")
     assert(type(response) == "function", "Function 'load': Second parameter must be a function.")
 
-    local path = transition.dir..fileName
+    local path = transition.dir .. fileName
 
     transition.name = fileName
 
-    if pathDefined(path..".lua") then
+    if pathDefined(path .. ".lua") then
       transition.effect = require(path)
       transition.response = response
       transition.params = params
@@ -104,45 +106,3 @@ function module.newManager()
 
   return transition
 end
-
-
---                --
---------------------
--- ERROR CHECKERS --
---------------------
---                --
-funcDefined = function(func, transition)
-  if transition.effect[func] then
-    if type(transition.effect[func]) == 'function' then
-      return true
-    else
-      error("\'"..transition.dir..transition.name..".lua\': "..func.." should be a function.")
-    end
-  else
-    error("\'"..transition.dir..transition.name..".lua\': "..func.." function is not defined.")
-  end
-end
-
-pathDefined = function(path)
-  local major, minor, revision, _ = love.getVersion()
-
-  if major == 0 and minor == 9 and revision >= 1 then
-    -- File system calls for love 0.9.1 and up to 0.11.0
-    if love.filesystem.exists(path) then
-      return true
-    else
-      error("Can't "..debug.getinfo(2).name.." \'"..path.."\': No such file or directory.")
-    end
-  elseif major == 11 and minor >= 0 and revision >= 0 then
-    -- File system calls for love 0.11.0 and up to most recent
-    if love.filesystem.getInfo(path, filtertype) then
-      return true
-    else
-      error("Can't "..debug.getinfo(2).name.." \'"..path.."\': No such file or directory.")
-    end
-  else
-    error("Love versions prior to 0.9.1 are not supported by this module..")
-  end
-end
-
-return module

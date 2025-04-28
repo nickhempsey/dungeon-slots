@@ -1,4 +1,4 @@
-local Fonts = {}
+Fonts = {}
 Fonts.__index = Fonts
 
 Fonts.xxl = love.graphics.newFont(60)

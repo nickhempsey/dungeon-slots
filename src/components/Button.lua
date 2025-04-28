@@ -1,8 +1,7 @@
-local clickSound = love.audio.newSource("assets/audio/button-click.wav", 'static')
-
-
-local Button = {}
+Button = {}
 Button.__index = Button
+
+Button.debug = Debug
 
 -- Creates a new button
 ---@param label string
@@ -33,15 +32,20 @@ function Button:new(label, x, y, callback)
   btn.hoverColor   = Colors.text
   btn.hoverBg      = Colors.accent
   btn.borderRadius = 4
-  btn.mouseKey     = 1
-  btn.keyboardKey  = nil
-  btn.sound        = clickSound
+  btn.mousebind    = 1
+  btn.keybind      = nil
+  btn.sound        = love.audio.newSource("assets/audio/button-click.wav", 'static')
   btn.btnSizes     = btnSizes
   return btn
 end
 
+-- Allows you to set the size of a button using the predefined button sizes.
+---@param size string sm | md | lg
 function Button:size(size)
-  print(size)
+  if self.btnSizes[size] == nil then
+    return self
+  end
+
   self.width      = self.btnSizes[size].width
   self.height     = self.btnSizes[size].height
   self.fontOffset = self.btnSizes[size].fontOffset
@@ -54,7 +58,7 @@ function Button:set(key, value)
   return self
 end
 
--- Checks to if your mouse is inside of the button.
+-- Checks if the mouse is inside of the button... duh
 ---@param mx number
 ---@param my number
 ---@return boolean
@@ -69,12 +73,16 @@ function Button:update(dt)
   local mx, my = love.mouse.getPosition()
   self.hover = self:isInside(mx, my)
 
-  if self.keyboardkey ~= nil and love.keyboard.isPressed(self.keyboardKey) then
-    self:playsound()
-    self.callback()
-  end
+  local keypressed = self.keybind ~= nil and love.keyboard.isPressed(self.keybind)
+  local mousepressed = self.mousebind ~= nil and love.mouse.isPressed(self.mousebind) and self.hover
 
-  if self.mouseKey ~= nil and love.mouse.isPressed(self.mouseKey) and self.hover then
+  if keypressed or mousepressed then
+    if self.debug then
+      local activationType = keypressed and "keybind" or "mousebind"
+      local bindType = keypressed and self.keybind or self.mousebind
+      Logger.debug(string.format("[Button] '%s', activated using %s '%s'", self.label, activationType, bindType))
+    end
+
     self:playsound()
     self.callback()
   end

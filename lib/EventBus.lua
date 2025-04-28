@@ -1,7 +1,8 @@
 local EventBus = {}
 
 EventBus.listeners = {}
-EventBus.debug = false
+
+EventBus.debug = Debug
 
 -- Subscribe to an event
 function EventBus:subscribe(event, callback, owner, priority)
@@ -20,7 +21,7 @@ function EventBus:subscribe(event, callback, owner, priority)
   end)
 
   if self.debug then
-    print(string.format("[EventBus] Subscribed to '%s' (priority: %d)", event, priority or 0))
+    Logger.debug(string.format("[EventBus] '%s' subscribed to '%s' (priority: %d)", owner, event, priority or 0))
   end
 end
 
@@ -41,7 +42,7 @@ function EventBus:unsubscribe(event, callback)
       table.remove(self.listeners[event], i)
 
       if self.debug then
-        print(string.format("[EventBus] Unsubscribed from '%s'", event))
+        Logger.debug(string.format("[EventBus] Unsubscribed from '%s'", event))
       end
     end
   end
@@ -59,6 +60,8 @@ function EventBus:clearByOwner(owner)
 end
 
 -- Publish an event, calling all listeners
+---@param event string
+---@param ... any
 function EventBus:publish(event, ...)
   if self.debug then
     local args = { ... }
@@ -66,7 +69,7 @@ function EventBus:publish(event, ...)
     for i, v in ipairs(args) do
       argsStr = argsStr .. tostring(v) .. (i < #args and ", " or "")
     end
-    print(string.format("[EventBus] Publishing event '%s' with args: %s", event, argsStr))
+    Logger.debug(string.format("[EventBus] Publishing event '%s' with args: %s", event, argsStr))
   end
 
   if not self.listeners[event] then return end
