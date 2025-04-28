@@ -39,8 +39,8 @@ function GameState:load()
 
   SceneManager.modify("debug", { visible = false })
 
-  EventBus:publish('load_game', self);
-  EventBus:publish('current_scene', self.scene);
+  EventBusManager:publish('load_game', self);
+  EventBusManager:publish('current_scene', self.scene);
 end
 
 function GameState:update(dt)

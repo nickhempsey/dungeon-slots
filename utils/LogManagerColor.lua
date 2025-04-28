@@ -1,8 +1,8 @@
--- LoggerColor.lua
-local LoggerColor = {}
+-- LogManagerColor.lua
+local LogManagerColor = {}
 
 -- ANSI color codes
-LoggerColor.colors = {
+LogManagerColor.colors = {
   reset = 0,
   black = 30,
   red = 31,
@@ -25,8 +25,8 @@ LoggerColor.colors = {
 }
 
 -- Format a single string with a color
-function LoggerColor.colorText(text, colorName)
-  local code = LoggerColor.colors[colorName]
+function LogManagerColor.colorText(text, colorName)
+  local code = LogManagerColor.colors[colorName]
   if not code then
     return text -- fallback: no color
   end
@@ -34,10 +34,10 @@ function LoggerColor.colorText(text, colorName)
 end
 
 -- Fancy color formatting with {color} tags
-function LoggerColor.colorf(str)
+function LogManagerColor.colorf(str)
   -- Replace {color} with the correct ANSI code
   local formatted = str:gsub("{(.-)}", function(colorName)
-    local code = LoggerColor.colors[colorName]
+    local code = LogManagerColor.colors[colorName]
     if code then
       return string.format("\27[%dm", code)
     else
@@ -49,4 +49,4 @@ function LoggerColor.colorf(str)
   return formatted
 end
 
-return LoggerColor
+return LogManagerColor

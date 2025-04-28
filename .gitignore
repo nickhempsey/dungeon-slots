@@ -2,6 +2,7 @@
 luac.out
 
 releases/
+logs/
 
 # luarocks build files
 *.src.rock

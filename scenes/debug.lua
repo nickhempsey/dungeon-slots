@@ -13,7 +13,7 @@ function scene.modify(flags)
   for k, v in pairs(flags) do
     if k == "visible" then
       scene.visible = v
-      EventBus:publish("debug_visible", v)
+      EventBusManager:publish("debug_visible", v)
     end
   end
 end

@@ -80,7 +80,7 @@ function Button:update(dt)
     if self.debug then
       local activationType = keypressed and "keybind" or "mousebind"
       local bindType = keypressed and self.keybind or self.mousebind
-      Logger.debug(string.format("[Button] '%s', activated using %s '%s'", self.label, activationType, bindType))
+      LogManager.debug(string.format("[Button] '%s', activated using %s '%s'", self.label, activationType, bindType))
     end
 
     self:playsound()

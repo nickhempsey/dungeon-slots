@@ -12,8 +12,9 @@ Fonts = require "config.Fonts"
 -- Library
 InputManager = require "lib.InputManager"
 SceneManager = require "lib.SceneManager".newManager()
-EventBus = require "lib.EventBus"
-Logger = require "lib.Logger"
+EventBusManager = require "lib.EventBusManager"
+LogManager = require "lib.LogManager"
+TweenManager = require "lib.TweenManager"
 
 -- Components
 Button = require "src.components.Button"
@@ -25,8 +26,8 @@ GameState = require "src.entities.GameState"
 
 
 function love.load()
-  Logger.startSession()
-  Logger.info("Game booting...")
+  LogManager.startSession()
+  LogManager.info("Game booting...")
   GameState:load()
 end
 
@@ -43,5 +44,5 @@ function love.draw()
 end
 
 function love.quit()
-  Logger.shutdown()
+  LogManager.shutdown()
 end

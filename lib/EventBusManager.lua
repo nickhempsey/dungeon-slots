@@ -1,11 +1,11 @@
-local EventBus = {}
+EventBusManager = {}
 
-EventBus.listeners = {}
+EventBusManager.listeners = {}
 
-EventBus.debug = Debug
+EventBusManager.debug = Debug
 
 -- Subscribe to an event
-function EventBus:subscribe(event, callback, owner, priority)
+function EventBusManager:subscribe(event, callback, owner, priority)
   if not self.listeners[event] then
     self.listeners[event] = {}
   end
@@ -21,12 +21,12 @@ function EventBus:subscribe(event, callback, owner, priority)
   end)
 
   if self.debug then
-    Logger.debug(string.format("[EventBus] '%s' subscribed to '%s' (priority: %d)", owner, event, priority or 0))
+    LogManager.debug(string.format("[EventBus] '%s' subscribed to '%s' (priority: %d)", owner, event, priority or 0))
   end
 end
 
 -- Subscribe to an event, but only once
-function EventBus:once(event, callback, owner, priority)
+function EventBusManager:once(event, callback, owner, priority)
   local function wrapper(...)
     self:unsubscribe(event, wrapper)
     callback(...)
@@ -35,21 +35,21 @@ function EventBus:once(event, callback, owner, priority)
 end
 
 -- Unsubscribe a specific callback from an event
-function EventBus:unsubscribe(event, callback)
+function EventBusManager:unsubscribe(event, callback)
   if not self.listeners[event] then return end
   for i = #self.listeners[event], 1, -1 do
     if self.listeners[event][i].callback == callback then
       table.remove(self.listeners[event], i)
 
       if self.debug then
-        Logger.debug(string.format("[EventBus] Unsubscribed from '%s'", event))
+        LogManager.debug(string.format("[EventBus] Unsubscribed from '%s'", event))
       end
     end
   end
 end
 
 -- Clear all listeners tied to an owner
-function EventBus:clearByOwner(owner)
+function EventBusManager:clearByOwner(owner)
   for event, listeners in pairs(self.listeners) do
     for i = #listeners, 1, -1 do
       if listeners[i].owner == owner then
@@ -62,14 +62,14 @@ end
 -- Publish an event, calling all listeners
 ---@param event string
 ---@param ... any
-function EventBus:publish(event, ...)
+function EventBusManager:publish(event, ...)
   if self.debug then
     local args = { ... }
     local argsStr = ""
     for i, v in ipairs(args) do
       argsStr = argsStr .. tostring(v) .. (i < #args and ", " or "")
     end
-    Logger.debug(string.format("[EventBus] Publishing event '%s' with args: %s", event, argsStr))
+    LogManager.debug(string.format("[EventBus] Publishing event '%s' with args: %s", event, argsStr))
   end
 
   if not self.listeners[event] then return end
@@ -85,8 +85,8 @@ function EventBus:publish(event, ...)
 end
 
 -- Helper: Check if there are any listeners for an event
-function EventBus:hasListeners(event)
+function EventBusManager:hasListeners(event)
   return self.listeners[event] and #self.listeners[event] > 0
 end
 
-return EventBus
+return EventBusManager
