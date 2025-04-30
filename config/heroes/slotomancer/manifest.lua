@@ -11,10 +11,10 @@ return {
     attackSound = "attack_sound.wav",
     deathSound = "death_sound.wav",
   },
-  baseSymbols = { 'sword_attack', 'coin_toss' },
   ai = {
     behavior = "aggressive", -- optional special behavior tags
   },
+  symbols = { 'sword_attack' },
   abilities = {
     "quick_slash",
     "taunt",

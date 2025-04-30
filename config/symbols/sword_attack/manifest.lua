@@ -5,5 +5,9 @@ return {
   effects = {
     'stun',
     'debuff'
+  },
+  assets = {
+    sprite = 'sprite.png',
+    sound = 'attack_sound.wav'
   }
 }

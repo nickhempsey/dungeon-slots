@@ -1,5 +1,5 @@
 -- LogManager.lua
-local LogManagerColor = require "utils.LogManagerColor"
+local LogManagerColor = require "lib.LogManagerColor"
 local serialize = require "utils.serialize"
 local getTimestamp = require "utils.getTimestamp"
 local unpack = require "utils.unpack"
@@ -7,7 +7,7 @@ local unpack = require "utils.unpack"
 local LogManager = {}
 
 LogManager.levels = {
-  debug = { label = "DEBUG", color = "bright_magenta" },
+  debug = { label = "DEBUG", color = "bright_black" },
   info  = { label = "INFO ", color = "cyan" },
   warn  = { label = "WARN ", color = "yellow" },
   error = { label = "ERROR", color = "bright_red" }
@@ -28,15 +28,12 @@ local logFileHandle = nil
 -- Start log session
 function LogManager.startSession()
   if love and love.filesystem then
-    LogManager.debug('has filesystem')
     if not love.filesystem.getInfo("logs") then
       love.filesystem.createDirectory("logs")
-      LogManager.debug('created directory')
     end
     LogManager.logFilePath = "logs/session_" .. os.date("%Y%m%d_%H%M%S") .. ".txt"
     logFileHandle = love.filesystem.newFile(LogManager.logFilePath, "w")
     logFileHandle:open("w")
-    LogManager.debug(logFileHandle)
     LogManager.info("Log session started: %s", LogManager.logFilePath)
   else
     print("LogManager: love.filesystem not available, file logging disabled.")
@@ -44,7 +41,10 @@ function LogManager.startSession()
   end
 end
 
+---@param text string
 local function writeToFile(text)
+  assert(type(text) == "string", "Function 'writeToFile': parameter must be a string.")
+
   if LogManager.fileLoggingEnabled and logFileHandle then
     logFileHandle:write(text .. "\n")
     logFileHandle:flush()
@@ -52,7 +52,12 @@ local function writeToFile(text)
 end
 
 -- Log a message
+---@param level string
+---@param message string|table
+---@param ... any
 function LogManager.log(level, message, ...)
+  assert(type(level) == "string", "Function 'log': first parameter must be a string.")
+
   if not LogManager.enabledLevels[level] then return end
 
   local lvl = LogManager.levels[level]

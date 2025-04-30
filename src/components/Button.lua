@@ -2,6 +2,7 @@ Button = {}
 Button.__index = Button
 
 Button.debug = Debug
+Button.debugLabel = LogManagerColor.colorf('{green}[Button]{reset}')
 
 -- Creates a new button
 ---@param label string
@@ -80,7 +81,8 @@ function Button:update(dt)
     if self.debug then
       local activationType = keypressed and "keybind" or "mousebind"
       local bindType = keypressed and self.keybind or self.mousebind
-      LogManager.debug(string.format("[Button] '%s', activated using %s '%s'", self.label, activationType, bindType))
+      LogManager.debug(string.format("%s '%s', activated using %s '%s'", Button.debugLabel, self.label, activationType,
+        bindType))
     end
 
     self:playsound()

@@ -2,60 +2,55 @@ GameState = {}
 GameState.__index = GameState
 
 GameState.debug = Debug
+GameState.debugLabel = LogManagerColor.colorf('{green}[GameState]{reset}')
 
 GameState.scenes = {
   shop = 'shop',
   menu = 'menu',
+  intro = 'intro',
   title = 'title',
   event = 'event',
   combat = 'combat',
   inventory = 'inventory'
 }
 
-
 GameState.scene = nil
 GameState.currentFloor = 1
-GameState.player = nil
-GameState.enemies = {}
 GameState.currentTurn = nil
+
+GameState.hero = nil
+GameState.inventory = {}
+
+GameState.enemies = {}
+
 GameState.reel = nil
 GameState.spinTokens = 3
-GameState.inventory = {}
 
 GameState.rng = love.math.newRandomGenerator(os.time())
 
-
 function GameState:load()
-  SceneManager.setPath("scenes/")
+  SceneManager.setPath("src/scenes/")
   SceneManager.removeAll()
+  SceneManager.add("debug")
 
   -- Eventually run "load" for now we'll hard code a default GameState
-  GameState.scene = GameState.scenes.combat
-  GameState.player = Player:new("Warrior")
-  GameState.reel = Reel:new(self.player:getBaseSymbols())
+  GameState.scene = GameState.scenes.intro
+  GameState.hero = Hero:new('luck_punk')
+  GameState.reel = Reel:new(GameState.hero:getBaseSymbols())
 
-  SceneManager.add("debug")
-  SceneManager.add(self.scene)
+  SceneManager.add(GameState.scene)
 
-  SceneManager.modify("debug", { visible = false })
-
-  EventBusManager:publish('load_game', self);
-  EventBusManager:publish('current_scene', self.scene);
+  EventBusManager:publish('load_game');
+  EventBusManager:publish('current_scene', GameState.scene);
 end
 
 function GameState:update(dt)
+  GameState.hero:update(dt)
+  function love.keypressed(key, unicode)
+  end
 end
 
 function GameState:draw()
-end
-
-function GameState:generateEnemies()
-end
-
-function GameState:loadPlayer()
-end
-
-function GameState:savePlayer()
 end
 
 return GameState

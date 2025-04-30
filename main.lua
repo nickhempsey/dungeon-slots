@@ -3,7 +3,12 @@ if arg[#arg] == "vsc_debug" then require("lldebugger").start() end
 if love.filesystem then io.stdout:setvbuf("no") end
 
 -- Debug
-Debug = require "config.Debug"
+Debug = true
+LogManagerColor = require "lib.LogManagerColor"
+LogManager = require "lib.LogManager"
+
+-- Utils
+Tween = require "utils.tween"
 
 -- Config
 Colors = require "config.Colors"
@@ -13,25 +18,28 @@ Fonts = require "config.Fonts"
 InputManager = require "lib.InputManager"
 SceneManager = require "lib.SceneManager".newManager()
 EventBusManager = require "lib.EventBusManager"
-LogManager = require "lib.LogManager"
-TweenManager = require "lib.TweenManager"
+ManifestManager = require "lib.ManifestManager"
 
 -- Components
 Button = require "src.components.Button"
 
 -- Entities
 Reel = require "src.entities.Reel"
-Player = require "src.entities.Player"
+Hero = require "src.entities.Hero"
+Enemy = require "src.entities.Enemy"
 GameState = require "src.entities.GameState"
 
+local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
 
 function love.load()
   LogManager.startSession()
-  LogManager.info("Game booting...")
+  LogManager.info("%s ⌛ Game loading...", sceneLabel)
   GameState:load()
+  LogManager.info("%s ✅ Game loaded!", sceneLabel)
 end
 
 function love.update(dt)
+  Tween.update(dt)
   GameState:update(dt)
   SceneManager.update(dt)
 
@@ -39,7 +47,7 @@ function love.update(dt)
 end
 
 function love.draw()
-  GameState:draw()
+  love.graphics.clear(0, 0, 0, 0)
   SceneManager.draw()
 end
 

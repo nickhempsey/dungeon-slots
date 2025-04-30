@@ -8,12 +8,18 @@ local module = {}
 
 function module.newManager()
   -- Scene and properties
-  local scene    = {}
-  scene.dir      = nil -- The directory for your scenes (string)
-  scene.current  = nil -- current scene file name (string) (top scene)
-  scene.previous = nil -- previous scene file name (string) (scene before top scene)
-  scene.table    = {}  -- A table of all the target files in a key value pair
+  local scene      = {}
+  scene.dir        = nil  -- The directory for your scenes (string)
 
+  scene.current    = nil  -- current scene file name (string) (top scene)
+  scene.previous   = nil  -- previous scene file name (string) (scene before top scene)
+
+  scene.table      = {}   -- A table of all the target files in a key value pair
+  scene.drawOrder  = {}   -- A table specifically for draw order to help with z-fighting
+  scene.zsortDirty = true -- Enables caching of the drawOrder table
+
+  scene.debug      = Debug
+  scene.debugLabel = LogManagerColor.colorf('{yellow}[SceneManager]{reset} ')
 
   -------------------------
   -- SCENE MANAGER CALLS --
@@ -43,27 +49,35 @@ function module.newManager()
     -- The modify functionality is handled in the scenes modify function to give the developer max control.
     if funcDefined("modify", scene) then
       scene.table[fileName].modify(flags) -- Run scenes modify function
+      if scene.debug then
+        LogManager.debug(string.format('%s modifying flags of scene: %s', scene.debugLabel, fileName))
+        LogManager.debug(flags)
+      end
     end
   end
 
-  --                       --
+  ---------------------------
   -- Add and Remove Scenes --
-  --                       --
+  ---------------------------
 
   -- Add a scene to the scene table
   function scene.add(fileName)
     assert(type(fileName) == "string", "Function 'add': parameter must be a string.")
 
-    local path = scene.dir .. fileName
+    local path       = scene.dir .. fileName
 
-    scene.previous = scene.current
-    scene.current = fileName
+    scene.previous   = scene.current
+    scene.current    = fileName
+    scene.zsortDirty = true
 
     if pathDefined(path .. ".lua") then
       scene.table[scene.current] = require(path) -- key value
 
       if funcDefined("load", scene) then
         scene.table[scene.current].load() -- run scenes load funciton
+        if scene.debug then
+          LogManager.debug('%s Loaded scene: %s', scene.debugLabel, fileName)
+        end
       end
     end
   end
@@ -73,10 +87,14 @@ function module.newManager()
     assert(type(fileName) == "string", "Function 'remove': parameter must be a string.")
 
     local path = scene.dir .. fileName
+    scene.zsortDirty = true
 
     if pathDefined(path .. ".lua") then
       if package.loaded[path] then
         scene.table[fileName] = nil
+        if scene.debug then
+          LogManager.debug('%s Removed scene: %s', scene.debugLabel, fileName)
+        end
       end
     end
   end
@@ -86,20 +104,30 @@ function module.newManager()
     assert(type(fileName) == "string", "Function 'remove': parameter must be a string.")
 
     local path = scene.dir .. fileName
+    scene.zsortDirty = true
 
     if pathDefined(path .. ".lua") then
       if package.loaded[path] then
         package.loaded[path] = nil
         scene.table[fileName] = nil
+
+        if scene.debug then
+          LogManager.debug('%s Purge scene: %s', scene.debugLabel, fileName)
+        end
       end
     end
   end
 
   -- Removes all scenes from scene table
   function scene.removeAll()
-    scene.previous = nil
-    scene.current = nil
-    scene.table = {}
+    scene.previous   = nil
+    scene.current    = nil
+    scene.table      = {}
+    scene.zsortDirty = true
+
+    if scene.debug then
+      LogManager.debug('%s Remove all scenes', scene.debugLabel)
+    end
   end
 
   -- Removes all scenes from scene table and unloads their data
@@ -112,14 +140,19 @@ function module.newManager()
       end
     end
 
-    scene.previous = nil
-    scene.current = nil
-    scene.table = {}
+    scene.previous   = nil
+    scene.current    = nil
+    scene.table      = {}
+    scene.zsortDirty = true
+
+    if scene.debug then
+      LogManager.debug('%s Purge all scenes')
+    end
   end
 
-  --                             --
+  ---------------------------------
   -- Freeze and Unfreeze a Scene --
-  --                             --
+  ---------------------------------
 
   -- Returns if scene is frozen or not (boolean)
   function scene.isFrozen(fileName)
@@ -133,12 +166,16 @@ function module.newManager()
     assert(type(fileName) == "string", "Function 'setFrozen': first parameter must be a string.")
     assert(type(toggle) == "boolean", "Function 'setFrozen': second parameter must be a boolean.")
 
+    if scene.debug then
+      LogManager.debug('%s Scene frozen: %s', scene.debugLabel, fileName)
+    end
+
     scene.table[fileName].frozen = toggle
   end
 
-  --                   --
+  -----------------------
   -- Game (scene) Loop --
-  --                   --
+  -----------------------
 
   -- Updates current scenes
   function scene.update(dt)
@@ -151,12 +188,28 @@ function module.newManager()
     end
   end
 
-  -- Draws current scenes
+  -- Only sort if something changed
   function scene.draw()
-    if funcDefined("draw", scene) then
-      for k, v in pairs(scene.table) do
-        scene.table[k].draw(dt)
+    if scene.zsortDirty then
+      if scene.debug then
+        LogManager.debug('%s Sorting scenes', scene.debugLabel)
       end
+
+      scene.drawOrder = {}
+      for _, v in pairs(scene.table) do
+        table.insert(scene.drawOrder, v)
+      end
+
+      table.sort(scene.drawOrder, function(a, b)
+        return (a.zsort or 0) < (b.zsort or 0)
+      end)
+
+      scene.zsortDirty = false -- Sorted, no longer dirty
+    end
+
+    -- Draw in sorted order
+    for _, sceneObj in ipairs(scene.drawOrder) do
+      sceneObj.draw()
     end
   end
 

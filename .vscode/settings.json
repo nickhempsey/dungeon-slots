@@ -1,6 +1,10 @@
 {
   "Lua.diagnostics.globals": [
-    "love"
+    "love",
+    "width",
+    "height",
+    "padding",
+    "panel"
   ],
   "Lua.diagnostics.disable": [
     "duplicate-set-field"
