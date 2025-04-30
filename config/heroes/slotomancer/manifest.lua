@@ -7,9 +7,17 @@ return {
     defense = 2,
   },
   assets = {
-    sprite = "sprite.png",
-    attackSound = "attack_sound.wav",
-    deathSound = "death_sound.wav",
+    images = {
+      --sprite = "sprite.png",
+    },
+    sounds = {
+      --attackSound = "attack_sound.wav",
+      --deathSound = "death_sound.wav",
+    },
+    -- Just incase we decide to give their names different fonts for dramatic effect.
+    fonts = {
+      -- font = "font.ttf",
+    },
   },
   ai = {
     behavior = "aggressive", -- optional special behavior tags

@@ -7,7 +7,11 @@ return {
     'debuff'
   },
   assets = {
-    sprite = 'sprite.png',
-    sound = 'attack_sound.wav'
+    images = {
+      sprite = "sprite.png",
+    },
+    sounds = {
+      --spin = "spin.wav",
+    },
   }
 }

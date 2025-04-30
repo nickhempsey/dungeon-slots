@@ -4,7 +4,11 @@ return {
   baseDmg = 0.25,
   effects = {},
   assets = {
-    sprite = 'sprite.png',
-    sound = 'attack_sound.wav'
+    images = {
+      sprite = "sprite.png",
+    },
+    sounds = {
+      --spin = "spin.wav",
+    },
   }
 }

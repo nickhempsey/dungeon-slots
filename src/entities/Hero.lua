@@ -23,12 +23,12 @@ end
 ---@param heroId string
 function Hero.loadManifest(heroId)
   assert(type(heroId) == "string", "Function 'loadManifest': parameter 'heroId' must be a string.")
-  LogManager.info(string.format("%s loading", Hero.debugLabel))
-  -- TODO: Check for saved data first.
-  local manifest = ManifestManager.getDefault('heroes', heroId)
+  LogManager.info(string.format("%s Loading", Hero.debugLabel))
+
+  local manifest, directory = ManifestManager.get('heroes', heroId)
   local output = {}
   if manifest then
-    output = ManifestManager.loadValues(manifest)
+    output = ManifestManager.loadValues(manifest, directory)
     LogManager.info(string.format(" %s loaded", Hero.debugLabel))
   else
     LogManager.error("%s No manifest found for '%s'", Hero.debugLabel, heroId)

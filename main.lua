@@ -3,7 +3,7 @@ if arg[#arg] == "vsc_debug" then require("lldebugger").start() end
 if love.filesystem then io.stdout:setvbuf("no") end
 
 -- Debug
-Debug = true
+Debug = false
 LogManagerColor = require "lib.LogManagerColor"
 LogManager = require "lib.LogManager"
 
