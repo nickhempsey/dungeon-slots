@@ -1,11 +1,17 @@
 {
 	"folders": [
-		{
+    {
+			"path": "./game"
+		},
+    {
+			"path": "./Dungeon Slots Notes"
+		},
+    {
+			"path": "../../Library/Application Support/LOVE/dungeon-slots/logs"
+		},
+    {
 			"path": "."
 		},
-		{
-			"path": "../../Library/Application Support/LOVE/dungeon-slots/logs"
-		}
 	],
   "settings": {}
 }

@@ -1,0 +1,11 @@
+{
+	"nodes":[
+		{"id":"42999eff0fb8c347","x":22,"y":-252,"width":400,"height":400,"type":"file","file":"Welcome.md"},
+		{"id":"bb63d856fb157136","x":-120,"y":-520,"width":250,"height":60,"type":"text","text":"State machine"},
+		{"id":"7ca3b1f41c06cc71","x":-358,"y":-280,"width":250,"height":60,"type":"text","text":"a new card"}
+	],
+	"edges":[
+		{"id":"019ec093fbe1d073","fromNode":"bb63d856fb157136","fromSide":"bottom","toNode":"7ca3b1f41c06cc71","toSide":"top"},
+		{"id":"43b2ba6974b1353e","fromNode":"bb63d856fb157136","fromSide":"bottom","toNode":"42999eff0fb8c347","toSide":"top"}
+	]
+}
