@@ -4,24 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "9e055df0bec9ff2a",
+        "id": "31c0ffcfd8c2f518",
         "type": "tabs",
         "children": [
           {
-            "id": "ceff9e2021979335",
+            "id": "de2213a349e32cbe",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "Untitled.canvas",
-                "viewState": {
-                  "x": 32,
-                  "y": -186,
-                  "zoom": -0.3828900637643043
-                }
+                "file": "Technical Notes/+ Technical Style Guide.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "Untitled"
+              "icon": "lucide-file",
+              "title": "+ Technical Style Guide"
             }
           }
         ]
@@ -44,7 +41,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -81,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 240.5
   },
   "right": {
     "id": "e4ee41ab424d00fc",
@@ -97,16 +94,17 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Technical Notes/+ Technical Style Guide.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "Backlinks"
+              "title": "Backlinks for + Technical Style Guide"
             }
           },
           {
@@ -115,11 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Technical Notes/+ Technical Style Guide.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links"
+              "title": "Outgoing links from + Technical Style Guide"
             }
           },
           {
@@ -143,19 +142,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "followCursor": false,
+                "file": "Technical Notes/+ Technical Style Guide.md",
+                "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline"
+              "title": "Outline of + Technical Style Guide"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 200,
     "collapsed": true
   },
   "left-ribbon": {
@@ -166,12 +167,49 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "obsidian-kanban:Create new board": false
+      "obsidian-kanban:Create new board": false,
+      "iconic:Open rulebook": false
     }
   },
-  "active": "e40009d4e74022af",
+  "active": "de2213a349e32cbe",
   "lastOpenFiles": [
-    "Welcome.md",
+    "Technical Notes/Tech Debt Tasks/+ Tech Debt Tasks.md",
+    "Technical Notes/+ Technical Style Guide.md",
+    "Technical Notes/Tech Debt Tasks",
+    "Technical Notes/Untitled Kanban.md",
+    "Levels and Rooms/Boss Room.md",
+    "Technical Notes",
+    "Hero Designs/+ Hero Design Overview.md",
+    "Hero Designs/Untitled.md",
+    "Hero Designs/Slotomancer",
+    "Hero Designs/Luck Punk",
+    "Enemy Designs/+ Enemy Design Overview.md",
+    "Enemy Designs/Mid Tier",
+    "Hero Designs",
+    "Enemy Designs/Boss Tier",
+    "Enemy Designs/Elite Tier",
+    "Enemy Designs/Common Tier",
+    "Levels and Rooms/+ Dungeon Levels Overview.md",
+    "Game Design Document.md",
+    "Roadmap/0.0.4 Dungeon & Node Map Generation.md",
+    "Levels and Rooms/+ Level Layouts.canvas",
+    "Roadmap/+ Kanban.md",
+    "Levels and Rooms/Monster Room.md",
+    "Levels and Rooms/Rest Room.md",
+    "Levels and Rooms/Shop Room.md",
+    "Roadmap/0.0.2 Reel Logic.md",
+    "Roadmap/0.0.3 Combat System.md",
+    "Levels and Rooms/Level Start.md",
+    "Levels and Rooms/Mystery Room.md",
+    "Roadmap/0.0.1 Project Setup.md",
+    "Roadmap/0.0.11 Save & Meta Progression.md",
+    "Roadmap/0.0.10 Sound & Music.md",
+    "Roadmap/0.0.9 Visuals & UI.md",
+    "Roadmap/0.0.8 Enemy & Encounter Design.md",
+    "Roadmap/0.0.7 Economy & Upgrades.md",
+    "Roadmap/0.0.6 Class System.md",
+    "Roadmap/0.0.5 Mystery Room System.md",
+    "Roadmap",
     "Untitled.canvas"
   ]
 }

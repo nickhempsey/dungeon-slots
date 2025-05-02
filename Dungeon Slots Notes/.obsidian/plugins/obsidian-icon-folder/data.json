@@ -6,7 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "LiAlarmSmoke"
+      "LiBookMarked",
+      "LiShoppingBasket",
+      "LiDollarSign",
+      "RaUncertainty",
+      "RaSpawnNode"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -16,10 +20,10 @@
       "bottom": 0,
       "left": 0
     },
-    "iconInTabsEnabled": false,
-    "iconInTitleEnabled": false,
+    "iconInTabsEnabled": true,
+    "iconInTitleEnabled": true,
     "iconInTitlePosition": "above",
-    "iconInFrontmatterEnabled": false,
+    "iconInFrontmatterEnabled": true,
     "iconInFrontmatterFieldName": "icon",
     "iconColorInFrontmatterFieldName": "iconColor",
     "iconsBackgroundCheckEnabled": false,
@@ -30,5 +34,16 @@
     "debugMode": false,
     "useInternalPlugins": false
   },
-  "Welcome.md": "LiAlarmSmoke"
+  "Levels and Rooms/Mystery Room.md": "RaUncertainty",
+  "Levels and Rooms/Boss Room.md": "RaHydra",
+  "Levels and Rooms/Shop Room.md": "LiShoppingBasket",
+  "Levels and Rooms/Elite Monster Room.md": "RaEyeMonster",
+  "Levels and Rooms/+ Level Layouts.canvas": "LiMap",
+  "Levels and Rooms/+ Dungeon Levels Overview.md": "LiBook",
+  "Levels and Rooms/Level Start.md": "RaSpawnNode",
+  "Levels and Rooms/Rest Room.md": "RaCampfire",
+  "Levels and Rooms/Monster Room.md": "RaHood",
+  "Game Design Document.md": "🎰",
+  "Roadmap/+ Kanban.md": "LiCheckSmall",
+  "Technical Notes/+ Technical Style Guide.md": "LiBookMarked"
 }

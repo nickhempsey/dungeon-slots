@@ -1,0 +1,35 @@
+{
+	"nodes":[
+		{"id":"a1e9a1bcc83baf84","type":"file","file":"Levels and Rooms/Mystery Room.md","x":-15,"y":160,"width":400,"height":100,"color":"5"},
+		{"id":"42e6b09cc1f7f6dd","type":"file","file":"Levels and Rooms/Rest Room.md","x":-260,"y":-140,"width":400,"height":100,"color":"4"},
+		{"id":"eedf0b0b3e92088e","type":"file","file":"Levels and Rooms/Monster Room.md","x":260,"y":-140,"width":400,"height":100,"color":"3"},
+		{"id":"aa73c1a5a6ffb0ec","type":"file","file":"Levels and Rooms/Monster Room.md","x":-480,"y":160,"width":400,"height":100,"color":"3"},
+		{"id":"3b3d907b7fdd3961","type":"file","file":"Levels and Rooms/Shop Room.md","x":440,"y":160,"width":400,"height":100,"color":"6"},
+		{"id":"22cfa54b4dcd2df2","type":"file","file":"Levels and Rooms/Monster Room.md","x":-260,"y":440,"width":400,"height":100,"color":"3"},
+		{"id":"2c86801a087492f0","type":"file","file":"Levels and Rooms/Elite Monster Room.md","x":260,"y":440,"width":400,"height":100,"color":"2"},
+		{"id":"38bb1a890e9d9fd7","type":"file","file":"Levels and Rooms/Shop Room.md","x":-260,"y":710,"width":400,"height":100,"color":"6"},
+		{"id":"899973fc6fb369a5","type":"file","file":"Levels and Rooms/Rest Room.md","x":260,"y":710,"width":400,"height":100,"color":"4"},
+		{"id":"a47ffed307719cc2","type":"file","file":"Levels and Rooms/Boss Room.md","x":-15,"y":1000,"width":400,"height":100,"color":"1"},
+		{"id":"ec93cf5bc7316d03","type":"file","file":"Levels and Rooms/Monster Room.md","x":-15,"y":-420,"width":400,"height":100,"color":"3"},
+		{"id":"2b168a15e76e3b70","type":"file","file":"Levels and Rooms/Monster Room.md","x":-15,"y":-640,"width":400,"height":100,"color":"3"},
+		{"id":"9e83a8e9f2d4f9f9","type":"file","file":"Levels and Rooms/Level Start.md","x":-15,"y":-860,"width":400,"height":120}
+	],
+	"edges":[
+		{"id":"70576f6b7ec53ab9","fromNode":"9e83a8e9f2d4f9f9","fromSide":"bottom","toNode":"2b168a15e76e3b70","toSide":"top"},
+		{"id":"5a16b14b820b9b39","fromNode":"2b168a15e76e3b70","fromSide":"bottom","toNode":"ec93cf5bc7316d03","toSide":"top"},
+		{"id":"555d12db2882dd10","fromNode":"ec93cf5bc7316d03","fromSide":"bottom","toNode":"42e6b09cc1f7f6dd","toSide":"top"},
+		{"id":"4a84eadafb182325","fromNode":"ec93cf5bc7316d03","fromSide":"bottom","toNode":"eedf0b0b3e92088e","toSide":"top"},
+		{"id":"b48defea8d6eabf0","fromNode":"eedf0b0b3e92088e","fromSide":"bottom","toNode":"a1e9a1bcc83baf84","toSide":"top"},
+		{"id":"baa32eebfe54df2f","fromNode":"eedf0b0b3e92088e","fromSide":"bottom","toNode":"3b3d907b7fdd3961","toSide":"top"},
+		{"id":"f26e967f688f7f88","fromNode":"42e6b09cc1f7f6dd","fromSide":"bottom","toNode":"aa73c1a5a6ffb0ec","toSide":"top"},
+		{"id":"9aeaa60c024ee0aa","fromNode":"a1e9a1bcc83baf84","fromSide":"bottom","toNode":"2c86801a087492f0","toSide":"top"},
+		{"id":"19e9d435d753f854","fromNode":"3b3d907b7fdd3961","fromSide":"bottom","toNode":"2c86801a087492f0","toSide":"top"},
+		{"id":"8a0aa837768084ea","fromNode":"aa73c1a5a6ffb0ec","fromSide":"bottom","toNode":"22cfa54b4dcd2df2","toSide":"top"},
+		{"id":"ff2cd803ca5fa275","fromNode":"2c86801a087492f0","fromSide":"bottom","toNode":"899973fc6fb369a5","toSide":"top"},
+		{"id":"a4ed2863546cb52f","fromNode":"22cfa54b4dcd2df2","fromSide":"bottom","toNode":"38bb1a890e9d9fd7","toSide":"top"},
+		{"id":"bf13a375ba6d0f7e","fromNode":"2c86801a087492f0","fromSide":"bottom","toNode":"38bb1a890e9d9fd7","toSide":"top"},
+		{"id":"177f6b7c57576b23","fromNode":"38bb1a890e9d9fd7","fromSide":"bottom","toNode":"a47ffed307719cc2","toSide":"top"},
+		{"id":"ddae3cb53ed4be9f","fromNode":"899973fc6fb369a5","fromSide":"bottom","toNode":"a47ffed307719cc2","toSide":"top"},
+		{"id":"575c8cab8d7c640b","fromNode":"a1e9a1bcc83baf84","fromSide":"bottom","toNode":"22cfa54b4dcd2df2","toSide":"top"}
+	]
+}

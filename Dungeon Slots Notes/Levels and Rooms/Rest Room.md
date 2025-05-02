@@ -1,0 +1,1 @@
+A place for the player to gain some hit points, or perform upgrades or maintenance on their symbols. 
