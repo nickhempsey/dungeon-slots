@@ -8,17 +8,27 @@
         "type": "tabs",
         "children": [
           {
-            "id": "de2213a349e32cbe",
+            "id": "d0fe829ef00b5b46",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Technical Notes/+ Technical Style Guide.md",
+                "file": "Enemy Designs/+ Enemy Design Overview.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
-              "title": "+ Technical Style Guide"
+              "title": "+ Enemy Design Overview"
             }
           }
         ]
@@ -94,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Technical Notes/+ Technical Style Guide.md",
+                "file": "Enemy Designs/+ Enemy Design Overview.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +114,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for + Technical Style Guide"
+              "title": "Backlinks for + Enemy Design Overview"
             }
           },
           {
@@ -113,12 +123,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Technical Notes/+ Technical Style Guide.md",
+                "file": "Enemy Designs/+ Enemy Design Overview.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from + Technical Style Guide"
+              "title": "Outgoing links from + Enemy Design Overview"
             }
           },
           {
@@ -142,13 +152,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Technical Notes/+ Technical Style Guide.md",
-                "followCursor": true,
-                "showSearch": false,
+                "file": "Enemy Designs/+ Enemy Design Overview.md",
+                "followCursor": false,
+                "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of + Technical Style Guide"
+              "title": "Outline of + Enemy Design Overview"
             }
           }
         ],
@@ -156,8 +166,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -171,11 +180,16 @@
       "iconic:Open rulebook": false
     }
   },
-  "active": "de2213a349e32cbe",
+  "active": "d0fe829ef00b5b46",
   "lastOpenFiles": [
-    "Technical Notes/Tech Debt Tasks/+ Tech Debt Tasks.md",
     "Technical Notes/+ Technical Style Guide.md",
-    "Technical Notes/Tech Debt Tasks",
+    "Roadmap/+ Development Roadmap.md",
+    "Tech Debt & Bugs/+ Tech Debt & Bugs.md",
+    "Roadmap/0.0.2 Reel Logic.md",
+    "Roadmap/0.0.1 Project Setup.md",
+    "Templates/Task.md",
+    "Templates",
+    "Tech Debt & Bugs",
     "Technical Notes/Untitled Kanban.md",
     "Levels and Rooms/Boss Room.md",
     "Technical Notes",
@@ -193,23 +207,17 @@
     "Game Design Document.md",
     "Roadmap/0.0.4 Dungeon & Node Map Generation.md",
     "Levels and Rooms/+ Level Layouts.canvas",
-    "Roadmap/+ Kanban.md",
     "Levels and Rooms/Monster Room.md",
     "Levels and Rooms/Rest Room.md",
     "Levels and Rooms/Shop Room.md",
-    "Roadmap/0.0.2 Reel Logic.md",
     "Roadmap/0.0.3 Combat System.md",
     "Levels and Rooms/Level Start.md",
     "Levels and Rooms/Mystery Room.md",
-    "Roadmap/0.0.1 Project Setup.md",
     "Roadmap/0.0.11 Save & Meta Progression.md",
     "Roadmap/0.0.10 Sound & Music.md",
     "Roadmap/0.0.9 Visuals & UI.md",
     "Roadmap/0.0.8 Enemy & Encounter Design.md",
     "Roadmap/0.0.7 Economy & Upgrades.md",
-    "Roadmap/0.0.6 Class System.md",
-    "Roadmap/0.0.5 Mystery Room System.md",
-    "Roadmap",
     "Untitled.canvas"
   ]
 }

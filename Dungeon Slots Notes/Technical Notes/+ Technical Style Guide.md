@@ -1,20 +1,22 @@
-This documents purpose is an attempt to bring consistency throughout the codebase and define how modules, classes, utils, etc will be structured.  This is easier said than done especially since there are several modules that are being directly imported from other vendors.  
+This documents purpose is an attempt to bring consistency throughout the codebase and define how modules, classes, tables, functions, etc will be structured.  This is easier said than done especially since there are several modules that are being directly imported from other vendors.  Any module that is imported that has been deprecated by the author will be brought into alignment with this guide in order to bring parity throughout the codebase. 
 
-This doc is heavily inspired by [Tiger Style](https://tigerstyle.dev/), from the Tiger Beetle team.  While it's inspired, it does deviate since Lua is not a truly typed language nor does it allow for static memory allocation.  That doesn't mean we shouldn't do our best to write performant and safe code. 
-
-In addition, this doc will not rewrite the Tiger Style manifest, rather it'll use it as a guide to outline stylistic choices and patterns that we should adhere to while building this project. 
-
+This doc is heavily inspired by [Tiger Style](https://tigerstyle.dev/), from the Tiger Beetle team, it will not rewrite the aforementioned manifest, rather it'll use it as a guide to outline stylistic choices and patterns that should be adhered to while building this project. While it's inspired, it does deviate since Lua is not a typed language nor does it allow for static memory allocation.  That doesn't mean we shouldn't do our best to write performant and safe code. 
 
 ---
 
 ## Philosophy
 
-> 
+>       
 >     _"Programs should be written for people to read, 
 >     and only incidentally for machines to execute."_  
-> 
->        — Hal Abelson & Gerald Jay Sussman
-> 
+>        — **Harold Abelson**
+>        
+
+>     
+>     "_Any fool can write code that a computer can understand. 
+>     Good programmers write code that humans can understand._” 
+>        — **Martin Fowler**
+>        
 
 - **Favor simplicity over cleverness.**
 - **Avoid magic. Embrace clarity.**
@@ -22,13 +24,13 @@ In addition, this doc will not rewrite the Tiger Style manifest, rather it'll us
 - **Structure code like a narrative.**
 - **Optimize for understanding, not just execution.**
 
-
 ---
 
 ## Formatting & Structure
 
 ### Indentation
 - Use **2 spaces** per indentation level.
+- This should be handled by the Lua formatter
 
 ```lua
 function greet(name)
@@ -49,7 +51,6 @@ end
 - Group related functions together.
 - Put "public" interface at the top; helpers below.
 
-
 ---
 
 ## Naming Conventions
@@ -57,13 +58,13 @@ end
 ### Variables & Functions
 - `snake_case` for variables and functions.
 - Use **descriptive** names (`enemy_hp`, not `ehp`).
+- Avoid using single letter variable names.
 
 ### Constants
 - Use `ALL_CAPS` for module-level constants.
 
 ### Modules
 - Use `PascalCase` for module names: `CombatSystem`, `InventoryManager`.
-
 
 ---
 
@@ -98,8 +99,9 @@ for i, item in ipairs(inventory) do
 end
 ```
 
-Avoid `while true` unless you're writing a coroutine or FSM (Finite State Machine).
+Avoid recursion if possible to keep execution bounded and predictable, preventing stack overflows and uncontrolled resource use. 
 
+The exception is if you're writing a coroutine or FSM (Finite State Machine). 
 
 ### FSMs
 
@@ -160,7 +162,6 @@ else
 
 This will lead to a dark place as the logic and state tree gets larger. 
 
-
 ---
 
 ## Tables
@@ -212,7 +213,6 @@ local status = {
 
 This provides a clear start and end to the table, further increasing readability.
 
-
 ---
 
 ## Functions
@@ -232,7 +232,6 @@ function calculate_damage(base_damage, armor)
 end
 ```
 
-
 ---
 
 ## Modules
@@ -250,7 +249,6 @@ end
 return Combat
 
 ```
-
 
 --- 
 
@@ -295,3 +293,51 @@ function Enemy:take_damage(amount)
 end
 ```
 
+#### 3. **Customizing Table Behavior**
+
+This includes:
+- **`__tostring`**: Custom string representation.
+- **`__len`**: Custom behavior for `#table`.
+- **`__pairs`**: Control iteration order or filtering.
+
+#### 4. **Weak Tables**
+
+When managing caches, registries, or references you don’t want to prevent from being GC’d.
+
+```lua
+local cache = setmetatable({}, { __mode = "v" })  -- weak values
+```
+
+Use case: Memory-efficient data structures.
+
+### When _Not_ to Use Metatables
+
+#### 1. **Just to Simulate Classes**
+
+If your data structure doesn't need methods or inheritance, a plain table is often clearer.
+
+:LiXCircle: Bad
+
+```lua
+setmetatable(myTable, { __index = someOtherTable })
+```
+
+:LiCheckCircle: Better
+```lua
+-- explicit copy or reference
+myTable.someField = someOtherTable.someField  
+```
+
+#### 2. **Dynamic Behavior That Obscures Logic**
+
+Avoid magic like `__index` or `__call` unless it's truly beneficial. It can make debugging harder and performance worse.
+
+#### 3. **Performance-Critical Loops**
+
+Metatables incur overhead. If you're doing thousands of iterations per frame (e.g., in a game loop), avoid using them for hot-path data structures.
+
+#### 4. **Obfuscating Table Contents**
+
+If you’re using metatables to hide or override behavior in a way that’s not obvious to readers or collaborators, it’s likely a misuse.
+
+---

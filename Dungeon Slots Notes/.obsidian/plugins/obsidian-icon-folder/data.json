@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "LiCircle",
+      "LiCheckCircle",
       "LiBookMarked",
       "LiShoppingBasket",
-      "LiDollarSign",
-      "RaUncertainty",
-      "RaSpawnNode"
+      "LiDollarSign"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -44,6 +44,10 @@
   "Levels and Rooms/Rest Room.md": "RaCampfire",
   "Levels and Rooms/Monster Room.md": "RaHood",
   "Game Design Document.md": "🎰",
-  "Roadmap/+ Kanban.md": "LiCheckSmall",
-  "Technical Notes/+ Technical Style Guide.md": "LiBookMarked"
+  "Technical Notes/+ Technical Style Guide.md": "LiBookMarked",
+  "Roadmap/+ Development Roadmap.md": "LiCheckCircle",
+  "Tech Debt & Bugs/+ Tech Debt & Bugs.md": "LiCheckCircle",
+  "Roadmap": "LiCheckCircle",
+  "Tech Debt & Bugs": "LiCheckCircle",
+  "Templates/Task.md": "LiCircle"
 }
