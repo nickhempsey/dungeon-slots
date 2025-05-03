@@ -10,6 +10,7 @@ return {
     images = {
       sprite = {
         src = "sword_attack.png",
+        animation = "sword_attack.json",
       }
     },
     sounds = {

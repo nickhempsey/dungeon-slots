@@ -1,4 +1,3 @@
-local anim8 = require("utils.anim8")
 local Hero = {}
 Hero.__index = Hero
 
@@ -12,7 +11,9 @@ function Hero:new(heroId)
   assert(type(heroId) == "string", "Function 'new': parameter 'heroId' must be a string.")
   local hero = setmetatable({
     currentSprite = nil,
-    currentAnimation = nil
+    currentAnimation = nil,
+    x = 100,
+    y = 100,
   }, Hero)
 
   LogManager.info(string.format("%s New hero: %s", Hero.debugLabel, heroId))
@@ -24,8 +25,11 @@ function Hero:new(heroId)
   end
 
   hero.currentSprite = hero.assets.images.sprite
-  local idleData = hero.assets.images.sprite.animations.idle
-  hero.currentAnimation = anim8.newAnimation(idleData.frames, idleData.durations)
+  LogManager.info(hero.assets.images)
+  hero.currentAnimation = hero.currentSprite.animations.factory('idle')
+
+  -- hero.currentAnimation.setTag('idle')
+
   return hero
 end
 
@@ -41,7 +45,7 @@ function Hero.loadManifest(heroId)
   if manifest then
     output = ManifestManager.loadValues(manifest, directory)
     LogManager.info(string.format(" %s loaded", Hero.debugLabel))
-    LogManager.info(output)
+    -- LogManager.info(output)
   else
     LogManager.error("%s No manifest found for '%s'", Hero.debugLabel, heroId)
   end
@@ -60,7 +64,7 @@ end
 
 -- Runs in love.draw
 function Hero:draw()
-  self.currentAnimation:draw(self.currentSprite.image, 100, 100)
+  self.currentAnimation:draw(self.x, self.y)
 end
 
 -----------------------------
@@ -71,13 +75,22 @@ function Hero:getBaseSymbols()
   return self.symbols
 end
 
+function Hero:getSymbolById(id)
+  local result = {}
+  for _, v in pairs(self.symbols) do
+    if v.id == id then
+      result = v
+    end
+  end
+  return result
+end
+
 function Hero:setSprite(sprite)
   self.currentSprite = self.assets.images[sprite]
 end
 
-function Hero:setAnimation(animation)
-  local data = self.currentSprite.animations[animation]
-  self.currentAnimation = anim8.newAnimation(data.frames, data.durations)
+function Hero:setAnimation(tag)
+  self.currentAnimation = self.currentSprite.animations.factory(tag)
 end
 
 function Hero:applyDamage(amount)

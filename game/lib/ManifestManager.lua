@@ -1,6 +1,7 @@
 local pathDefined = require "utils.pathDefined"
 local deepcopy = require "utils.deepcopy"
 local json = require "utils.json"
+local peachy = require "utils.peachy"
 
 ManifestManager = {}
 ManifestManager.__index = ManifestManager
@@ -153,6 +154,7 @@ function ManifestManager.handleAssets(configPath, manifest)
   return output
 end
 
+---@return table
 function ManifestManager.handleImages(configPath, images)
   local output = {}
   if type(images) ~= 'table' then
@@ -165,11 +167,15 @@ function ManifestManager.handleImages(configPath, images)
 
     local animations = nil
     if data.animation then
-      local animationPath = configPath .. data.animation
-      if pathDefined(animationPath) then
-        local animationJson = love.filesystem.read(animationPath)
-        local decodedJson = json.decode(animationJson)
-        animations = AnimationManager.buildFromAseprite(decodedJson)
+      local jsonPath = configPath .. data.animation
+      if pathDefined(jsonPath) then
+        animations = {}
+        local peachyData = love.filesystem.read(jsonPath)
+        -- Optional: You can cache this parsed JSON if used in multiple sprites
+        animations.raw = json.decode(peachyData)
+        animations.factory = function(tag)
+          return peachy.new(jsonPath, image, tag)
+        end
       end
     end
 

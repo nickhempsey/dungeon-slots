@@ -19,7 +19,6 @@ InputManager = require "lib.InputManager"
 SceneManager = require "lib.SceneManager".newManager()
 EventBusManager = require "lib.EventBusManager"
 ManifestManager = require "lib.ManifestManager"
-AnimationManager = require "lib.AnimationManager"
 
 -- Components
 Button = require "src.components.Button"

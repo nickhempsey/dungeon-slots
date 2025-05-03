@@ -6,6 +6,8 @@ local cur = SceneManager.current
 scene.playerReel = nil
 scene.enemyReel = nil
 scene.currentReel = nil
+scene.enemyReelAnimations = {}
+scene.playerReelAnimations = {}
 
 -- Stacking Scene Manager can be used to call a scenes modify function.
 -- The modify function is intended to be used for changing specific
@@ -22,18 +24,51 @@ end
 -- initialized outside of the load function for persistent state.
 function scene.load()
   EnemyButton = Button:new('Enemy Roll', 1000, 250, function()
+    GameState.hero:setAnimation('idle')
     GameState.reel:spin()
     scene.enemyReel = GameState.reel:getResults()
+    for i, v in ipairs(scene.enemyReel) do
+      scene.enemyReelAnimations[i] = {
+        id = v.id,
+        sprite = v.assets.images.sprite.animations.factory('flash'),
+        x = 900 + (i * 100),
+        y = 310,
+      }
+    end
+
+    for i, v in ipairs(scene.playerReelAnimations) do
+      local curSymbol = GameState.hero:getSymbolById(v.id)
+      -- LogManager.info(curSymbol)
+      if curSymbol then
+        scene.playerReelAnimations[i].sprite = curSymbol.assets.images.sprite.animations.factory('idle')
+      end
+    end
   end)
   EnemyButton:size('lg')
   EnemyButton:set('width', 300)
   EnemyButton:set('keybind', 'e')
 
   HeroButton = Button:new('Hero Roll', 600, 250, function()
+    GameState.hero:setAnimation('spinning')
     GameState.reel:spin()
     scene.playerReel = GameState.reel:getResults()
-    -- GameState.hero:applyDamage(10)
-    -- LogManager.info(scene.currentReel)
+
+    for i, v in ipairs(scene.playerReel) do
+      scene.playerReelAnimations[i] = {
+        id = v.id,
+        sprite = v.assets.images.sprite.animations.factory('flash'),
+        x = 500 + (i * 100),
+        y = 310,
+      }
+    end
+
+    for i, v in ipairs(scene.enemyReelAnimations) do
+      local curSymbol = GameState.hero:getSymbolById(v.id)
+      -- LogManager.info(curSymbol)
+      if curSymbol then
+        scene.enemyReelAnimations[i].sprite = curSymbol.assets.images.sprite.animations.factory('idle')
+      end
+    end
   end)
   HeroButton:size('lg')
   HeroButton:set('width', 300)
@@ -48,7 +83,13 @@ end
 function scene.update(dt)
   HeroButton:update(dt)
   EnemyButton:update(dt)
-  -- LogManager.info(GameState.hero.stats.health)
+
+  for _, v in ipairs(scene.playerReelAnimations) do
+    v.sprite:update(dt)
+  end
+  for _, v in ipairs(scene.enemyReelAnimations) do
+    v.sprite:update(dt)
+  end
 end
 
 -- Scene draw loop
@@ -56,22 +97,21 @@ function scene.draw()
   HeroButton:draw()
   EnemyButton:draw()
   GameState:draw()
+
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.setFont(Fonts.xl)
   love.graphics.printf("\"Combat Scene\"", 0, 150, love.graphics.getWidth(), "center")
 
-  if scene.playerReel ~= nil then
-    LogManager.info(string.format("%s player reel:", SceneManager.debugLabel))
-    LogManager.info(scene.playerReel)
-    -- for i, v in ipairs(scene.playerReel) do
-    --   -- love.graphics.draw(v.assets.images.sprite, 500 + (i * 100), 310, 0, 1, 1)
-    -- end
+  if scene.playerReelAnimations ~= nil then
+    for _, v in pairs(scene.playerReelAnimations) do
+      v.sprite:draw(v.x, v.y)
+    end
   end
-  -- if scene.enemyReel ~= nil then
-  --   for i, v in ipairs(scene.enemyReel) do
-  --    --  love.graphics.draw(v.assets.images.sprite, 900 + (i * 100), 310, 0, 1, 1)
-  --   end
-  -- end
+  if scene.enemyReelAnimations ~= nil then
+    for _, v in pairs(scene.enemyReelAnimations) do
+      v.sprite:draw(v.x, v.y)
+    end
+  end
 end
 
 return scene
