@@ -6,17 +6,14 @@ This doc is heavily inspired by [Tiger Style](https://tigerstyle.dev/), from the
 
 ## Philosophy
 
->       
->     _"Programs should be written for people to read, 
->     and only incidentally for machines to execute."_  
->        — **Harold Abelson**
->        
+> _"Programs should be written for people to read, and only incidentally for machines to execute."_  
+>  — **Harold Abelson**
+   
 
->     
->     "_Any fool can write code that a computer can understand. 
->     Good programmers write code that humans can understand._” 
->        — **Martin Fowler**
->        
+
+> "_Any fool can write code that a computer can understand. Good programmers write code that humans can understand._” 
+> — **Martin Fowler**
+
 
 - **Favor simplicity over cleverness.**
 - **Avoid magic. Embrace clarity.**
@@ -341,3 +338,111 @@ Metatables incur overhead. If you're doing thousands of iterations per frame (e.
 If you’re using metatables to hide or override behavior in a way that’s not obvious to readers or collaborators, it’s likely a misuse.
 
 ---
+
+## Error Handling
+
+- Use `assert` for developer-facing guarantees.
+- Use `pcall` only for modding systems* for custom error handling for runtime recovery.
+
+`* If we ever get there`
+
+### Assertions: Defensive Thinking, Not Paranoia
+
+Assertions are sanity checks — they verify that **your assumptions are still true** while running. Use them to **fail fast** and catch bugs early, especially in development.
+
+#### When to Use `assert`
+
+ To enforce **preconditions**:
+
+```lua
+assert(type(name) == "string", "Expected name to be a string")
+```
+
+To guard against **nil values** where they shouldn’t occur:
+
+```lua
+local player = get_player()
+assert(player, "Player must exist at this point")
+```
+
+To document **invariants** in your logic:
+
+```lua
+assert(x >= 0, "x should never be negative here")
+```
+
+To validate return values from functions you don’t fully control.
+
+```lua
+local ok, result = try_something()
+assert(ok, "try_something() failed")
+```
+
+That same scenario could be run as a `pcall` if we want to handle a safe recovery and not bomb the app.
+
+```lua
+local ok, result = pcall(try_something())
+print(ok, result) --> boolean  value
+```
+
+#### When **Not** to Use `assert`
+
+To handle runtime errors or bad user input:
+
+```lua
+-- Don't do this in production:
+assert(user_input > 0, "Invalid input")
+```
+
+To "fix" code by assuming a bug won't happen:
+
+```lua
+-- Don't cover up an unclear bug:
+assert(enemy.hp, "Enemy HP shouldn't be nil")
+```
+
+#### Mental Model
+
+> “Use assertions not because you _don’t trust_ the code — but because you _do trust_ your assumptions, and want to be notified the moment they're wrong.”
+
+---
+
+## Comments & Docstrings
+
+- Prefer self-documenting code.
+- Use **block comments** for non-obvious logic or decisions:
+
+```lua
+-- Convert screen coordinates to world coordinates
+-- Takes into account camera position and scale
+```
+
+---
+
+## Examples
+
+:LiCheckCircle: Good
+
+```lua
+local Math = {}
+
+-- Adds two vectors
+--
+-- @param a table {x, y}
+-- @param b table {x, y}
+-- @return table
+function Math.add_vectors(a, b)
+  return { 
+    x = a.x + b.x, 
+    y = a.y + b.y
+  }
+end
+
+return Math
+```
+
+:LiXCircle: Bad
+
+```lua
+function add(a,b) return{x=a.x+b.x,y=a.y+b.y} end
+```

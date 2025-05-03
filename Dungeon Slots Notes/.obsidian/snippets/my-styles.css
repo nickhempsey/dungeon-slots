@@ -1,0 +1,10 @@
+/** Qoutes **/
+.markdown-source-view .cm-line.HyperMD-quote {
+  padding-block: 1rem;
+  padding-inline: 2rem !important;
+  text-indent: -1rem !important;
+}
+
+.markdown-source-view .cm-line.HyperMD-quote + .cm-line.HyperMD-quote {
+  padding-block-start: 0;
+}

@@ -1,4 +1,4 @@
-local pathDefined = function(path)
+local function pathDefined(path)
   local major, minor, revision, _ = love.getVersion()
 
   if major == 0 and minor == 9 and revision >= 1 then

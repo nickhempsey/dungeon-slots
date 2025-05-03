@@ -8,7 +8,7 @@
         "command": "love"
       },
       "args": [
-        "${workspaceFolder}",
+        "${workspaceFolder}/game",
         "vsc_debug"
       ],
     }

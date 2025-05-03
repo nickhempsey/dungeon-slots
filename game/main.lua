@@ -3,7 +3,7 @@ if arg[#arg] == "vsc_debug" then require("lldebugger").start() end
 if love.filesystem then io.stdout:setvbuf("no") end
 
 -- Debug
-Debug = false
+Debug = true
 LogManagerColor = require "lib.LogManagerColor"
 LogManager = require "lib.LogManager"
 
@@ -19,6 +19,7 @@ InputManager = require "lib.InputManager"
 SceneManager = require "lib.SceneManager".newManager()
 EventBusManager = require "lib.EventBusManager"
 ManifestManager = require "lib.ManifestManager"
+AnimationManager = require "lib.AnimationManager"
 
 -- Components
 Button = require "src.components.Button"
@@ -49,6 +50,7 @@ end
 function love.draw()
   love.graphics.clear(0, 0, 0, 0)
   SceneManager.draw()
+  GameState:draw()
 end
 
 function love.quit()

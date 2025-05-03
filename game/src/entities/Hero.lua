@@ -1,25 +1,36 @@
-Hero = {}
+local anim8 = require("utils.anim8")
+local Hero = {}
 Hero.__index = Hero
 
 Hero.debug = Debug
 Hero.debugLabel = LogManagerColor.colorf('{green}[Hero]{reset}')
 
+-- Instantiate a new hero by their id.
+--
 ---@param heroId string
 function Hero:new(heroId)
   assert(type(heroId) == "string", "Function 'new': parameter 'heroId' must be a string.")
-  local Hero = setmetatable({}, Hero)
+  local hero = setmetatable({
+    currentSprite = nil,
+    currentAnimation = nil
+  }, Hero)
 
   LogManager.info(string.format("%s New hero: %s", Hero.debugLabel, heroId))
-  local manifest = Hero.loadManifest(heroId)
+  local manifest = hero.loadManifest(heroId)
   if manifest then
     for k, v in pairs(manifest) do
-      Hero[k] = v
+      hero[k] = v
     end
   end
 
-  return Hero
+  hero.currentSprite = hero.assets.images.sprite
+  local idleData = hero.assets.images.sprite.animations.idle
+  hero.currentAnimation = anim8.newAnimation(idleData.frames, idleData.durations)
+  return hero
 end
 
+-- Gather all of the required resources from the manifest.
+--
 ---@param heroId string
 function Hero.loadManifest(heroId)
   assert(type(heroId) == "string", "Function 'loadManifest': parameter 'heroId' must be a string.")
@@ -30,26 +41,43 @@ function Hero.loadManifest(heroId)
   if manifest then
     output = ManifestManager.loadValues(manifest, directory)
     LogManager.info(string.format(" %s loaded", Hero.debugLabel))
+    LogManager.info(output)
   else
     LogManager.error("%s No manifest found for '%s'", Hero.debugLabel, heroId)
   end
   return output
 end
 
+-- Runs in love.load
 function Hero:load()
-
+  Hero:subscribeToEvents()
 end
 
+-- Runs in love.update
 function Hero:update(dt)
-
+  self.currentAnimation:update(dt)
 end
 
+-- Runs in love.draw
+function Hero:draw()
+  self.currentAnimation:draw(self.currentSprite.image, 100, 100)
+end
+
+-----------------------------
+---       UTILITIES       ---
+-----------------------------
+---
 function Hero:getBaseSymbols()
   return self.symbols
 end
 
-function Hero:load()
-  Hero:subscribeToEvents()
+function Hero:setSprite(sprite)
+  self.currentSprite = self.assets.images[sprite]
+end
+
+function Hero:setAnimation(animation)
+  local data = self.currentSprite.animations[animation]
+  self.currentAnimation = anim8.newAnimation(data.frames, data.durations)
 end
 
 function Hero:applyDamage(amount)

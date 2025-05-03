@@ -55,20 +55,23 @@ end
 function scene.draw()
   HeroButton:draw()
   EnemyButton:draw()
+  GameState:draw()
   love.graphics.setColor(1, 1, 1, 1)
   love.graphics.setFont(Fonts.xl)
   love.graphics.printf("\"Combat Scene\"", 0, 150, love.graphics.getWidth(), "center")
 
   if scene.playerReel ~= nil then
-    for i, v in ipairs(scene.playerReel) do
-      love.graphics.draw(v.assets.images.sprite, 500 + (i * 100), 310, 0, 0.1, 0.1)
-    end
+    LogManager.info(string.format("%s player reel:", SceneManager.debugLabel))
+    LogManager.info(scene.playerReel)
+    -- for i, v in ipairs(scene.playerReel) do
+    --   -- love.graphics.draw(v.assets.images.sprite, 500 + (i * 100), 310, 0, 1, 1)
+    -- end
   end
-  if scene.enemyReel ~= nil then
-    for i, v in ipairs(scene.enemyReel) do
-      love.graphics.draw(v.assets.images.sprite, 900 + (i * 100), 310, 0, 0.1, 0.1)
-    end
-  end
+  -- if scene.enemyReel ~= nil then
+  --   for i, v in ipairs(scene.enemyReel) do
+  --    --  love.graphics.draw(v.assets.images.sprite, 900 + (i * 100), 310, 0, 1, 1)
+  --   end
+  -- end
 end
 
 return scene

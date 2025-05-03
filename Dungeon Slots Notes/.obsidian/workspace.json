@@ -4,31 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "31c0ffcfd8c2f518",
+        "id": "6a4b5bb32a63699e",
         "type": "tabs",
         "children": [
           {
-            "id": "d0fe829ef00b5b46",
+            "id": "7b153fd0dc728a71",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Game Design Document.md",
-                "mode": "preview",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Game Design Document"
+              "title": "New tab"
             }
           }
         ]
@@ -88,7 +74,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 240.5
+    "width": 240.5,
+    "collapsed": true
   },
   "right": {
     "id": "e4ee41ab424d00fc",
@@ -152,21 +139,21 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Game Design Document.md",
-                "followCursor": true,
-                "showSearch": true,
+                "followCursor": false,
+                "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Game Design Document"
+              "title": "Outline"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 400.5
+    "width": 200,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -176,48 +163,48 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "obsidian-kanban:Create new board": false,
-      "iconic:Open rulebook": false
+      "obsidian-kanban:Create new board": false
     }
   },
-  "active": "d0fe829ef00b5b46",
+  "active": "7b153fd0dc728a71",
   "lastOpenFiles": [
-    "Enemy Designs/+ Enemy Design Overview.md",
+    "Technical Notes/Managers/Manifests.md",
+    "Technical Notes/Managers/Logs and Debugging.md",
+    "Technical Notes/Managers/Inputs.md",
+    "Technical Notes/Managers/Scenes.md",
+    "Technical Notes/Managers/Event Bus.md",
+    "Technical Notes/Managers/Achievements.md",
+    "Technical Notes/Managers",
     "Technical Notes/+ Technical Style Guide.md",
-    "Roadmap/+ Development Roadmap.md",
     "Tech Debt & Bugs/+ Tech Debt & Bugs.md",
-    "Roadmap/0.0.2 Reel Logic.md",
-    "Roadmap/0.0.1 Project Setup.md",
     "Templates/Task.md",
+    "+ Level and Room Design/+Levels and Rooms Overview.md",
+    "+ Symbol Design/+ Symbol Design Overview.md",
+    "Roadmap/0.0.2 Reel Logic.md",
+    "+ Symbol Design",
+    "Roadmap/0.0.1 Project Setup.md",
+    "Game Design Document.md",
+    "+ Enemy Designs/+ Enemy Design Overview.md",
+    "Roadmap/+ Development Roadmap.md",
     "Templates",
     "Tech Debt & Bugs",
     "Technical Notes/Untitled Kanban.md",
-    "Levels and Rooms/Boss Room.md",
+    "+ Level and Room Design/Boss Room.md",
     "Technical Notes",
-    "Hero Designs/+ Hero Design Overview.md",
+    "+ Hero Designs/+ Hero Design Overview.md",
     "Hero Designs/Untitled.md",
-    "Hero Designs/Slotomancer",
-    "Hero Designs/Luck Punk",
-    "Enemy Designs/Mid Tier",
-    "Hero Designs",
-    "Enemy Designs/Boss Tier",
-    "Enemy Designs/Elite Tier",
-    "Enemy Designs/Common Tier",
-    "Levels and Rooms/+ Dungeon Levels Overview.md",
-    "Game Design Document.md",
+    "+ Hero Designs/Slotomancer",
+    "+ Hero Designs/Luck Punk",
+    "+ Enemy Designs/Mid Tier",
+    "+ Hero Designs",
+    "+ Enemy Designs/Boss Tier",
     "Roadmap/0.0.4 Dungeon & Node Map Generation.md",
-    "Levels and Rooms/+ Level Layouts.canvas",
-    "Levels and Rooms/Monster Room.md",
-    "Levels and Rooms/Rest Room.md",
-    "Levels and Rooms/Shop Room.md",
+    "+ Level and Room Design/+ Level Layouts.canvas",
+    "+ Level and Room Design/Monster Room.md",
+    "+ Level and Room Design/Rest Room.md",
+    "+ Level and Room Design/Shop Room.md",
     "Roadmap/0.0.3 Combat System.md",
-    "Levels and Rooms/Level Start.md",
-    "Levels and Rooms/Mystery Room.md",
-    "Roadmap/0.0.11 Save & Meta Progression.md",
-    "Roadmap/0.0.10 Sound & Music.md",
-    "Roadmap/0.0.9 Visuals & UI.md",
-    "Roadmap/0.0.8 Enemy & Encounter Design.md",
-    "Roadmap/0.0.7 Economy & Upgrades.md",
+    "+ Level and Room Design/Level Start.md",
     "Untitled.canvas"
   ]
 }

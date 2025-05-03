@@ -1,4 +1,4 @@
-GameState = {}
+local GameState = {}
 GameState.__index = GameState
 
 GameState.debug = Debug
@@ -51,6 +51,7 @@ function GameState:update(dt)
 end
 
 function GameState:draw()
+  GameState.hero:draw()
 end
 
 return GameState

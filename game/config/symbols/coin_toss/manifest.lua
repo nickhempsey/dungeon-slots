@@ -5,7 +5,10 @@ return {
   effects = {},
   assets = {
     images = {
-      sprite = "sprite.png",
+      sprite = {
+        src = "coin_toss.png",
+        animation = "coin_toss.json"
+      }
     },
     sounds = {
       --spin = "spin.wav",

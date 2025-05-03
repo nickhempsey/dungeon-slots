@@ -1,4 +1,4 @@
-local funcDefined = function(func, scene)
+local function funcDefined(func, scene)
   -- Make sure our scene exists
   if scene.current == nil then
     if #scene.table == 0 then

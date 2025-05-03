@@ -1,6 +1,6 @@
 return {
-  id = "sword_attack",
-  name = "Sword Attack",
+  id = "seven",
+  name = "Seven",
   baseDmg = 2,
   effects = {
     'stun',
@@ -9,7 +9,7 @@ return {
   assets = {
     images = {
       sprite = {
-        src = "sword_attack.png",
+        src = "seven.png",
       }
     },
     sounds = {

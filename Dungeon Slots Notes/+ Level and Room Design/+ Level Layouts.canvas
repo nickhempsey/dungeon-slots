@@ -1,18 +1,18 @@
 {
 	"nodes":[
-		{"id":"a1e9a1bcc83baf84","type":"file","file":"Levels and Rooms/Mystery Room.md","x":-15,"y":160,"width":400,"height":100,"color":"5"},
-		{"id":"42e6b09cc1f7f6dd","type":"file","file":"Levels and Rooms/Rest Room.md","x":-260,"y":-140,"width":400,"height":100,"color":"4"},
-		{"id":"eedf0b0b3e92088e","type":"file","file":"Levels and Rooms/Monster Room.md","x":260,"y":-140,"width":400,"height":100,"color":"3"},
-		{"id":"aa73c1a5a6ffb0ec","type":"file","file":"Levels and Rooms/Monster Room.md","x":-480,"y":160,"width":400,"height":100,"color":"3"},
-		{"id":"3b3d907b7fdd3961","type":"file","file":"Levels and Rooms/Shop Room.md","x":440,"y":160,"width":400,"height":100,"color":"6"},
-		{"id":"22cfa54b4dcd2df2","type":"file","file":"Levels and Rooms/Monster Room.md","x":-260,"y":440,"width":400,"height":100,"color":"3"},
-		{"id":"2c86801a087492f0","type":"file","file":"Levels and Rooms/Elite Monster Room.md","x":260,"y":440,"width":400,"height":100,"color":"2"},
-		{"id":"38bb1a890e9d9fd7","type":"file","file":"Levels and Rooms/Shop Room.md","x":-260,"y":710,"width":400,"height":100,"color":"6"},
-		{"id":"899973fc6fb369a5","type":"file","file":"Levels and Rooms/Rest Room.md","x":260,"y":710,"width":400,"height":100,"color":"4"},
-		{"id":"a47ffed307719cc2","type":"file","file":"Levels and Rooms/Boss Room.md","x":-15,"y":1000,"width":400,"height":100,"color":"1"},
-		{"id":"ec93cf5bc7316d03","type":"file","file":"Levels and Rooms/Monster Room.md","x":-15,"y":-420,"width":400,"height":100,"color":"3"},
-		{"id":"2b168a15e76e3b70","type":"file","file":"Levels and Rooms/Monster Room.md","x":-15,"y":-640,"width":400,"height":100,"color":"3"},
-		{"id":"9e83a8e9f2d4f9f9","type":"file","file":"Levels and Rooms/Level Start.md","x":-15,"y":-860,"width":400,"height":120}
+		{"id":"a1e9a1bcc83baf84","type":"file","file":"+ Level and Room Design/Mystery Room.md","x":-15,"y":160,"width":400,"height":100,"color":"5"},
+		{"id":"42e6b09cc1f7f6dd","type":"file","file":"+ Level and Room Design/Rest Room.md","x":-260,"y":-140,"width":400,"height":100,"color":"4"},
+		{"id":"eedf0b0b3e92088e","type":"file","file":"+ Level and Room Design/Monster Room.md","x":260,"y":-140,"width":400,"height":100,"color":"3"},
+		{"id":"aa73c1a5a6ffb0ec","type":"file","file":"+ Level and Room Design/Monster Room.md","x":-480,"y":160,"width":400,"height":100,"color":"3"},
+		{"id":"3b3d907b7fdd3961","type":"file","file":"+ Level and Room Design/Shop Room.md","x":440,"y":160,"width":400,"height":100,"color":"6"},
+		{"id":"22cfa54b4dcd2df2","type":"file","file":"+ Level and Room Design/Monster Room.md","x":-260,"y":440,"width":400,"height":100,"color":"3"},
+		{"id":"2c86801a087492f0","type":"file","file":"+ Level and Room Design/Elite Monster Room.md","x":260,"y":440,"width":400,"height":100,"color":"2"},
+		{"id":"38bb1a890e9d9fd7","type":"file","file":"+ Level and Room Design/Shop Room.md","x":-260,"y":710,"width":400,"height":100,"color":"6"},
+		{"id":"899973fc6fb369a5","type":"file","file":"+ Level and Room Design/Rest Room.md","x":260,"y":710,"width":400,"height":100,"color":"4"},
+		{"id":"a47ffed307719cc2","type":"file","file":"+ Level and Room Design/Boss Room.md","x":-15,"y":1000,"width":400,"height":100,"color":"1"},
+		{"id":"ec93cf5bc7316d03","type":"file","file":"+ Level and Room Design/Monster Room.md","x":-15,"y":-420,"width":400,"height":100,"color":"3"},
+		{"id":"2b168a15e76e3b70","type":"file","file":"+ Level and Room Design/Monster Room.md","x":-15,"y":-640,"width":400,"height":100,"color":"3"},
+		{"id":"9e83a8e9f2d4f9f9","type":"file","file":"+ Level and Room Design/Level Start.md","x":-15,"y":-860,"width":400,"height":120}
 	],
 	"edges":[
 		{"id":"70576f6b7ec53ab9","fromNode":"9e83a8e9f2d4f9f9","fromSide":"bottom","toNode":"2b168a15e76e3b70","toSide":"top"},

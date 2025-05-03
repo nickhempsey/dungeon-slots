@@ -8,7 +8,10 @@ return {
   },
   assets = {
     images = {
-      --sprite = "sprite.png",
+      sprite = {
+        src = "luck_punk.png",
+        animation = "luck_punk.json",
+      }
     },
     sounds = {
       --attackSound = "attack_sound.wav",
@@ -22,7 +25,10 @@ return {
   ai = {
     behavior = "aggressive", -- optional special behavior tags
   },
-  symbols = { 'sword_attack', 'coin_toss' },
+  symbols = {
+    'sword_attack',
+    'coin_toss'
+  },
   abilities = {
     "quick_slash",
     "taunt",
