@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Enemy Designs/+ Enemy Design Overview.md",
-                "mode": "source",
+                "file": "Game Design Document.md",
+                "mode": "preview",
                 "source": false,
                 "backlinks": true,
                 "backlinkOpts": {
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "+ Enemy Design Overview"
+              "title": "Game Design Document"
             }
           }
         ]
@@ -104,7 +104,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Enemy Designs/+ Enemy Design Overview.md",
+                "file": "Game Design Document.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +114,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for + Enemy Design Overview"
+              "title": "Backlinks for Game Design Document"
             }
           },
           {
@@ -123,12 +123,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Enemy Designs/+ Enemy Design Overview.md",
+                "file": "Game Design Document.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from + Enemy Design Overview"
+              "title": "Outgoing links from Game Design Document"
             }
           },
           {
@@ -152,13 +152,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Enemy Designs/+ Enemy Design Overview.md",
-                "followCursor": false,
+                "file": "Game Design Document.md",
+                "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of + Enemy Design Overview"
+              "title": "Outline of Game Design Document"
             }
           }
         ],
@@ -166,7 +166,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 400.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -182,6 +182,7 @@
   },
   "active": "d0fe829ef00b5b46",
   "lastOpenFiles": [
+    "Enemy Designs/+ Enemy Design Overview.md",
     "Technical Notes/+ Technical Style Guide.md",
     "Roadmap/+ Development Roadmap.md",
     "Tech Debt & Bugs/+ Tech Debt & Bugs.md",
@@ -197,7 +198,6 @@
     "Hero Designs/Untitled.md",
     "Hero Designs/Slotomancer",
     "Hero Designs/Luck Punk",
-    "Enemy Designs/+ Enemy Design Overview.md",
     "Enemy Designs/Mid Tier",
     "Hero Designs",
     "Enemy Designs/Boss Tier",
