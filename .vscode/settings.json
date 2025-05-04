@@ -1,12 +1,11 @@
 {
+  "Lua.runtime.version": "LuaJIT",
   "Lua.diagnostics.globals": [
-    "love",
-    "width",
-    "height",
-    "padding",
-    "panel"
+    "love"
   ],
-  "Lua.diagnostics.disable": [
-    "duplicate-set-field"
-  ]
+  "Lua.diagnostics.disable": [],
+  "Lua.workspace.checkThirdParty": false,
+  "Lua.workspace.library": [
+    "${workspaceFolder}/game/api",
+  ],
 }

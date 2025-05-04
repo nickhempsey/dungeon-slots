@@ -1,9 +1,11 @@
 {
+  "Lua.runtime.version": "LuaJIT",
   "Lua.diagnostics.globals": [
     "love"
   ],
-  "Lua.diagnostics.disable": [
-    "undefined-doc-name",
-    "undefined-field"
-  ]
+  "Lua.diagnostics.disable": [],
+  "Lua.workspace.checkThirdParty": false,
+  "Lua.workspace.library": [
+    "${workspaceFolder}/game/api",
+  ],
 }
