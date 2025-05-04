@@ -23,55 +23,46 @@ end
 -- this function is to initialize variables. Though they can also be
 -- initialized outside of the load function for persistent state.
 function scene.load()
-  EnemyButton = Button:new('Enemy Roll', 1000, 250, function()
+  EnemyButton = Button:new('Enemy Roll', 400, 100, function()
     GameState.hero:setAnimation('idle')
     GameState.reel:spin()
     scene.enemyReel = GameState.reel:getResults()
     for i, v in ipairs(scene.enemyReel) do
+      local sprite = v.assets.images.sprite.animations.factory('flash')
       scene.enemyReelAnimations[i] = {
         id = v.id,
-        sprite = v.assets.images.sprite.animations.factory('flash'),
-        x = 900 + (i * 100),
-        y = 310,
+        sprite = sprite,
+        x = EnemyButton.x - sprite:getWidth() * 1.5 + (i * sprite:getWidth()),
+        y = EnemyButton.y + EnemyButton.height,
       }
     end
 
-    for i, v in ipairs(scene.playerReelAnimations) do
-      local curSymbol = GameState.hero:getSymbolById(v.id)
-      -- LogManager.info(curSymbol)
-      if curSymbol then
-        scene.playerReelAnimations[i].sprite = curSymbol.assets.images.sprite.animations.factory('idle')
-      end
+    for _, v in pairs(scene.playerReelAnimations) do
+      v.sprite:setTag('idle')
     end
   end)
-  EnemyButton:size('lg')
-  EnemyButton:set('width', 300)
+  EnemyButton:size('md')
   EnemyButton:set('keybind', 'e')
 
-  HeroButton = Button:new('Hero Roll', 600, 250, function()
+  HeroButton = Button:new('Hero Roll', 100, 100, function()
     GameState.hero:setAnimation('spinning')
     GameState.reel:spin()
     scene.playerReel = GameState.reel:getResults()
-
     for i, v in ipairs(scene.playerReel) do
+      local sprite = v.assets.images.sprite.animations.factory('flash')
       scene.playerReelAnimations[i] = {
         id = v.id,
-        sprite = v.assets.images.sprite.animations.factory('flash'),
-        x = 500 + (i * 100),
-        y = 310,
+        sprite = sprite,
+        x = HeroButton.x - sprite:getWidth() * 1.5 + (i * sprite:getWidth()),
+        y = HeroButton.y + HeroButton.height,
       }
     end
 
-    for i, v in ipairs(scene.enemyReelAnimations) do
-      local curSymbol = GameState.hero:getSymbolById(v.id)
-      -- LogManager.info(curSymbol)
-      if curSymbol then
-        scene.enemyReelAnimations[i].sprite = curSymbol.assets.images.sprite.animations.factory('idle')
-      end
+    for _, v in pairs(scene.enemyReelAnimations) do
+      v.sprite:setTag('idle')
     end
   end)
-  HeroButton:size('lg')
-  HeroButton:set('width', 300)
+  HeroButton:size('md')
   HeroButton:set('keybind', 'r')
   HeroButton:set('bg', Colors.primary)
   HeroButton:set('hoverBg', Colors.secondary)
@@ -83,6 +74,7 @@ end
 function scene.update(dt)
   HeroButton:update(dt)
   EnemyButton:update(dt)
+  GameState.hero:update(dt)
 
   for _, v in ipairs(scene.playerReelAnimations) do
     v.sprite:update(dt)
@@ -97,9 +89,11 @@ function scene.draw()
   HeroButton:draw()
   EnemyButton:draw()
   GameState:draw()
+  GameState.hero:draw()
+
 
   love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.setFont(Fonts.xl)
+  FontsManager:setFont('xl')
   love.graphics.printf("\"Combat Scene\"", 0, 150, love.graphics.getWidth(), "center")
 
   if scene.playerReelAnimations ~= nil then

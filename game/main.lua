@@ -10,15 +10,14 @@ LogManager = require "lib.LogManager"
 -- Utils
 Tween = require "utils.tween"
 
--- Config
-Colors = require "config.Colors"
-Fonts = require "config.Fonts"
-
--- Library
+-- Libraries
+FontsManager = require "lib.FontsManager"
+ColorsManager = require "lib.ColorsManager"
 InputManager = require "lib.InputManager"
 SceneManager = require "lib.SceneManager".newManager()
 EventBusManager = require "lib.EventBusManager"
 ManifestManager = require "lib.ManifestManager"
+ViewportManager = require "lib.ViewportManager"
 
 -- Components
 Button = require "src.components.Button"
@@ -31,13 +30,25 @@ GameState = require "src.entities.GameState"
 
 local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
 
+-------------------------------------
+---              LOAD             ---
+-------------------------------------
 function love.load()
+  ViewportManager:load()
+  ViewportManager:update()
+
+  FontsManager:load()
+
+
   LogManager.startSession()
   LogManager.info("%s ⌛ Game loading...", sceneLabel)
   GameState:load()
   LogManager.info("%s ✅ Game loaded!", sceneLabel)
 end
 
+-------------------------------------
+---            UPDATE             ---
+-------------------------------------
 function love.update(dt)
   Tween.update(dt)
   GameState:update(dt)
@@ -46,12 +57,32 @@ function love.update(dt)
   love.keyboard.resetInputStates()
 end
 
-function love.draw()
-  love.graphics.clear(0, 0, 0, 0)
-  SceneManager.draw()
-  GameState:draw()
+-------------------------------------
+---            RESIZE             ---
+-------------------------------------
+function love.resize()
+  ViewportManager:update()
 end
 
+-------------------------------------
+---              DRAW             ---
+-------------------------------------
+function love.draw()
+  -- Resets the screen and canvas on every draw
+  -- Prevents left over elements hanging around.
+  ViewportManager:clearCanvas()
+
+  -- ALL Scenes, states, etc get rendered here.
+  SceneManager.draw()
+  GameState:draw()
+
+  -- Now draw the canvas to the real screen, scaled and centered
+  ViewportManager:scaleCanvas()
+end
+
+-------------------------------------
+---              QUIT             ---
+-------------------------------------
 function love.quit()
   LogManager.shutdown()
 end

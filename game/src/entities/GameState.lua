@@ -45,13 +45,11 @@ function GameState:load()
 end
 
 function GameState:update(dt)
-  GameState.hero:update(dt)
-  function love.keypressed(key, unicode)
-  end
+
 end
 
 function GameState:draw()
-  GameState.hero:draw()
+
 end
 
 return GameState

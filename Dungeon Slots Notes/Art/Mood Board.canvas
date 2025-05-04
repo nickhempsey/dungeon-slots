@@ -1,0 +1,25 @@
+{
+	"nodes":[
+		{"id":"2b88b80f569f1f1d","type":"file","file":"Art/References/Games/WizardSpin_dribble.webp","x":-960,"y":-800,"width":400,"height":306},
+		{"id":"29f51c1b40a2d05b","type":"text","text":"Like the simple and clear ui","x":-960,"y":-860,"width":400,"height":60},
+		{"id":"92283e3bd42efe6f","type":"file","file":"Art/References/slow-machine_8_digital_full_screen_takeover.jpg","x":-960,"y":-340,"width":400,"height":397},
+		{"id":"ab85a021bc1ed433","type":"text","text":"A full screen take over for the spin could be neat, but could also be distracting. ","x":-960,"y":-400,"width":400,"height":60},
+		{"id":"821108b7b2db03c3","type":"file","file":"Art/References/Pixel Art/pa_slot_1.avif","x":-360,"y":-340,"width":400,"height":400},
+		{"id":"521ca62bf1a20f89","type":"text","text":"CUTE","x":-360,"y":-400,"width":400,"height":60},
+		{"id":"2a186d97d9261f5c","type":"file","file":"Art/References/slow-machine_2.jpg","x":200,"y":-340,"width":316,"height":400},
+		{"id":"ab313e961618c7b9","type":"text","text":"Coin slot and the little light are cool details. ","x":200,"y":-400,"width":316,"height":60},
+		{"id":"cb2ff7f6847ed19c","type":"text","text":"The dirty reels is cool, adds some texture.  Could be done as an overlay.","x":-360,"y":-913,"width":400,"height":80},
+		{"id":"928b062ee91ab143","type":"file","file":"Art/References/slow-machine_6_dirty_is_cool.webp","x":-360,"y":-833,"width":400,"height":339},
+		{"id":"c13b2826e274b993","type":"file","file":"Art/References/Pixel Art/pa_slot_2.jpg","x":1240,"y":-913,"width":400,"height":400},
+		{"id":"38ad34bbb731f5c9","type":"text","text":"Isometric views during story sections could be a nice touch. ","x":1240,"y":-973,"width":400,"height":60},
+		{"id":"40d812686882f945","type":"text","text":"# UI Inspiration","x":-960,"y":-1093,"width":1476,"height":150}
+	],
+	"edges":[
+		{"id":"5472336276f31b16","fromNode":"cb2ff7f6847ed19c","fromSide":"left","toNode":"928b062ee91ab143","toSide":"left"},
+		{"id":"8deeb46586cac99c","fromNode":"521ca62bf1a20f89","fromSide":"left","toNode":"821108b7b2db03c3","toSide":"left"},
+		{"id":"4cf1950e983d0842","fromNode":"29f51c1b40a2d05b","fromSide":"left","toNode":"2b88b80f569f1f1d","toSide":"left"},
+		{"id":"8b3646323ada9607","fromNode":"ab85a021bc1ed433","fromSide":"left","toNode":"92283e3bd42efe6f","toSide":"left"},
+		{"id":"da1dd7dc76886fd5","fromNode":"ab313e961618c7b9","fromSide":"left","toNode":"2a186d97d9261f5c","toSide":"left"},
+		{"id":"b257bedbc35f8be9","fromNode":"38ad34bbb731f5c9","fromSide":"left","toNode":"c13b2826e274b993","toSide":"left"}
+	]
+}

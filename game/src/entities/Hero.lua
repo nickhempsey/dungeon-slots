@@ -12,8 +12,8 @@ function Hero:new(heroId)
   local hero = setmetatable({
     currentSprite = nil,
     currentAnimation = nil,
-    x = 100,
-    y = 100,
+    x = 0,
+    y = 0,
   }, Hero)
 
   LogManager.info(string.format("%s New hero: %s", Hero.debugLabel, heroId))

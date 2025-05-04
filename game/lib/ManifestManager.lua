@@ -8,6 +8,7 @@ ManifestManager.__index = ManifestManager
 ManifestManager.debug = false -- Debug
 ManifestManager.debugLabel = LogManagerColor.colorf('{green}[ManifestManager]{reset}')
 
+local basePath = 'data'
 
 --[[
     TODO: Pull in default dataset then pull in the users save data and merge them together.
@@ -32,8 +33,8 @@ function ManifestManager.get(configPath, manifestId)
   assert(type(configPath) == "string", "Function 'getManifest': parameter 'configType' must be a string.")
   assert(type(manifestId) == "string", "Function 'getManifest': parameter 'manifestId' must be a string.")
 
-  local modulePath = string.format("config.%s.%s.manifest", configPath, manifestId)
-  local filePath = string.format("config/%s/%s/manifest.lua", configPath, manifestId)
+  local modulePath = string.format("%s.%s.%s.manifest", basePath, configPath, manifestId)
+  local filePath = string.format("%s/%s/%s/manifest.lua", basePath, configPath, manifestId)
 
   if not pathDefined(filePath) then
     LogManager.error(string.format("%s No manifest found for '%s/%s'", ManifestManager.debugLabel, configPath, manifestId))
@@ -48,7 +49,7 @@ function ManifestManager.get(configPath, manifestId)
   end
 
   local manifest = require(modulePath)
-  return manifest, "config/" .. configPath .. "/" .. manifestId .. "/"
+  return manifest, basePath .. "/" .. configPath .. "/" .. manifestId .. "/"
 end
 
 ---@param manifest table
@@ -93,7 +94,7 @@ function ManifestManager.insertRelationalTables(configPath, manifestIds)
 
   local output = {}
   for _, manifestId in ipairs(manifestIds) do
-    local cacheKey = string.format("config.%s.%s.manifest", configPath, manifestId)
+    local cacheKey = string.format("data.%s.%s.manifest", configPath, manifestId)
     if relationalCache[cacheKey] then
       table.insert(output, deepcopy(relationalCache[cacheKey]))
       if ManifestManager.debug then

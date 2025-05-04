@@ -11,10 +11,24 @@
             "id": "7b153fd0dc728a71",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "Art/Canvas Sizing.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "Canvas Sizing"
             }
           }
         ]
@@ -167,6 +181,26 @@
   },
   "active": "7b153fd0dc728a71",
   "lastOpenFiles": [
+    "Art/Mood Board.canvas",
+    "Art/References/slow-machine_3.jpg",
+    "Art/References/slow-machine_5.jpg",
+    "Art/References/Pixel Art/pa_slot_2.jpg",
+    "Art/References/Pixel Art/pa_slot_1.avif",
+    "Art/References/slow-machine_2.jpg",
+    "Art/References/slow-machine_7_digital.jpeg",
+    "Art/References/slow-machine_6_dirty_is_cool.webp",
+    "Art/References/slow-machine.avif",
+    "Art/References/slow-machine_4.avif",
+    "Art/References/slow-machine_8_digital_full_screen_takeover.jpg",
+    "Art/References/Color Palettes",
+    "Art/References/Games",
+    "Art/References/Pixel Art",
+    "Art.md",
+    "Art/Canvas Sizing.md",
+    "Art/References",
+    "Art/untitled folder",
+    "Art",
+    "untitled folder",
     "Technical Notes/Managers/Manifests.md",
     "Technical Notes/Managers/Logs and Debugging.md",
     "Technical Notes/Managers/Inputs.md",
@@ -186,24 +220,14 @@
     "+ Enemy Designs/+ Enemy Design Overview.md",
     "Roadmap/+ Development Roadmap.md",
     "Templates",
-    "Tech Debt & Bugs",
     "Technical Notes/Untitled Kanban.md",
     "+ Level and Room Design/Boss Room.md",
-    "Technical Notes",
     "+ Hero Designs/+ Hero Design Overview.md",
     "Hero Designs/Untitled.md",
-    "+ Hero Designs/Slotomancer",
-    "+ Hero Designs/Luck Punk",
-    "+ Enemy Designs/Mid Tier",
-    "+ Hero Designs",
-    "+ Enemy Designs/Boss Tier",
     "Roadmap/0.0.4 Dungeon & Node Map Generation.md",
     "+ Level and Room Design/+ Level Layouts.canvas",
     "+ Level and Room Design/Monster Room.md",
     "+ Level and Room Design/Rest Room.md",
-    "+ Level and Room Design/Shop Room.md",
-    "Roadmap/0.0.3 Combat System.md",
-    "+ Level and Room Design/Level Start.md",
     "Untitled.canvas"
   ]
 }

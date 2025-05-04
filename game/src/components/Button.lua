@@ -13,9 +13,9 @@ Button.debugLabel = LogManagerColor.colorf('{green}[Button]{reset}')
 function Button:new(label, x, y, callback)
   -- Avaliable sizes
   local btnSizes   = {}
-  btnSizes.sm      = { width = 75, height = 30, fontSize = Fonts.sm, fontOffset = 8 }
-  btnSizes.md      = { width = 100, height = 40, fontSize = Fonts.md, fontOffset = 10 }
-  btnSizes.lg      = { width = 150, height = 60, fontSize = Fonts.lg, fontOffset = 15 }
+  btnSizes.sm      = { width = 80, height = 16 }
+  btnSizes.md      = { width = 96, height = 20 }
+  btnSizes.lg      = { width = 108, height = 24 }
 
   -- Properties
   local btn        = setmetatable({}, Button)
@@ -25,8 +25,8 @@ function Button:new(label, x, y, callback)
   btn.callback     = callback or function() end
   btn.width        = btnSizes.sm.width
   btn.height       = btnSizes.sm.height
-  btn.fontOffset   = btnSizes.sm.fontOffset
-  btn.fontSize     = btnSizes.sm.fontSize
+  btn.fontSize     = 'sm'
+  btn.fontOffset   = FontsManager.lineheight.sm
   btn.hover        = false
   btn.color        = Colors.text
   btn.bg           = Colors.secondary
@@ -41,16 +41,16 @@ function Button:new(label, x, y, callback)
 end
 
 -- Allows you to set the size of a button using the predefined button sizes.
----@param size string sm | md | lg
-function Button:size(size)
-  if self.btnSizes[size] == nil then
+---@param sizeName string sm | md | lg
+function Button:size(sizeName)
+  if self.btnSizes[sizeName] == nil then
     return self
   end
 
-  self.width      = self.btnSizes[size].width
-  self.height     = self.btnSizes[size].height
-  self.fontOffset = self.btnSizes[size].fontOffset
-  self.fontSize   = self.btnSizes[size].fontSize
+  self.width      = self.btnSizes[sizeName].width
+  self.height     = self.btnSizes[sizeName].height
+  self.fontSize   = sizeName
+  self.fontOffset = FontsManager.lineheight[sizeName]
   return self
 end
 
@@ -59,7 +59,8 @@ function Button:set(key, value)
   return self
 end
 
--- Checks if the mouse is inside of the button... duh
+--- Checks if the mouse is inside of the button... duh
+---
 ---@param mx number
 ---@param my number
 ---@return boolean
@@ -68,10 +69,11 @@ function Button:isInside(mx, my)
       my >= self.y and my <= self.y + self.height
 end
 
--- Set inside love.update
+--- Set inside love.update
+---
 ---@param dt number
 function Button:update(dt)
-  local mx, my = love.mouse.getPosition()
+  local mx, my = ViewportManager:getMousePosition()
   self.hover = self:isInside(mx, my)
 
   local keypressed = self.keybind ~= nil and love.keyboard.isPressed(self.keybind)
@@ -90,6 +92,8 @@ function Button:update(dt)
   end
 end
 
+--- Play sound on click
+--- TODO: Add a global setting that sets volumes for things like buttons, or ui.
 function Button:playsound()
   if self.sound then
     self.sound:stop()
@@ -97,7 +101,7 @@ function Button:playsound()
   end
 end
 
--- Draw the button to the screen
+--- Draw the button to the screen
 function Button:draw()
   -- Background
   if self.hover then
@@ -114,8 +118,25 @@ function Button:draw()
     love.graphics.setColor(self.color)      -- default color
   end
 
-  love.graphics.setFont(self.fontSize)
-  love.graphics.printf(self.label, self.x, self.y + self.height / 2 - self.fontOffset, self.width, "center")
+  FontsManager:setFont(self.fontSize)
+
+  --- This is how we position the text in the center of the button
+  --- I miss CSS. :(
+  local fontSize = FontsManager.sizes[self.fontSize]
+  local posYOffset = (self.y - fontSize)
+  local oy = (fontSize + (self.height - fontSize) / 2) * -1
+  love.graphics.printf(
+    self.label,
+    math.floor(self.x),
+    math.floor(posYOffset), -- To the top of the button
+    math.floor(self.width),
+    "center",
+    nil,
+    nil,
+    nil,
+    nil,
+    math.floor(oy) -- Push it into center with y offset
+  )
 end
 
 return Button
