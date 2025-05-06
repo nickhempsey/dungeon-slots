@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Art/Canvas Sizing.md",
+                "file": "+ Symbol Design/+ Symbol Design Overview.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Canvas Sizing"
+              "title": "+ Symbol Design Overview"
             }
           }
         ]
@@ -88,7 +88,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 240.5
+    "width": 240.5,
+    "collapsed": true
   },
   "right": {
     "id": "e4ee41ab424d00fc",
@@ -181,6 +182,7 @@
   },
   "active": "7b153fd0dc728a71",
   "lastOpenFiles": [
+    "Art/Canvas Sizing.md",
     "Art/Mood Board.canvas",
     "Art/References/slow-machine_3.jpg",
     "Art/References/slow-machine_5.jpg",
@@ -196,7 +198,6 @@
     "Art/References/Games",
     "Art/References/Pixel Art",
     "Art.md",
-    "Art/Canvas Sizing.md",
     "Art/References",
     "Art/untitled folder",
     "Art",

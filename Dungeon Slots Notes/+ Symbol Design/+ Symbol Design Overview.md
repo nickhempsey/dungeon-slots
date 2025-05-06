@@ -1,3 +1,8 @@
-symbol ideas
-- weak glue - etherial symbol falls off the reel after a single use
+
+
+## Mechanics
+- Weak Glue
+	- Single use symbol, similar to ethereal in StS
+- Rusty Reel
+	- Will be played twice in a row
 - 

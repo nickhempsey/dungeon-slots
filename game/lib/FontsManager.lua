@@ -1,13 +1,14 @@
 FontsManager = {}
-FontsManager.__index = Fonts
+FontsManager.__index = FontsManager
 
 --- Default Font Sizes
 FontsManager.sizes = {
-  xxl = 24,
-  xl = 20,
-  lg = 16,
-  md = 12,
-  sm = 8
+  xxl = 48,
+  xl = 40,
+  lg = 32,
+  md = 16,
+  sm = 8,
+  xs = 4
 }
 --- Default Font Lineheights that can be used for buttons and whatnot to automatically center the text
 --- TODO: This isn't actually hooked up yet.
@@ -23,11 +24,18 @@ FontsManager.lineheight = {
 --- TODO: Remove fonts from ManifestManager, let's just control all fonts in one place for now.
 FontsManager.fonts = {
   PressStart = 'assets/fonts/PressStart2P-Regular.ttf',
-  Pixellari = 'assets/fonts/Pixellari.ttf'
+  Pixellari = 'assets/fonts/Pixellari.ttf',
+  FreePixel = 'assets/fonts/FreePixel.ttf',
+}
+
+FontsManager.bmpfonts = {
+  FreePixelBMP = 'assets/fonts/pixelfree.png'
 }
 
 --- A cache for the loaded fonts that we'll be using.
 FontsManager.cache = {}
+FontsManager.bmpcache = {}
+
 
 
 --- Loads all fonts during love.load so that we have them ready to go.
@@ -39,10 +47,12 @@ function FontsManager:load()
 
     for sizeName, px in pairs(self.sizes) do
       local font = love.graphics.newFont(path, px)
-      -- font:setFilter("nearest", "nearest")
+      font:setFilter("nearest", "nearest")
       self.cache[name][sizeName] = font
     end
   end
+
+  LogManager.info(self.cache)
 end
 
 --- Allows for :setFont to grab the font from cache and load it if needed.
@@ -62,12 +72,53 @@ end
 ---@param sizeName string
 ---@param fontName string?
 function FontsManager:setFont(sizeName, fontName)
-  fontName = fontName or 'Pixellari'
+  fontName = fontName or 'PressStart'
   sizeName = sizeName or 'sm'
 
   local font = self:getLoaded(fontName, sizeName)
   if font then
-    font:setFilter("nearest", "nearest")
+    love.graphics.setFont(font)
+  else
+    error("Font not loaded: " .. fontName .. "@" .. sizeName)
+  end
+end
+
+function FontsManager:loadBMP()
+  self.bmpcache = {}
+
+  for name, path in pairs(self.bmpfonts) do
+    self.bmpcache[name] = {}
+
+    local font = love.graphics.newImageFont(path,
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#.!?: ", 3)
+    -- font:setFilter("nearest", "nearest")
+    self.bmpcache[name] = font
+  end
+
+  LogManager.info(self.bmpcache)
+end
+
+--- Allows for :setFont to grab the font from cache and load it if needed.
+---
+---@param fontName string
+---@return love.graphics.font | nil
+function FontsManager:getLoadedBMP(fontName)
+  assert(fontName, "'fontName' must be a string.")
+  -- assert(sizeName, "'sizeName' must be a string.")
+  local fontSet = self.bmpcache[fontName]
+  return fontSet
+end
+
+--- Sets the font requested by a draw method.
+---
+---@param sizeName string
+---@param fontName string?
+function FontsManager:setFontBMP(sizeName, fontName)
+  fontName = fontName or 'FreePixelBMP'
+  sizeName = sizeName or 'sm'
+
+  local font = self:getLoadedBMP(fontName)
+  if font then
     love.graphics.setFont(font)
   else
     error("Font not loaded: " .. fontName .. "@" .. sizeName)

@@ -38,6 +38,7 @@ function love.load()
   ViewportManager:update()
 
   FontsManager:load()
+  FontsManager:loadBMP()
 
 
   LogManager.startSession()

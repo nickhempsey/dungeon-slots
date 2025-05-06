@@ -26,7 +26,8 @@ function Button:new(label, x, y, callback)
   btn.width        = btnSizes.sm.width
   btn.height       = btnSizes.sm.height
   btn.fontSize     = 'sm'
-  btn.fontOffset   = FontsManager.lineheight.sm
+  btn.font         = 'PressStart'
+
   btn.hover        = false
   btn.color        = Colors.text
   btn.bg           = Colors.secondary
@@ -47,10 +48,9 @@ function Button:size(sizeName)
     return self
   end
 
-  self.width      = self.btnSizes[sizeName].width
-  self.height     = self.btnSizes[sizeName].height
-  self.fontSize   = sizeName
-  self.fontOffset = FontsManager.lineheight[sizeName]
+  self.width    = self.btnSizes[sizeName].width
+  self.height   = self.btnSizes[sizeName].height
+  self.fontSize = sizeName
   return self
 end
 
@@ -118,7 +118,7 @@ function Button:draw()
     love.graphics.setColor(self.color)      -- default color
   end
 
-  FontsManager:setFont(self.fontSize)
+  FontsManager:setFont(self.fontSize, self.font)
 
   --- This is how we position the text in the center of the button
   --- I miss CSS. :(

@@ -20,6 +20,15 @@
    { "name": "idle", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
    { "name": "spinning", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" }
   ],
+  "layers": [
+   { "name": "Legs", "opacity": 255, "blendMode": "normal" },
+   { "name": "Torso", "opacity": 255, "blendMode": "normal" },
+   { "name": "Left Arm", "opacity": 255, "blendMode": "normal" },
+   { "name": "Head", "opacity": 255, "blendMode": "normal" },
+   { "name": "Hammer", "opacity": 255, "blendMode": "normal" },
+   { "name": "Left Hand", "opacity": 255, "blendMode": "normal" },
+   { "name": "Right Arm", "opacity": 255, "blendMode": "normal" }
+  ],
   "slices": [
   ]
  }
