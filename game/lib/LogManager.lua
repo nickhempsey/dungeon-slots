@@ -22,32 +22,37 @@ LogManager.enabledLevels = {
 
 LogManager.fileLoggingEnabled = true
 LogManager.logFilePath = nil
-local logFileHandle = nil
+local handleLogFile = nil
 
 
 -- Start log session
 function LogManager.startSession()
-  if love and love.filesystem then
+  if not love then
+    LogManager.error("Love not found!", LogManager.logFilePath)
+    return
+  end
+  if love.filesystem and LogManager.fileLoggingEnabled then
     if not love.filesystem.getInfo("logs") then
       love.filesystem.createDirectory("logs")
     end
     LogManager.logFilePath = "logs/session_" .. os.date("%Y%m%d_%H%M%S") .. ".txt"
-    logFileHandle = love.filesystem.newFile(LogManager.logFilePath, "w")
-    logFileHandle:open("w")
-    LogManager.info("Log session started: %s", LogManager.logFilePath)
+    handleLogFile = love.filesystem.newFile(LogManager.logFilePath, "w")
+    handleLogFile:open("w")
   else
-    print("LogManager: love.filesystem not available, file logging disabled.")
+    print("LogManager: love.filesystem not available or file logging disabled.")
     LogManager.fileLoggingEnabled = false
   end
+
+  LogManager.info("Log session started: %s", LogManager.logFilePath)
 end
 
 ---@param text string
 local function writeToFile(text)
   assert(type(text) == "string", "Function 'writeToFile': parameter must be a string.")
 
-  if LogManager.fileLoggingEnabled and logFileHandle then
-    logFileHandle:write(text .. "\n")
-    logFileHandle:flush()
+  if LogManager.fileLoggingEnabled and handleLogFile then
+    handleLogFile:write(text .. "\n")
+    handleLogFile:flush()
   end
 end
 
@@ -122,9 +127,9 @@ function LogManager.setLevelEnabled(level, enabled)
 end
 
 function LogManager.shutdown()
-  if logFileHandle then
+  if handleLogFile then
     LogManager.info("Log session closed.")
-    logFileHandle:close()
+    handleLogFile:close()
   end
 end
 

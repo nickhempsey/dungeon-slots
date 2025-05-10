@@ -54,6 +54,13 @@ function Button:size(sizeName)
   return self
 end
 
+function Button:modify(flags)
+  assert(type(flags) == "table", "Function 'modify': parameter 'flags' must be a table.")
+  for k, v in pairs(flags) do
+    self[k] = v
+  end
+end
+
 function Button:set(key, value)
   self[key] = value
   return self

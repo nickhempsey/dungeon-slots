@@ -1,16 +1,23 @@
 return {
   id = "luck_punk",
   name = "Luck Punk",
+  w = 64,
+  h = 80,
+  ox = 64 / 2,
+  oy = 80 - 16,
   stats = {
     health = 30,
     attack = 5,
     defense = 2,
   },
+  rollCrit = function()
+    return math.random < 0.3
+  end,
   assets = {
     images = {
       sprite = {
-        src = "luck_punk.png",
-        animation = "luck_punk.json",
+        src = "luck_punk_64.png",
+        animation = "luck_punk_64.json",
       }
     },
     sounds = {

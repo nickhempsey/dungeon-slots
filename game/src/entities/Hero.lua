@@ -1,3 +1,5 @@
+local tableMerge = require "utils.tableMerge"
+
 local Hero = {}
 Hero.__index = Hero
 
@@ -6,50 +8,30 @@ Hero.debugLabel = LogManagerColor.colorf('{green}[Hero]{reset}')
 
 -- Instantiate a new hero by their id.
 --
----@param heroId string
-function Hero:new(heroId)
-  assert(type(heroId) == "string", "Function 'new': parameter 'heroId' must be a string.")
-  local hero = setmetatable({
+---@param id string
+function Hero:new(id)
+  assert(type(id) == "string", "Function 'new': parameter 'id' must be a string.")
+  local manifest = ManifestManager.loadEntityManifest("heroes", id)
+  if not manifest then
+    return nil
+  end
+
+  local entity = setmetatable(tableMerge.deepMergeWithArray({
     currentSprite = nil,
     currentAnimation = nil,
-    x = 0,
+    x = 500,
     y = 0,
-  }, Hero)
+  }, manifest), Hero)
 
-  LogManager.info(string.format("%s New hero: %s", Hero.debugLabel, heroId))
-  local manifest = hero.loadManifest(heroId)
-  if manifest then
-    for k, v in pairs(manifest) do
-      hero[k] = v
-    end
+  -- Set idle sprite
+  if entity.assets.images.sprite then
+    entity.currentSprite = entity.assets.images.sprite
+
+    assert(entity.assets.images.sprite.animations, 'Hero must have a default sprite with a base idle animaton.')
+    entity.currentAnimation = entity.assets.images.sprite.animations.factory('idle')
   end
 
-  hero.currentSprite = hero.assets.images.sprite
-  LogManager.info(hero.assets.images)
-  hero.currentAnimation = hero.currentSprite.animations.factory('idle')
-
-  -- hero.currentAnimation.setTag('idle')
-
-  return hero
-end
-
--- Gather all of the required resources from the manifest.
---
----@param heroId string
-function Hero.loadManifest(heroId)
-  assert(type(heroId) == "string", "Function 'loadManifest': parameter 'heroId' must be a string.")
-  LogManager.info(string.format("%s Loading", Hero.debugLabel))
-
-  local manifest, directory = ManifestManager.get('heroes', heroId)
-  local output = {}
-  if manifest then
-    output = ManifestManager.loadValues(manifest, directory)
-    LogManager.info(string.format(" %s loaded", Hero.debugLabel))
-    -- LogManager.info(output)
-  else
-    LogManager.error("%s No manifest found for '%s'", Hero.debugLabel, heroId)
-  end
-  return output
+  return entity
 end
 
 -- Runs in love.load

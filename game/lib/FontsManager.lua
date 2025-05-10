@@ -36,7 +36,8 @@ FontsManager.bmpfonts = {
 FontsManager.cache = {}
 FontsManager.bmpcache = {}
 
-
+FontsManager.debug = Debug
+FontsManager.debugLabel = LogManagerColor.colorf('{magenta}[FontsManager]{reset}')
 
 --- Loads all fonts during love.load so that we have them ready to go.
 function FontsManager:load()
@@ -49,10 +50,11 @@ function FontsManager:load()
       local font = love.graphics.newFont(path, px)
       font:setFilter("nearest", "nearest")
       self.cache[name][sizeName] = font
+      if self.debug then
+        LogManager.debug(string.format("%s Loaded font '%s' '%s'", self.debugLabel, name, sizeName))
+      end
     end
   end
-
-  LogManager.info(self.cache)
 end
 
 --- Allows for :setFont to grab the font from cache and load it if needed.
@@ -89,13 +91,16 @@ function FontsManager:loadBMP()
   for name, path in pairs(self.bmpfonts) do
     self.bmpcache[name] = {}
 
-    local font = love.graphics.newImageFont(path,
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#.!?: ", 3)
+    local font = love.graphics.newImageFont(
+      path,
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#.!?: ",
+      3)
     -- font:setFilter("nearest", "nearest")
     self.bmpcache[name] = font
+    if self.debug then
+      LogManager.debug(string.format("%s Loaded BMP font '%s'", self.debugLabel, name))
+    end
   end
-
-  LogManager.info(self.bmpcache)
 end
 
 --- Allows for :setFont to grab the font from cache and load it if needed.

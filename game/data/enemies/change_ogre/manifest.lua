@@ -1,29 +1,23 @@
 return {
-  id = "change_goblin",
-  name = "Change Goblin",
+  id = "change_ogre",
+  name = "Change Ogre",
   w = 64,
   h = 64,
   ox = 64 / 2,
   oy = 64 - 16,
-  --- TODO: maybe change this to an enum for easier editor writing?
-  --- ox = 'center' | 'left' | 'right' | number
-  --- oy = 'floor' | 'bottom' | 'center' | 'top' | number
   baseStats = function()
     return {
-      health = math.random(5, 15),
-      attack = math.random(1, 3),
-      defense = math.random(5, 10),
-      initiative = math.random(1, 8),
+      health = math.random(20, 30),
+      attack = math.random(6, 15),
+      defense = math.random(5, 20),
+      initiative = math.random(6, 10),
     }
-  end,
-  rollCrit = function()
-    return math.random() < 0.2 -- 20% chance
   end,
   assets = {
     images = {
       sprite = {
-        src = 'change_goblin.png',
-        animation = 'change_goblin.json'
+        src = 'change_ogre.png',
+        animation = 'change_ogre.json'
       }
     },
     sounds = {

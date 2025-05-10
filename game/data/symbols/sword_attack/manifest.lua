@@ -1,7 +1,12 @@
 return {
   id = "sword_attack",
   name = "Sword Attack",
-  baseDmg = 2,
+  rollDamage = function()
+    return math.random(2, 4)
+  end,
+  rollCrit = function()
+    return math.random() < 0.1
+  end,
   effects = {
     'stun',
     'debuff'

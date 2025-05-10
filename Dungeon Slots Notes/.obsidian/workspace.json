@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "6a4b5bb32a63699e",
+        "id": "1a71362721b34fb8",
         "type": "tabs",
         "children": [
           {
-            "id": "7b153fd0dc728a71",
+            "id": "20c7759ee9a7fcb2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "+ Symbol Design/+ Symbol Design Overview.md",
+                "file": "Game Design Document.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "+ Symbol Design Overview"
+              "title": "Game Design Document"
             }
           }
         ]
@@ -88,8 +88,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 240.5,
-    "collapsed": true
+    "width": 240.5
   },
   "right": {
     "id": "e4ee41ab424d00fc",
@@ -180,10 +179,16 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "7b153fd0dc728a71",
+  "active": "20c7759ee9a7fcb2",
   "lastOpenFiles": [
-    "Art/Canvas Sizing.md",
     "Art/Mood Board.canvas",
+    "Art/Canvas Sizing.md",
+    "+ Symbol Design/+ Symbol Design Overview.md",
+    "Game Loop.canvas",
+    "+ Level and Room Design/+ Level Layouts.canvas",
+    "Untitled 1.md",
+    "Untitled.md",
+    "Game Design Document.md",
     "Art/References/slow-machine_3.jpg",
     "Art/References/slow-machine_5.jpg",
     "Art/References/Pixel Art/pa_slot_2.jpg",
@@ -213,11 +218,9 @@
     "Tech Debt & Bugs/+ Tech Debt & Bugs.md",
     "Templates/Task.md",
     "+ Level and Room Design/+Levels and Rooms Overview.md",
-    "+ Symbol Design/+ Symbol Design Overview.md",
     "Roadmap/0.0.2 Reel Logic.md",
     "+ Symbol Design",
     "Roadmap/0.0.1 Project Setup.md",
-    "Game Design Document.md",
     "+ Enemy Designs/+ Enemy Design Overview.md",
     "Roadmap/+ Development Roadmap.md",
     "Templates",
@@ -225,10 +228,6 @@
     "+ Level and Room Design/Boss Room.md",
     "+ Hero Designs/+ Hero Design Overview.md",
     "Hero Designs/Untitled.md",
-    "Roadmap/0.0.4 Dungeon & Node Map Generation.md",
-    "+ Level and Room Design/+ Level Layouts.canvas",
-    "+ Level and Room Design/Monster Room.md",
-    "+ Level and Room Design/Rest Room.md",
-    "Untitled.canvas"
+    "Roadmap/0.0.4 Dungeon & Node Map Generation.md"
   ]
 }

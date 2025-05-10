@@ -2,7 +2,7 @@ local cur = SceneManager.current
 local scene = {}
 scene.zsort = 100
 
-local background = love.graphics.newImage("assets/images/placeholder_bg.jpg")
+local background = love.graphics.newImage("assets/images/UI_Tests.png")
 
 -- Stacking Scene Manager can be used to call a scenes modify function.
 -- The modify function is intended to be used for changing specific
@@ -38,10 +38,10 @@ end
 
 -- Scene draw loop
 function scene.draw()
-  love.graphics.setColor(0, 0, 0)
-  -- love.graphics.draw(background, 0, 0)
-  GameState:draw()
-  GameState.hero:draw()
+  love.graphics.setColor(1, 1, 1, 1)
+  love.graphics.draw(background, 0, 0)
+  --  GameState:draw()
+  -- GameState.hero:draw()
 
   --[[
   Finally understand why fonts are blurry.
@@ -50,13 +50,13 @@ function scene.draw()
   We would need to build out specific sized image fonts for smaller fonts specifically as I noticed scaling down is really bad.
   Will setup a task to find some 3 or 5 px image fonts.
   ]]
-  love.graphics.setColor(1, 1, 1, 1)
-  FontsManager:getLoadedBMP('FreePixelBMP')
-  FontsManager:setFontBMP('xs') -- Does not work, will need to be handled via scaling or creating specific image sizes.
-  love.graphics.push()
-  love.graphics.scale(0.5, 0.5)
-  love.graphics.printf('Deserunt qui quis nulla ipsum elit velit ut sit esse Lorem excepteur.', 10, 10, 400, "left")
-  love.graphics.pop()
+  -- love.graphics.setColor(1, 1, 1, 1)
+  -- FontsManager:getLoadedBMP('FreePixelBMP')
+  -- FontsManager:setFontBMP('xs') -- Does not work, will need to be handled via scaling or creating specific image sizes.
+  -- love.graphics.push()
+  -- love.graphics.scale(0.5, 0.5)
+  -- love.graphics.printf('Deserunt qui quis nulla ipsum elit velit ut sit esse Lorem excepteur.', 10, 10, 400, "left")
+  -- love.graphics.pop()
 
   startButton:draw()
 end

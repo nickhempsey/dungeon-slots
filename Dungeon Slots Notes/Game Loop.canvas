@@ -1,0 +1,27 @@
+{
+	"nodes":[
+		{"id":"0c013442e90274e8","type":"file","file":"+ Level and Room Design/+ Level Layouts.canvas","x":-320,"y":0,"width":400,"height":400},
+		{"id":"9a67cc6572e72f4b","type":"text","text":"Pick Character","x":584,"y":-190,"width":287,"height":60},
+		{"id":"078f5cf53d734509","type":"text","text":"Play scene content","x":80,"y":600,"width":287,"height":60,"color":"1"},
+		{"id":"df2a4915db11ff68","type":"text","text":"Get Reward","x":584,"y":600,"width":287,"height":60},
+		{"id":"65650f0abcf44a12","type":"text","text":"Final Boss","x":1184,"y":600,"width":287,"height":50,"color":"1"},
+		{"id":"d5628e4caeb8abaa","type":"text","text":"Generate Procedural Map","x":24,"y":-190,"width":287,"height":60},
+		{"id":"6851426cac75fb36","type":"text","text":"New game","x":1080,"y":-190,"width":287,"height":60,"color":"4"},
+		{"id":"03bcc25648e5626f","type":"text","text":"Get Permanent Upgrade \nor new character","x":871,"y":280,"width":287,"height":60},
+		{"id":"b8fe80c1c3f5a19f","type":"text","text":"Select a map node","x":-263,"y":480,"width":287,"height":60}
+	],
+	"edges":[
+		{"id":"654e7e37b580062e","fromNode":"0c013442e90274e8","fromSide":"bottom","toNode":"b8fe80c1c3f5a19f","toSide":"top","color":"4"},
+		{"id":"1cd009058f89264a","fromNode":"078f5cf53d734509","fromSide":"right","toNode":"df2a4915db11ff68","toSide":"left","color":"4","label":"WIN"},
+		{"id":"e00316176ec6e734","fromNode":"9a67cc6572e72f4b","fromSide":"left","toNode":"d5628e4caeb8abaa","toSide":"right","color":"4"},
+		{"id":"2d9707d73611aa9f","fromNode":"6851426cac75fb36","fromSide":"left","toNode":"9a67cc6572e72f4b","toSide":"right","color":"4"},
+		{"id":"71d57ba875854f52","fromNode":"df2a4915db11ff68","fromSide":"top","toNode":"0c013442e90274e8","toSide":"right","color":"3","label":"Cont."},
+		{"id":"b1a64852c1ef5849","fromNode":"df2a4915db11ff68","fromSide":"right","toNode":"65650f0abcf44a12","toSide":"left","color":"4","label":"Last Room"},
+		{"id":"12108e40da07af5c","fromNode":"d5628e4caeb8abaa","fromSide":"left","toNode":"0c013442e90274e8","toSide":"top","color":"4"},
+		{"id":"3dfbabc930f884fa","fromNode":"b8fe80c1c3f5a19f","fromSide":"bottom","toNode":"078f5cf53d734509","toSide":"left","color":"4"},
+		{"id":"f1374d81bcd95d1e","fromNode":"65650f0abcf44a12","fromSide":"top","toNode":"03bcc25648e5626f","toSide":"bottom","color":"4","label":"WIN"},
+		{"id":"b008ee9f6d0dbd6f","fromNode":"65650f0abcf44a12","fromSide":"top","toNode":"6851426cac75fb36","toSide":"bottom","color":"1","label":"DIE"},
+		{"id":"18d742cfb248ddab","fromNode":"078f5cf53d734509","fromSide":"top","toNode":"6851426cac75fb36","toSide":"bottom","color":"1","label":"DIE"},
+		{"id":"9e86b08487a106be","fromNode":"03bcc25648e5626f","fromSide":"top","toNode":"6851426cac75fb36","toSide":"bottom","color":"4"}
+	]
+}

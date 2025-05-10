@@ -34,15 +34,15 @@ local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
 ---              LOAD             ---
 -------------------------------------
 function love.load()
+  LogManager.startSession()
+  LogManager.info("%s ⌛ Game loading...", sceneLabel)
+
   ViewportManager:load()
   ViewportManager:update()
 
   FontsManager:load()
   FontsManager:loadBMP()
 
-
-  LogManager.startSession()
-  LogManager.info("%s ⌛ Game loading...", sceneLabel)
   GameState:load()
   LogManager.info("%s ✅ Game loaded!", sceneLabel)
 end
