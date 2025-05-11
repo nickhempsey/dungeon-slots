@@ -21,6 +21,8 @@ GameState.currentTurn = nil
 GameState.hero = nil
 GameState.inventory = {}
 
+GameState.lair = nil
+
 GameState.enemies = {}
 
 GameState.reel = nil
@@ -50,35 +52,6 @@ end
 
 function GameState:draw()
 
-end
-
----@param quantity number
----@param level string - future implementation
-function GameState:generateEnemies(quantity, level)
-  assert(quantity, "Function 'generateEnemies': parameter 'quantity' must be a number.")
-
-  local enemies = {}
-
-  local y = 48;
-  local x = 400;
-  for i = 1, quantity do
-    local id = 'change_goblin'
-    if i > 2 then
-      id = 'change_ogre'
-    end
-
-    local enemy = Enemy:new(id)
-    enemy.x = x
-    enemy.y = y
-    x = x + enemy.w
-    table.insert(enemies, enemy)
-  end
-
-  self.enemies = enemies
-  if self.debug then
-    LogManager.info(string.format("%s %d new enemies created", self.debugLabel, quantity))
-    -- LogManager.info(enemies)
-  end
 end
 
 return GameState

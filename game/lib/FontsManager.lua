@@ -36,7 +36,7 @@ FontsManager.bmpfonts = {
 FontsManager.cache = {}
 FontsManager.bmpcache = {}
 
-FontsManager.debug = Debug
+FontsManager.debug = false
 FontsManager.debugLabel = LogManagerColor.colorf('{magenta}[FontsManager]{reset}')
 
 --- Loads all fonts during love.load so that we have them ready to go.

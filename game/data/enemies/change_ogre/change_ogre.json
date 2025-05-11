@@ -308,8 +308,8 @@
  ],
  "meta": {
   "app": "https://www.aseprite.org/",
-  "version": "1.3.13-x64",
-  "image": "change_goblin.png",
+  "version": "1.3.13-arm64",
+  "image": "change_ogre.png",
   "format": "RGBA8888",
   "size": { "w": 2176, "h": 64 },
   "scale": "1",

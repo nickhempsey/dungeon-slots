@@ -1,6 +1,10 @@
 local cur = SceneManager.current
 local scene = {}
 scene.zsort = 100000
+scene.drawOverlay = false
+scene.overlay_image = nil
+
+local grid_overlay_image = love.graphics.newImage("assets/images/grid_overlay.png")
 
 
 -- Stacking Scene Manager can be used to call a scenes modify function.
@@ -45,6 +49,23 @@ scene.modes = {
     callback = nil,
     visible = true,
     hasPanel = true
+  },
+  {
+    modifier = 'g',
+    id = 'grid',
+    mode = 'Grid Debug',
+    description = 'Shows the grid overlay for debugging sprite positions.',
+    content = 'Velit qui aliqua culpa Lorem non velit tempor.',
+    callback = function()
+      scene.drawOverlay = true
+      scene.overlay_image = {
+        image = grid_overlay_image,
+        x = 0,
+        y = 0
+      }
+    end,
+    visible = true,
+    hasPanel = false
   }
 }
 
@@ -100,8 +121,12 @@ function scene.draw()
     love.graphics.setColor(1, 1, 1, 0.70)
     love.graphics.rectangle("fill", panel.x, panel.y, panel.width, panel.height)
 
-    love.graphics.setFont(Fonts.md)
-    love.graphics.setColor(0, 0, 0, 1)
+    if scene.drawOverlay then
+      love.graphics.draw(scene.overlay_image.image, scene.overlay_image.x, scene.overlay_image.y)
+    end
+
+    -- love.graphics.setFont(Fonts.md)
+    -- love.graphics.setColor(0, 0, 0, 1)
     love.graphics.printf("Debug Mode: " .. scene.mode .. "\n\n" .. scene.content, panel.x + panel.padding, panel.padding,
       panel.width - panel.padding * 2, "left")
   end

@@ -5,10 +5,10 @@
       "request": "launch",
       "name": "Debug LOVE",
       "program": {
-        "command": "love"
+        "command": "/Applications/love.app/Contents/MacOS/love"
       },
       "args": [
-        "${workspaceFolder}/game",
+        "${workspaceFolder}",
         "vsc_debug"
       ],
     }

@@ -10,14 +10,14 @@ return {
   --- oy = 'floor' | 'bottom' | 'center' | 'top' | number
   baseStats = function()
     return {
-      health = math.random(5, 15),
-      attack = math.random(1, 3),
-      defense = math.random(5, 10),
-      initiative = math.random(1, 8),
+      health = love.math.random(5, 15),
+      attack = love.math.random(1, 3),
+      defense = love.math.random(5, 10),
+      initiative = love.math.random(1, 8),
     }
   end,
   rollCrit = function()
-    return math.random() < 0.2 -- 20% chance
+    return love.math.random() < 0.2 -- 20% chance
   end,
   assets = {
     images = {

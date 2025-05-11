@@ -35,7 +35,7 @@ end
 
 function ViewportManager:clearCanvas()
   love.graphics.setCanvas(self.canvas)
-  love.graphics.clear(0, 0, 0, 0)
+  love.graphics.clear(1, 1, 1, 1)
 end
 
 function ViewportManager:scaleCanvas()

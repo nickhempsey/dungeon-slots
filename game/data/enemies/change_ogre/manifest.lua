@@ -7,10 +7,10 @@ return {
   oy = 64 - 16,
   baseStats = function()
     return {
-      health = math.random(20, 30),
-      attack = math.random(6, 15),
-      defense = math.random(5, 20),
-      initiative = math.random(6, 10),
+      health = love.math.random(20, 30),
+      attack = love.math.random(6, 15),
+      defense = love.math.random(5, 20),
+      initiative = love.math.random(6, 10),
     }
   end,
   assets = {

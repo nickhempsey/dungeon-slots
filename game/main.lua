@@ -10,6 +10,13 @@ LogManager = require "lib.LogManager"
 -- Utils
 Tween = require "utils.tween"
 
+-- Entities
+Reel = require "src.entities.Reel"
+Hero = require "src.entities.Hero"
+Lair = require "src.entities.Lair"
+Enemy = require "src.entities.Enemy"
+GameState = require "src.entities.GameState"
+
 -- Libraries
 FontsManager = require "lib.FontsManager"
 ColorsManager = require "lib.ColorsManager"
@@ -22,11 +29,7 @@ ViewportManager = require "lib.ViewportManager"
 -- Components
 Button = require "src.components.Button"
 
--- Entities
-Reel = require "src.entities.Reel"
-Hero = require "src.entities.Hero"
-Enemy = require "src.entities.Enemy"
-GameState = require "src.entities.GameState"
+
 
 local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
 
@@ -36,6 +39,12 @@ local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
 function love.load()
   LogManager.startSession()
   LogManager.info("%s ⌛ Game loading...", sceneLabel)
+
+  -- Clear out the system cache.
+  love.math.setRandomSeed(os.time())
+  love.math.random()
+  love.math.random()
+  love.math.random()
 
   ViewportManager:load()
   ViewportManager:update()
@@ -52,8 +61,8 @@ end
 -------------------------------------
 function love.update(dt)
   Tween.update(dt)
-  GameState:update(dt)
   SceneManager.update(dt)
+  GameState:update(dt)
 
   love.keyboard.resetInputStates()
 end
