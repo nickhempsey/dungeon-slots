@@ -88,8 +88,6 @@ Some lairs might have special effects that get performed every x round.  This wi
 
 ### ChatGPT Lair Ideas
 
-https://t3.chat/chat/03457d86-d3d2-4855-8bef-88eb35539d99
-
 Here are some concept‐level ideas for a “Lair Turn” subsystem—an environmental/arena mechanic that triggers special effects every X rounds. You can pick and mix these, or use them as springboards for your own:
 
 #### Lair Turn Framework  
@@ -141,5 +139,7 @@ Here are some concept‐level ideas for a “Lair Turn” subsystem—an environ
    • Provide clear UI warnings (“Next Poison Cloud in 1 Round”) so players can strategize around lair timing.
 
 These mechanics layer an extra strategic dimension—forcing players to plan not just around enemies’ AI and abilities, but around the arena itself. Pick a handful for your MVP lairs and expand once the core combat loop is solid.
+
+[Link to T3 Chat about Lairs](https://t3.chat/chat/03457d86-d3d2-4855-8bef-88eb35539d99)
 
 ---
