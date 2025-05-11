@@ -16,11 +16,12 @@ kanban-plugin: board
 
 ## Development
 
+- [ ] [[0.0.2 Manifest and Asset Manager]]
+- [ ] [[Rough Art Direction]]
 
 
 ## Researching
 
-- [ ] [[0.0.2 Reel Logic]]
 
 
 ## In Queue

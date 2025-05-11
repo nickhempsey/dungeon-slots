@@ -2,7 +2,7 @@ local cur = SceneManager.current
 local scene = {}
 scene.zsort = 100
 
-local background = love.graphics.newImage("assets/images/UI_Tests.png")
+local background = love.graphics.newImage("assets/images/UI_tests_2.png")
 
 -- Stacking Scene Manager can be used to call a scenes modify function.
 -- The modify function is intended to be used for changing specific

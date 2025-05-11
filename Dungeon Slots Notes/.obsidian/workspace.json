@@ -6,6 +6,7 @@
       {
         "id": "1a71362721b34fb8",
         "type": "tabs",
+        "dimension": 61.81972789115646,
         "children": [
           {
             "id": "20c7759ee9a7fcb2",
@@ -13,7 +14,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Game Design Document.md",
+                "file": "Combat Overview.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +29,38 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Game Design Document"
+              "title": "Combat Overview"
+            }
+          }
+        ]
+      },
+      {
+        "id": "88e85d2cd64bc901",
+        "type": "tabs",
+        "dimension": 38.18027210884354,
+        "children": [
+          {
+            "id": "5b09568f90acc2cc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Roadmap/0.0.2 Manifest and Asset Manager.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "0.0.2 Manifest and Asset Manager"
             }
           }
         ]
@@ -181,23 +213,34 @@
   },
   "active": "20c7759ee9a7fcb2",
   "lastOpenFiles": [
+    "Game Design Document.md",
+    "Combat Overview.md",
+    "Combat System",
+    "Roadmap/0.0.3 Combat System.md",
+    "Roadmap/Rough Art Direction.md",
+    "Roadmap/+ Development Roadmap.md",
+    "Roadmap/0.0.2 Manifest and Asset Manager.md",
+    "Roadmap/0.0.1 Project Setup.md",
+    "+ Level and Room Design/Monster Room.md",
+    "+ Level and Room Design/Mystery Room.md",
+    "+ Level and Room Design/Level Start.md",
+    "+ Level and Room Design/Elite Monster Room.md",
+    "+ Level and Room Design/Boss Room.md",
+    "+ Level and Room Design/+ Level Layouts.canvas",
+    "Art/References/slow-machine_4.avif",
+    "Art/References/slow-machine_5.jpg",
+    "Art/References/slow-machine_3.jpg",
+    "Art/References/slow-machine_2.jpg",
+    "Art/References/slow-machine.avif",
     "Art/Mood Board.canvas",
     "Art/Canvas Sizing.md",
     "+ Symbol Design/+ Symbol Design Overview.md",
     "Game Loop.canvas",
-    "+ Level and Room Design/+ Level Layouts.canvas",
     "Untitled 1.md",
-    "Untitled.md",
-    "Game Design Document.md",
-    "Art/References/slow-machine_3.jpg",
-    "Art/References/slow-machine_5.jpg",
     "Art/References/Pixel Art/pa_slot_2.jpg",
     "Art/References/Pixel Art/pa_slot_1.avif",
-    "Art/References/slow-machine_2.jpg",
     "Art/References/slow-machine_7_digital.jpeg",
     "Art/References/slow-machine_6_dirty_is_cool.webp",
-    "Art/References/slow-machine.avif",
-    "Art/References/slow-machine_4.avif",
     "Art/References/slow-machine_8_digital_full_screen_takeover.jpg",
     "Art/References/Color Palettes",
     "Art/References/Games",
@@ -217,17 +260,6 @@
     "Technical Notes/+ Technical Style Guide.md",
     "Tech Debt & Bugs/+ Tech Debt & Bugs.md",
     "Templates/Task.md",
-    "+ Level and Room Design/+Levels and Rooms Overview.md",
-    "Roadmap/0.0.2 Reel Logic.md",
-    "+ Symbol Design",
-    "Roadmap/0.0.1 Project Setup.md",
-    "+ Enemy Designs/+ Enemy Design Overview.md",
-    "Roadmap/+ Development Roadmap.md",
-    "Templates",
-    "Technical Notes/Untitled Kanban.md",
-    "+ Level and Room Design/Boss Room.md",
-    "+ Hero Designs/+ Hero Design Overview.md",
-    "Hero Designs/Untitled.md",
-    "Roadmap/0.0.4 Dungeon & Node Map Generation.md"
+    "+ Symbol Design"
   ]
 }

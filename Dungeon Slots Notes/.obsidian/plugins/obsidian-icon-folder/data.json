@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "LiSwords",
       "LiCircle",
       "LiCheckCircle",
       "LiBookMarked",
-      "LiShoppingBasket",
-      "LiDollarSign"
+      "LiShoppingBasket"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -49,5 +49,6 @@
   "+ Level and Room Design/Shop Room.md": "LiShoppingBasket",
   "+ Level and Room Design/+Levels and Rooms Overview.md": "LiBook",
   "Templates/Task.md": "LiCircle",
-  "Technical Notes/+ Technical Style Guide.md": "LiBookMarked"
+  "Technical Notes/+ Technical Style Guide.md": "LiBookMarked",
+  "Combat Overview.md": "LiSwords"
 }
