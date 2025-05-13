@@ -38,7 +38,16 @@ return {
   ai = {
     behavior = "aggressive", -- optional special behavior tags
   },
-  symbols = { 'sword_attack', 'coin_toss' },
+  symbols = {
+    'defense',
+    'heal',
+    'magic',
+    'melee',
+    'mobility',
+    'potion',
+    'ranged',
+    'wild'
+  },
   abilities = {
     "quick_slash",
     "taunt",

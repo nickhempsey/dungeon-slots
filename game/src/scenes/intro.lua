@@ -2,7 +2,7 @@ local cur = SceneManager.current
 local scene = {}
 scene.zsort = 100
 
-local background = love.graphics.newImage("assets/images/UI_tests_2.png")
+local background = love.graphics.newImage("assets/images/UI_Layout.png")
 
 -- Stacking Scene Manager can be used to call a scenes modify function.
 -- The modify function is intended to be used for changing specific
@@ -18,14 +18,14 @@ end
 -- this function is to initialize variables. Though they can also be
 -- initialized outside of the load function for persistent state.
 function scene.load()
-  local midScreen = ViewportManager:getMidScreen()
-  startButton = Button:new('START', midScreen.x, midScreen.y, function()
+  local midX, midY = ViewportManager:getMidScreen()
+  startButton = Button:new('START', midX, midY, function()
     SceneManager.add('combat')
     SceneManager.purge('intro')
   end)
   startButton:size('md')
-  startButton:set('x', midScreen.x - startButton.width / 2)
-  startButton:set('y', midScreen.y - startButton.height / 2)
+  startButton:set('x', midX - startButton.width / 2)
+  startButton:set('y', midY - startButton.height / 2)
   startButton:set('font', 'Pixellari')
 end
 

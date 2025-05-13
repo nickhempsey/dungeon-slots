@@ -7,13 +7,13 @@
 2. Roll Phase
 	1. Roll up to as many coins as you have available
 	2. You roll for symbols that can be used to charge up abilities
-		1. Swords charge melee attacks
-		2. Arrow charge range attacks
-		3. Shield charge defense abilities
-		4. Heart charge healing abilities
-		5. Wand charges magic abilities
-		6. Potion charge status effects
-		7. Boots charge mobility abilities
+		1. Melee - (Swords) charge melee attacks
+		2. Ranged - (Arrow) charge range attacks
+		3. Defense - (Shield) charge defense abilities
+		4. Heal - (Heart) charge healing abilities
+		5. Magic - (Wand) charges magic abilities
+		6. Potion - (Potion) charge status effects
+		7. Mobility - (Boots) charge mobility abilities
 		8. Wild or specials per character? 
 	3. These symbols will go into a symbol bank or something similar that you can use in your main phase. This bank might have a limited size that you can increase as a prestige upgrade?
 3. Main Phase
@@ -33,6 +33,7 @@
 				5. Chance to bleed
 				6. Chance to stun
 				7. Chance to burn
+				8. Chance to distract
 			2. Healing
 				1. Maybe they have limited uses per round?
 				2. Chance to over heal

@@ -76,12 +76,7 @@ function ViewportManager:getOffset()
 end
 
 function ViewportManager:getMidScreen()
-  local midScreen = {
-    x = self:getWidth() / 2,
-    y = self:getHeight() / 2
-  }
-
-  return midScreen
+  return self:getWidth() / 2, self:getHeight() / 2
 end
 
 return ViewportManager

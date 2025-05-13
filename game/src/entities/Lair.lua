@@ -17,8 +17,14 @@ function Lair:new(id)
     end
 
     local entity = setmetatable(tableMerge.deepMergeWithArray({
-        someThing = 2
+        currentBackground = nil,
+        stageSet = false
     }, manifest), Lair)
+
+    if entity.assets.images.bg then
+        entity.currentBackground = entity.assets.images.bg.image
+    end
+
 
     return entity
 end
@@ -31,6 +37,21 @@ function Lair:update(dt)
 end
 
 function Lair:draw()
+    if self.currentBackground then
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.draw(self.currentBackground, 0, 0)
+    end
+end
+
+function Lair:setStage()
+    self:generateEnemies()
+
+    local midX = ViewportManager:getMidScreen()
+    GameState.hero:modify({ x = midX - 64, y = self.floorLevel })
+
+    if self.generatedEnemies then
+        self.stageSet = true
+    end
 end
 
 function Lair:getGeneratedEnemies()
@@ -48,26 +69,24 @@ function Lair:generateEnemies()
 
     local enemies = {}
 
-    local y = 48;
-    local x = 400;
+    local midX = ViewportManager:getMidScreen()
+    midX = midX + 64
     for i = 1, quantity do
         local randomIndex = love.math.random(1, #availableEnemies)
         local randomEnemyId = availableEnemies[randomIndex]
-        LogManager.info(randomIndex)
-        LogManager.info(randomEnemyId)
-        LogManager.info(availableEnemies)
 
         local enemy = Enemy:new(randomEnemyId)
-        enemy.x = x
-        enemy.y = y
-        x = x + enemy.w
-        table.insert(enemies, enemy)
+        if enemy then
+            enemy.x = midX
+            enemy.y = self.floorLevel
+            midX = midX + enemy.w
+            table.insert(enemies, enemy)
+        end
     end
 
     self.generatedEnemies = enemies
     if self.debug then
         LogManager.info(string.format("%s %d new enemies created", self.debugLabel, quantity))
-        -- LogManager.info(enemies)
     end
 end
 

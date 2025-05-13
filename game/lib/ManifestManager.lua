@@ -10,7 +10,7 @@ end
 
 ManifestManager = {}
 ManifestManager.__index = ManifestManager
-ManifestManager.debug = false -- Debug
+ManifestManager.debug = Debug
 ManifestManager.debugLabel = LogManagerColor.colorf('{green}[ManifestManager]{reset}')
 ManifestManager.storeRawAnimationJSON = false
 

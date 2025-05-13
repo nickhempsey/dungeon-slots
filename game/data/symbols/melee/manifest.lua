@@ -1,15 +1,11 @@
 return {
-  id = "seven",
-  name = "Seven",
-  baseDmg = 2,
-  effects = {
-    'stun',
-    'debuff'
-  },
+  id = "melee",
+  name = "Melee Symbol",
   assets = {
     images = {
       sprite = {
-        src = "seven.png",
+        src = "melee.png",
+        animation = "melee.json",
       }
     },
     sounds = {

@@ -6,7 +6,6 @@
       {
         "id": "1a71362721b34fb8",
         "type": "tabs",
-        "dimension": 61.81972789115646,
         "children": [
           {
             "id": "20c7759ee9a7fcb2",
@@ -30,37 +29,6 @@
               },
               "icon": "lucide-file",
               "title": "Combat Overview"
-            }
-          }
-        ]
-      },
-      {
-        "id": "88e85d2cd64bc901",
-        "type": "tabs",
-        "dimension": 38.18027210884354,
-        "children": [
-          {
-            "id": "5b09568f90acc2cc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Roadmap/0.0.2 Manifest and Asset Manager.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
-                }
-              },
-              "icon": "lucide-file",
-              "title": "0.0.2 Manifest and Asset Manager"
             }
           }
         ]

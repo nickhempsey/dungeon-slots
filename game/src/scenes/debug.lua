@@ -107,11 +107,17 @@ function scene.update(dt)
   end
 
   if love.keyboard.isDown('escape') then
-    Tween.to(panel, 0.5, { x = love.graphics.getWidth() + panel.width }):ease("quadout"):oncomplete(function()
+    if not scene.hasPanel then
       scene.visible = false
       scene.content = ''
       scene.mode = ''
-    end)
+    else
+      Tween.to(panel, 0.5, { x = love.graphics.getWidth() + panel.width }):ease("quadout"):oncomplete(function()
+        scene.visible = false
+        scene.content = ''
+        scene.mode = ''
+      end)
+    end
   end
 end
 

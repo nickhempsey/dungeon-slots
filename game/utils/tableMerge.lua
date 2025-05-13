@@ -1,3 +1,4 @@
+local unpack = require "utils.unpack"
 local tableMerge = {}
 
 --- Shallow Table Merge
@@ -58,7 +59,7 @@ function tableMerge.deepMergeWithArray(t1, t2)
 
   for k, v in pairs(t1) do
     if type(v) == "table" then
-      result[k] = tableMerge.isArray(v) and { table.unpack(v) } or tableMerge.deepMergeWithArray(v, {})
+      result[k] = tableMerge.isArray(v) and { unpack(v) } or tableMerge.deepMergeWithArray(v, {})
     else
       result[k] = v
     end

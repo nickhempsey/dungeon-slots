@@ -1,5 +1,3 @@
-local Lair = require "src.entities.Lair"
-
 -----------------------
 --   COMBAT SCENE    --
 -----------------------
@@ -28,11 +26,15 @@ end
 -- this function is to initialize variables. Though they can also be
 -- initialized outside of the load function for persistent state.
 function scene.load()
-  lair = Lair:new('tutorial_lair')
+  local lairId = "tutorial_lair"
+  scene.lair = Lair:new(lairId)
 
-  if lair then
-    LogManager.info(lair)
-    lair:generateEnemies()
+
+  if scene.lair then
+    LogManager.info(scene.lair)
+    scene.lair:setStage()
+
+    assert(scene.lair.stageSet, string.format('The stage %s failed to set properly.', lairId))
   end
 
   scene.playerReel = Reel:new(GameState.hero:getBaseSymbols())
@@ -67,11 +69,12 @@ end
 
 -- Scene updates loop
 function scene.update(dt)
+  scene.lair:update(dt)
   -- HeroButton:update(dt)
   -- GameState.lair:update(dt)
   GameState.hero:update(dt)
-  if lair and lair.generatedEnemies then
-    for _, v in pairs(lair.generatedEnemies) do
+  if scene.lair and scene.lair.generatedEnemies then
+    for _, v in pairs(scene.lair.generatedEnemies) do
       v:update(dt)
     end
   end
@@ -79,12 +82,13 @@ end
 
 -- Scene draw loop
 function scene.draw()
+  scene.lair:draw()
   GameState:draw()
   -- GameState.lair:draw()
   GameState.hero:draw()
   -- HeroButton:draw()
-  if lair and lair.generatedEnemies then
-    for _, v in pairs(lair.generatedEnemies) do
+  if scene.lair and scene.lair.generatedEnemies then
+    for _, v in pairs(scene.lair.generatedEnemies) do
       v:draw()
     end
   end

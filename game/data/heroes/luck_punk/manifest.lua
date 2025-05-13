@@ -10,9 +10,6 @@ return {
     attack = 5,
     defense = 2,
   },
-  rollCrit = function()
-    return math.random < 0.3
-  end,
   assets = {
     images = {
       sprite = {
@@ -33,11 +30,18 @@ return {
     behavior = "aggressive", -- optional special behavior tags
   },
   symbols = {
-    'sword_attack',
-    'coin_toss'
+    "defense",
+    "heal",
+    "magic",
+    "melee",
+    "mobility",
+    "potion",
+    "ranged",
+    "wild"
   },
   abilities = {
     "quick_slash",
     "taunt",
+    "quick_slash"
   }
 }

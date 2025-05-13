@@ -19,8 +19,11 @@ function Hero:new(id)
   local entity = setmetatable(tableMerge.deepMergeWithArray({
     currentSprite = nil,
     currentAnimation = nil,
-    x = 500,
+    x = 0,
     y = 0,
+    ox = 0,
+    oy = 0,
+    symbolBank = {}
   }, manifest), Hero)
 
   -- Set idle sprite
@@ -46,13 +49,30 @@ end
 
 -- Runs in love.draw
 function Hero:draw()
-  self.currentAnimation:draw(self.x, self.y)
+  LogManager.info({ x = self.x, y = self.y, ox = self.ox, oy = self.oy })
+  self.currentAnimation:draw(self.x, self.y, 0, 1, 1, self.ox or 0, self.oy or 0)
 end
 
 -----------------------------
 ---       UTILITIES       ---
 -----------------------------
+
+--- Modifies properties on the table
 ---
+---@param flags table
+function Hero:modify(flags)
+  if flags then
+    for key, value in pairs(flags) do
+      self[key] = value
+    end
+
+    if self.debug then
+      LogManager.info(string.format("%s modified flags for '%s'", self.debugLabel, self.id))
+      LogManager.info(flags)
+    end
+  end
+end
+
 function Hero:getBaseSymbols()
   return self.symbols
 end

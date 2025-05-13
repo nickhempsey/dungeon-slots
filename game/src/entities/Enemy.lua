@@ -20,8 +20,11 @@ function Enemy:new(id)
   local entity = setmetatable(tableMerge.deepMergeWithArray({
     currentSprite = nil,
     currentAnimation = nil,
-    x = 500,
+    x = 0,
     y = 0,
+    ox = 0,
+    oy = 0,
+    symbolBank = {}
   }, manifest), Enemy)
 
   -- Set idle sprite
@@ -42,13 +45,21 @@ function Enemy:update(dt)
 end
 
 function Enemy:draw()
-  self.currentAnimation:draw(self.x, self.y)
+  self.currentAnimation:draw(self.x, self.y, 0, 1, 1, self.ox or 0, self.oy or 0)
 end
 
 -----------------------------
 ---       UTILITIES       ---
 -----------------------------
----
+
+function Enemy:modify(flags)
+  if flags then
+    for key, value in pairs(flags) do
+      self[key] = value
+    end
+  end
+end
+
 function Enemy:getBaseSymbols()
   return self.symbols
 end

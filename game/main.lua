@@ -13,8 +13,8 @@ Tween = require "utils.tween"
 -- Entities
 Reel = require "src.entities.Reel"
 Hero = require "src.entities.Hero"
-Lair = require "src.entities.Lair"
 Enemy = require "src.entities.Enemy"
+Lair = require "src.entities.Lair"
 GameState = require "src.entities.GameState"
 
 -- Libraries
