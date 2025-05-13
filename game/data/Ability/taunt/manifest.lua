@@ -9,7 +9,7 @@ return {
   appliesEffect = {
     'distract'
   },
-  rollDistract = function()
-    return love.math.random() < 0.8
-  end
+  chances = {
+    distract = 0.8,
+  }
 }

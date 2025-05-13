@@ -117,11 +117,11 @@ function ManifestManager.collectStaticAndRelationalValues(manifest, directory)
     local isStatic = type(k) == "string" and type(v) ~= "function"
     if isStatic then
       if k == 'symbols' then
-        output[k] = ManifestManager.handleRelationalTables('symbols', v)
+        output[k] = ManifestManager.handleRelationalTables('Symbol', v)
       elseif k == 'effects' then
-        output[k] = ManifestManager.handleRelationalTables('effects', v)
+        output[k] = ManifestManager.handleRelationalTables('Effect', v)
       elseif k == 'abilities' then
-        output[k] = ManifestManager.handleRelationalTables('abilities', v)
+        output[k] = ManifestManager.handleRelationalTables('Ability', v)
       elseif k == 'assets' then
         output[k] = ManifestManager.handleAssets(directory, v)
       else

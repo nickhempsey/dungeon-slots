@@ -9,7 +9,7 @@ scene.currentReel = nil
 scene.playerReelAnimations = {}
 
 scene.current_turn = nil
-scene.entity_references = {}
+scene.turn_order = {}
 scene.lair = nil
 
 -- Stacking Scene Manager can be used to call a scenes modify function.

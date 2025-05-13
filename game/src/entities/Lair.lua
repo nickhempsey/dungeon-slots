@@ -11,7 +11,7 @@ Lair.debugLabel = LogManagerColor.colorf('{cyan}[Lair]{reset}')
 ---@param id string
 function Lair:new(id)
     assert(type(id) == "string", "Function 'new': parameter 'id' must be a string.")
-    local manifest = ManifestManager.loadEntityManifest("lairs", id)
+    local manifest = ManifestManager.loadEntityManifest("Lair", id)
     if not manifest then
         return nil
     end

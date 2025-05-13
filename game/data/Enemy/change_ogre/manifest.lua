@@ -10,7 +10,7 @@ return {
       health = love.math.random(20, 30),
       attack = love.math.random(6, 15),
       defense = love.math.random(5, 20),
-      initiative = love.math.random(6, 10),
+      initiative = love.math.random(-3, 2),
     }
   end,
   assets = {
@@ -19,14 +19,6 @@ return {
         src = 'change_ogre.png',
         animation = 'change_ogre.json'
       }
-    },
-    sounds = {
-      --attackSound = "attack_sound.wav",
-      --deathSound = "death_sound.wav",
-    },
-    -- Just incase we decide to give their names different fonts for dramatic effect.
-    fonts = {
-      --font = "font.ttf",
     },
   },
   ai = {

@@ -13,7 +13,7 @@ return {
       health = love.math.random(5, 15),
       attack = love.math.random(1, 3),
       defense = love.math.random(5, 10),
-      initiative = love.math.random(1, 8),
+      initiative = love.math.random(3, 5),
     }
   end,
   rollCrit = function()

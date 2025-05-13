@@ -1,6 +1,7 @@
-local tableMerge = require "utils.tableMerge"
+local Actor = require "src.entities.Actor"
+local Bank = require "src.entities.Bank"
 
-local Hero = {}
+local Hero = setmetatable({}, { __index = Actor })
 Hero.__index = Hero
 
 Hero.debug = Debug
@@ -9,32 +10,23 @@ Hero.debugLabel = LogManagerColor.colorf('{green}[Hero]{reset}')
 -- Instantiate a new hero by their id.
 --
 ---@param id string
+---@diagnostic disable-next-line: duplicate-set-field
 function Hero:new(id)
-  assert(type(id) == "string", "Function 'new': parameter 'id' must be a string.")
-  local manifest = ManifestManager.loadEntityManifest("heroes", id)
-  if not manifest then
-    return nil
-  end
+  local hero = Actor:new('Hero', id)
 
-  local entity = setmetatable(tableMerge.deepMergeWithArray({
-    currentSprite = nil,
-    currentAnimation = nil,
-    x = 0,
-    y = 0,
-    ox = 0,
-    oy = 0,
-    symbolBank = {}
-  }, manifest), Hero)
+  assert(hero, 'Hero failed to load')
 
-  -- Set idle sprite
-  if entity.assets.images.sprite then
-    entity.currentSprite = entity.assets.images.sprite
+  setmetatable(hero, Hero)
 
-    assert(entity.assets.images.sprite.animations, 'Hero must have a default sprite with a base idle animaton.')
-    entity.currentAnimation = entity.assets.images.sprite.animations.factory('idle')
-  end
+  hero.bank     = Bank:new()
+  hero.currency = {} -- map e.g. { gold=0, gems=0 }
+  hero.reels    = {} -- list of Reel
+  hero.xpAmount = 0
+  hero.xpRecord = { amount = 0 }
 
-  return entity
+  LogManager.info(string.format("%s New Hero: %s", Hero.debugLabel, id))
+
+  return hero
 end
 
 -- Runs in love.load
@@ -49,29 +41,12 @@ end
 
 -- Runs in love.draw
 function Hero:draw()
-  LogManager.info({ x = self.x, y = self.y, ox = self.ox, oy = self.oy })
   self.currentAnimation:draw(self.x, self.y, 0, 1, 1, self.ox or 0, self.oy or 0)
 end
 
 -----------------------------
 ---       UTILITIES       ---
 -----------------------------
-
---- Modifies properties on the table
----
----@param flags table
-function Hero:modify(flags)
-  if flags then
-    for key, value in pairs(flags) do
-      self[key] = value
-    end
-
-    if self.debug then
-      LogManager.info(string.format("%s modified flags for '%s'", self.debugLabel, self.id))
-      LogManager.info(flags)
-    end
-  end
-end
 
 function Hero:getBaseSymbols()
   return self.symbols
@@ -85,14 +60,6 @@ function Hero:getSymbolById(id)
     end
   end
   return result
-end
-
-function Hero:setSprite(sprite)
-  self.currentSprite = self.assets.images[sprite]
-end
-
-function Hero:setAnimation(tag)
-  self.currentAnimation = self.currentSprite.animations.factory(tag)
 end
 
 function Hero:applyDamage(amount)

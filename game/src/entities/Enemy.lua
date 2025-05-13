@@ -1,5 +1,8 @@
+local Actor = require "src.entities.Actor"
 local tableMerge = require "utils.tableMerge"
-local Enemy = {}
+
+
+local Enemy = setmetatable({}, { __index = Actor })
 Enemy.__index = Enemy
 
 Enemy.debug = Debug
@@ -8,34 +11,18 @@ Enemy.debugLabel = LogManagerColor.colorf("{red}[Enemy]{reset}")
 -- Instantiate a new hero by their id.
 --
 ---@param id string
+---@diagnostic disable-next-line: duplicate-set-field
 function Enemy:new(id)
   assert(type(id) == "string", "Function 'new': parameter 'id' must be a string.")
+
+  local enemy = Actor:new('Enemy', id)
+
+  assert(enemy, 'Enemy failed to load')
+
+  setmetatable(enemy, Enemy)
   LogManager.info(string.format("%s New enemy: %s", Enemy.debugLabel, id))
 
-  local manifest = ManifestManager.loadEntityManifest("enemies", id)
-  if not manifest then
-    return nil
-  end
-
-  local entity = setmetatable(tableMerge.deepMergeWithArray({
-    currentSprite = nil,
-    currentAnimation = nil,
-    x = 0,
-    y = 0,
-    ox = 0,
-    oy = 0,
-    symbolBank = {}
-  }, manifest), Enemy)
-
-  -- Set idle sprite
-  if entity.assets.images.sprite then
-    entity.currentSprite = entity.assets.images.sprite
-
-    assert(entity.assets.images.sprite.animations, 'Enemy must have a default sprite with a base idle animaton.')
-    entity.currentAnimation = entity.assets.images.sprite.animations.factory('idle')
-  end
-
-  return entity
+  return enemy
 end
 
 function Enemy:update(dt)
@@ -52,13 +39,13 @@ end
 ---       UTILITIES       ---
 -----------------------------
 
-function Enemy:modify(flags)
-  if flags then
-    for key, value in pairs(flags) do
-      self[key] = value
-    end
-  end
-end
+-- function Enemy:modify(flags)
+--   if flags then
+--     for key, value in pairs(flags) do
+--       self[key] = value
+--     end
+--   end
+-- end
 
 function Enemy:getBaseSymbols()
   return self.symbols
