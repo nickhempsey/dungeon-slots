@@ -1,7 +1,3 @@
-local Actor = require "src.entities.Actor"
-local tableMerge = require "utils.tableMerge"
-
-
 local Enemy = setmetatable({}, { __index = Actor })
 Enemy.__index = Enemy
 
@@ -13,22 +9,21 @@ Enemy.debugLabel = LogManagerColor.colorf("{red}[Enemy]{reset}")
 ---@param id string
 ---@diagnostic disable-next-line: duplicate-set-field
 function Enemy:new(id)
-  assert(type(id) == "string", "Function 'new': parameter 'id' must be a string.")
+  assert(type(id) == "string", "Enemy:new 'new': parameter 'id' must be a string.")
 
   local enemy = Actor:new('Enemy', id)
-
   assert(enemy, 'Enemy failed to load')
 
   setmetatable(enemy, Enemy)
   LogManager.info(string.format("%s New enemy: %s", Enemy.debugLabel, id))
+
+  EntityManager.register(enemy)
 
   return enemy
 end
 
 function Enemy:update(dt)
   self.currentAnimation:update(dt)
-  --self.updateIntent()
-  -- self.performAction(GameState)
 end
 
 function Enemy:draw()
@@ -38,14 +33,6 @@ end
 -----------------------------
 ---       UTILITIES       ---
 -----------------------------
-
--- function Enemy:modify(flags)
---   if flags then
---     for key, value in pairs(flags) do
---       self[key] = value
---     end
---   end
--- end
 
 function Enemy:getBaseSymbols()
   return self.symbols
@@ -59,14 +46,6 @@ function Enemy:getSymbolById(id)
     end
   end
   return result
-end
-
-function Enemy:setSprite(sprite)
-  self.currentSprite = self.assets.images[sprite]
-end
-
-function Enemy:setAnimation(tag)
-  self.currentAnimation:setTag(tag)
 end
 
 function Enemy:attack()

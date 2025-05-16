@@ -1,3 +1,5 @@
+-- GameState will be used to managed top level state and interface with the scenes.
+
 local GameState = {}
 GameState.__index = GameState
 
@@ -5,28 +7,20 @@ GameState.debug = Debug
 GameState.debugLabel = LogManagerColor.colorf('{green}[GameState]{reset}')
 
 GameState.scenes = {
-  shop = 'shop',
-  menu = 'menu',
-  intro = 'intro',
-  title = 'title',
-  event = 'event',
-  combat = 'combat',
-  inventory = 'inventory'
+  SHOP      = 'shop',
+  MENU      = 'menu',
+  INTRO     = 'intro',
+  TITLE     = 'title',
+  EVENT     = 'event',
+  COMBAT    = 'combat',
+  INVENTORY = 'inventory'
 }
 
 GameState.scene = nil
-GameState.currentFloor = 1
-GameState.currentTurn = nil
-
-GameState.hero = nil
-GameState.inventory = {}
-
+GameState.heroId = 1
+GameState.initiative = {}
 GameState.lair = nil
-
-GameState.enemies = {}
-
-GameState.reel = nil
-GameState.spinTokens = 3
+GameState.actor = nil
 
 GameState.rng = love.math.newRandomGenerator(os.time())
 
@@ -36,9 +30,8 @@ function GameState:load()
   SceneManager.add("debug")
 
   -- Eventually run "load" for now we'll hard code a default GameState
-  GameState.scene = GameState.scenes.intro
+  GameState.scene = GameState.scenes.INTRO
   GameState.hero = Hero:new('luck_punk')
-  GameState.reel = Reel:new(GameState.hero:getBaseSymbols())
 
   SceneManager.add(GameState.scene)
 
@@ -52,6 +45,14 @@ end
 
 function GameState:draw()
 
+end
+
+function GameState.resetRNG()
+  -- Clear out the system cache.
+  love.math.setRandomSeed(os.time())
+  love.math.random()
+  love.math.random()
+  love.math.random()
 end
 
 return GameState

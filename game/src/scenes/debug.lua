@@ -3,6 +3,7 @@ local scene = {}
 scene.zsort = 100000
 scene.drawOverlay = false
 scene.overlay_image = nil
+scene.activeModifers = {}
 
 local grid_overlay_image = love.graphics.newImage("assets/images/grid_overlay.png")
 
@@ -51,6 +52,16 @@ scene.modes = {
     hasPanel = true
   },
   {
+    modifier = 'c',
+    id = 'combat',
+    mode = 'Combat Debug',
+    description = '',
+    content = '',
+    callback = nil,
+    visible = true,
+    hasPanel = true
+  },
+  {
     modifier = 'g',
     id = 'grid',
     mode = 'Grid Debug',
@@ -66,7 +77,17 @@ scene.modes = {
     end,
     visible = true,
     hasPanel = false
-  }
+  },
+  {
+    modifier = 'm',
+    id = 'mouse',
+    mode = 'Mouse Position',
+    description = '',
+    content = '',
+    callback = nil,
+    visible = true,
+    hasPanel = false
+  },
 }
 
 -- Stacking Scene Manager can all a scenes load function. The purpose of
@@ -77,12 +98,12 @@ function scene.load()
   scene.content = ''
   scene.mode = ''
 
-  local panelWidth = love.graphics.getWidth() / 2
+  local panelWidth = ViewportManager:getWidth() / 2
   panel = {
-    x = love.graphics.getWidth() + panelWidth, -- TO love.graphics.getWidth() - width
+    x = ViewportManager:getWidth() + panelWidth, -- TO love.graphics.getWidth() - width
     y = 0,
     width = panelWidth,
-    height = love.graphics.getHeight(),
+    height = ViewportManager:getHeight(),
     padding = 25
   }
 end
@@ -92,12 +113,13 @@ function scene.update(dt)
   if love.keyboard.isDown('f3') then
     for _, v in pairs(scene.modes) do
       if love.keyboard.isDown(v.modifier) then
-        LogManager.info("Debug Mode: " .. v.mode .. "\n\n" .. v.description)
         scene.visible = v.visible
         scene.mode = v.mode
+        scene.activeModifers[v.modifier] = true
+        scene.id = v.id
         if v.hasPanel then
           scene.content = v.content
-          Tween.to(panel, 0.5, { x = love.graphics.getWidth() - panel.width }):ease("quadout")
+          Tween.to(panel, 0.5, { x = ViewportManager:getWidth() - panel.width }):ease("quadout")
         end
         if v.callback then
           v.callback()
@@ -108,33 +130,100 @@ function scene.update(dt)
 
   if love.keyboard.isDown('escape') then
     if not scene.hasPanel then
+      scene.activeModifers = {}
+      scene.drawOverlay = false
       scene.visible = false
       scene.content = ''
       scene.mode = ''
     else
-      Tween.to(panel, 0.5, { x = love.graphics.getWidth() + panel.width }):ease("quadout"):oncomplete(function()
+      Tween.to(panel, 0.5, { x = ViewportManager:getWidth() + panel.width }):ease("quadout"):oncomplete(function()
+        scene.activeModifers = {}
         scene.visible = false
         scene.content = ''
         scene.mode = ''
       end)
     end
   end
+
+  if scene.activeModifers['c'] ~= nil and GameState.initiative then
+    local actor = GameState.initiative.actor
+    scene.content = string.format([[
+CURRENT:
+  ROUND: %s
+  TURN: %s - %d
+  PHASE: %s
+    NextPhase: %s
+
+ACTOR:
+  HP: %d
+  INIT: %d
+  DEF: %d
+]],
+      GameState.initiative.round,
+      actor.name,
+      actor.uid,
+      actor.phaseState.id,
+      actor.phaseState.next,
+      actor.stats.health,
+      actor.stats.rolledInitiative,
+      actor.stats.defense
+    )
+  end
 end
 
 -- Scene draw loop
 function scene.draw()
   if scene.visible then
-    love.graphics.setColor(1, 1, 1, 0.70)
+    love.graphics.setColor(1, 1, 1, 0.80)
     love.graphics.rectangle("fill", panel.x, panel.y, panel.width, panel.height)
 
     if scene.drawOverlay then
       love.graphics.draw(scene.overlay_image.image, scene.overlay_image.x, scene.overlay_image.y)
     end
 
-    -- love.graphics.setFont(Fonts.md)
-    -- love.graphics.setColor(0, 0, 0, 1)
-    love.graphics.printf("Debug Mode: " .. scene.mode .. "\n\n" .. scene.content, panel.x + panel.padding, panel.padding,
-      panel.width - panel.padding * 2, "left")
+    if scene.content then
+      love.graphics.setColor(0, 0, 0, 1)
+      FontsManager:setFontBMP('sm', 'Medium')
+      love.graphics.printf("DEBUG MODE " .. scene.mode .. "\n\n" .. scene.content, panel.x + panel.padding,
+        panel.padding,
+        panel.width - panel.padding * 2, "left")
+    end
+
+    if scene.activeModifers['m'] ~= nil then
+      local mx, my = ViewportManager:getMousePosition()
+      local w, h = ViewportManager:getDimensions()
+      -- Set the width and height for the mouse coordinate display box
+      local m_width, m_height = 48, 15
+
+      local adjusted_mx = mx
+      local adjusted_my = my
+
+      -- If the box would go off the right edge, shift it left
+      if mx + m_width >= w then
+        adjusted_mx = mx - m_width
+      end
+
+      -- If the box would go off the bottom edge, shift it up
+      if my + m_height * 2 >= h then
+        adjusted_my = my - m_height * 3
+      end
+
+      -- If the mouse is below the viewport, clamp the box to the bottom
+      if my > h then
+        adjusted_my = h - m_height * 3
+      end
+
+      -- If the mouse is above the viewport, clamp the box to the top
+      if my < 0 then
+        adjusted_my = 0
+      end
+
+      love.graphics.setColor(1, 1, 1, 0.80)
+      love.graphics.rectangle("fill", adjusted_mx, adjusted_my + m_height, m_width, m_height, 3, 3)
+      love.graphics.setColor(0, 0, 0, 1)
+      love.graphics.rectangle("line", adjusted_mx, adjusted_my + m_height, m_width, m_height, 3, 3)
+      love.graphics.printf(string.format("%d, %d", mx, my), adjusted_mx, adjusted_my + m_height + 4, m_width, "center")
+    end
   end
 end
 

@@ -1,0 +1,33 @@
+{
+	"nodes":[
+		{"id":"b3922b54999bc1de","type":"text","text":"\"Game Start\"","x":-242,"y":-718,"width":250,"height":60},
+		{"id":"42771b91eadde04f","type":"text","text":"Select Hero / Load save data","x":-242,"y":-613,"width":250,"height":60},
+		{"id":"0a22e02f17fb7aae","type":"text","text":"This is a loose representation....","x":102,"y":-720,"width":250,"height":60},
+		{"id":"9f706da2ac36321c","type":"text","text":"ManifestManager collects and merges, abilities, symbols, and all related data and passes it to:","x":-242,"y":-520,"width":250,"height":120},
+		{"id":"6d8fcc6dacb403c2","type":"text","text":"EntityManager, force id to 1.","x":-242,"y":-360,"width":250,"height":60},
+		{"id":"7e4db5f29b6557b8","type":"text","text":"Save registry ID reference in GameState table","x":-242,"y":-260,"width":250,"height":60},
+		{"id":"367d86483b0f0d17","type":"text","text":"User picks map item","x":-242,"y":-160,"width":250,"height":60},
+		{"id":"c4c9555de6c97a45","type":"text","text":"Generate a random lair from list of available lairs","x":-243,"y":-60,"width":250,"height":60},
+		{"id":"ecd11feb19e4277e","type":"text","text":"Generate random enemies based on valid enemy types from the lair manifest","x":-243,"y":40,"width":250,"height":108},
+		{"id":"4e09196ba1434f9d","type":"text","text":"ManifestManager gets all of their data and passes that to:","x":-242,"y":180,"width":250,"height":81},
+		{"id":"976ebf24e0ef3fbd","type":"text","text":"EntityManager, incremented ids","x":-243,"y":300,"width":250,"height":70},
+		{"id":"2c9c4302be706ae8","type":"text","text":"set id references to GameState","x":-243,"y":400,"width":250,"height":60},
+		{"id":"513d4b7acf45e4fd","type":"text","text":"Loads to figure out around procedural map and lair generation.","x":-680,"y":-80,"width":250,"height":100,"color":"1"}
+	],
+	"edges":[
+		{"id":"018a66553ee43d68","fromNode":"367d86483b0f0d17","fromSide":"bottom","toNode":"c4c9555de6c97a45","toSide":"top"},
+		{"id":"f40347e09b43ebb4","fromNode":"c4c9555de6c97a45","fromSide":"bottom","toNode":"ecd11feb19e4277e","toSide":"top"},
+		{"id":"693ab42e0b080e13","fromNode":"b3922b54999bc1de","fromSide":"bottom","toNode":"42771b91eadde04f","toSide":"top"},
+		{"id":"ed3ecd0f4c1d0ce6","fromNode":"513d4b7acf45e4fd","fromSide":"right","toNode":"367d86483b0f0d17","toSide":"left"},
+		{"id":"47fab8cad231c9c6","fromNode":"ecd11feb19e4277e","fromSide":"bottom","toNode":"4e09196ba1434f9d","toSide":"top"},
+		{"id":"96c20493ca4bcfb0","fromNode":"42771b91eadde04f","fromSide":"bottom","toNode":"9f706da2ac36321c","toSide":"top"},
+		{"id":"37173466c73557c8","fromNode":"b3922b54999bc1de","fromSide":"right","toNode":"0a22e02f17fb7aae","toSide":"left"},
+		{"id":"417b1056297e998a","fromNode":"976ebf24e0ef3fbd","fromSide":"bottom","toNode":"2c9c4302be706ae8","toSide":"top"},
+		{"id":"e282449cd151cb03","fromNode":"6d8fcc6dacb403c2","fromSide":"bottom","toNode":"7e4db5f29b6557b8","toSide":"top"},
+		{"id":"67a657ad702241b8","fromNode":"9f706da2ac36321c","fromSide":"bottom","toNode":"6d8fcc6dacb403c2","toSide":"top"},
+		{"id":"1d28a999b6aef91b","fromNode":"7e4db5f29b6557b8","fromSide":"bottom","toNode":"367d86483b0f0d17","toSide":"top"},
+		{"id":"98d9ca1ef51c6632","fromNode":"4e09196ba1434f9d","fromSide":"bottom","toNode":"976ebf24e0ef3fbd","toSide":"top"},
+		{"id":"efb3baf4424235cd","fromNode":"513d4b7acf45e4fd","fromSide":"right","toNode":"c4c9555de6c97a45","toSide":"left"},
+		{"id":"ee3117e31592a835","fromNode":"513d4b7acf45e4fd","fromSide":"right","toNode":"ecd11feb19e4277e","toSide":"left"}
+	]
+}

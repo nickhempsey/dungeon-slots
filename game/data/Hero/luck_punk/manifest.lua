@@ -2,10 +2,10 @@ return {
   id          = "luck_punk",
   name        = "Luck Punk",
   description = "",
-  w           = 64,
-  h           = 80,
+  w           = 128,
+  h           = 128,
   ox          = 64 / 2,
-  oy          = 80 - 16,
+  oy          = 128 - 16,
   baseStats   = function()
     return {
       health     = 30,
@@ -32,8 +32,8 @@ return {
   assets      = {
     images = {
       sprite = {
-        src       = "luck_punk_64.png",
-        animation = "luck_punk_64.json",
+        src       = "luck_punk.png",
+        animation = "luck_punk.json",
       }
     },
   },

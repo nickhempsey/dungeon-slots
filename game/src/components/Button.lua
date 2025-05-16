@@ -1,3 +1,5 @@
+local hexToRGBA = require "utils.hexToRGBA"
+
 Button = {}
 Button.__index = Button
 
@@ -29,10 +31,10 @@ function Button:new(label, x, y, callback)
   btn.font         = 'PressStart'
 
   btn.hover        = false
-  btn.color        = Colors.text
-  btn.bg           = Colors.secondary
-  btn.hoverColor   = Colors.text
-  btn.hoverBg      = Colors.accent
+  btn.color        = hexToRGBA('#000000')
+  btn.bg           = hexToRGBA('#FF004D')
+  btn.hoverColor   = hexToRGBA('#ffffff')
+  btn.hoverBg      = hexToRGBA('#7E2553')
   btn.borderRadius = 4
   btn.mousebind    = 1
   btn.keybind      = nil

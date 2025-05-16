@@ -5,6 +5,7 @@ return {
   h = 64,
   ox = 64 / 2,
   oy = 64 - 16,
+
   --- TODO: maybe change this to an enum for easier editor writing?
   --- ox = 'center' | 'left' | 'right' | number
   --- oy = 'floor' | 'bottom' | 'center' | 'top' | number

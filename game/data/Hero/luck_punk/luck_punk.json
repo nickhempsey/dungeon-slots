@@ -1,7 +1,43 @@
 { "frames": [
    {
-    "filename": "luck_punk.aseprite",
+    "filename": "luck_punk 0.aseprite",
     "frame": { "x": 0, "y": 0, "w": 128, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 128 },
+    "sourceSize": { "w": 128, "h": 128 },
+    "duration": 100
+   },
+   {
+    "filename": "luck_punk 1.aseprite",
+    "frame": { "x": 128, "y": 0, "w": 128, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 128 },
+    "sourceSize": { "w": 128, "h": 128 },
+    "duration": 100
+   },
+   {
+    "filename": "luck_punk 2.aseprite",
+    "frame": { "x": 256, "y": 0, "w": 128, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 128 },
+    "sourceSize": { "w": 128, "h": 128 },
+    "duration": 100
+   },
+   {
+    "filename": "luck_punk 3.aseprite",
+    "frame": { "x": 384, "y": 0, "w": 128, "h": 128 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 128 },
+    "sourceSize": { "w": 128, "h": 128 },
+    "duration": 100
+   },
+   {
+    "filename": "luck_punk 4.aseprite",
+    "frame": { "x": 512, "y": 0, "w": 128, "h": 128 },
     "rotated": false,
     "trimmed": false,
     "spriteSourceSize": { "x": 0, "y": 0, "w": 128, "h": 128 },
@@ -11,23 +47,14 @@
  ],
  "meta": {
   "app": "https://www.aseprite.org/",
-  "version": "1.3.13-x64",
+  "version": "1.3.13-arm64",
   "image": "luck_punk.png",
   "format": "RGBA8888",
-  "size": { "w": 128, "h": 128 },
+  "size": { "w": 640, "h": 128 },
   "scale": "1",
   "frameTags": [
    { "name": "idle", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" },
-   { "name": "spinning", "from": 0, "to": 0, "direction": "forward", "color": "#000000ff" }
-  ],
-  "layers": [
-   { "name": "Legs", "opacity": 255, "blendMode": "normal" },
-   { "name": "Torso", "opacity": 255, "blendMode": "normal" },
-   { "name": "Left Arm", "opacity": 255, "blendMode": "normal" },
-   { "name": "Head", "opacity": 255, "blendMode": "normal" },
-   { "name": "Hammer", "opacity": 255, "blendMode": "normal" },
-   { "name": "Left Hand", "opacity": 255, "blendMode": "normal" },
-   { "name": "Right Arm", "opacity": 255, "blendMode": "normal" }
+   { "name": "attack", "from": 1, "to": 4, "direction": "forward", "color": "#000000ff" }
   ],
   "slices": [
   ]

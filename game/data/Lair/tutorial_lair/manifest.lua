@@ -4,7 +4,7 @@ return {
     floorLevel = 176,
     availableEnemies = { 'change_goblin', 'change_ogre' },
     rollQuantityOfEnemies = function()
-        return love.math.random(1, 4)
+        return love.math.random(2, 4)
     end,
     assets = {
         images = {

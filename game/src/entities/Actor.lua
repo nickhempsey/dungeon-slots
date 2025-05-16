@@ -13,7 +13,7 @@ Actor.debugLabel = LogManagerColor.colorf('{green}[Actor]{reset}')
 ---
 ---@param actorType string The directory inside `./data` that leads to the actors manifest. Hero | Enemy
 ---@param actorId string The directory name for this actor, ie: `luck_punk` | `change_goblin`
----@return table|nil
+---@return table|nil Actor
 function Actor:new(actorType, actorId)
     assert(type(actorId) == "string", "Function 'new': parameter 'actorId' must be a string.")
     assert(type(actorType) == "string", "Function 'new': parameter 'actorType' must be a string.")
@@ -31,10 +31,10 @@ function Actor:new(actorType, actorId)
         actorType        = actorType,
         currentAnimation = nil,
         currentSprite    = nil,
-        phaseStates      = {},
+        phaseState       = {},
         statusEffects    = {},
         symbolBank       = {},
-        turnState        = nil,
+        InitiativeState  = nil,
     }, manifest), self)
 
     -- Set idle sprite
@@ -65,12 +65,24 @@ function Actor:modify(flags)
     end
 end
 
+--- Set the sprite of the actor
+---
+---@param sprite string
 function Actor:setSprite(sprite)
-    self.currentSprite = self.assets.images[sprite]
+    if self.currentSprite then
+        self.currentSprite = self.assets.images[sprite]
+    end
 end
 
+--- Set a specific animation
+---
+---@param tag string
 function Actor:setAnimation(tag)
-    self.currentAnimation = self.currentSprite.animations.factory(tag)
+    LogManager.info(string.format("%s animation change: %s %s", self.debugLabel, self.name, tag))
+    LogManager.info(self.currentSprite)
+    if self.currentAnimation and self.currentSprite.animations then
+        self.currentAnimation = self.currentSprite.animations.factory(tag)
+    end
 end
 
 return Actor

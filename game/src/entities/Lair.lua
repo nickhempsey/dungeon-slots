@@ -10,7 +10,8 @@ Lair.debugLabel = LogManagerColor.colorf('{cyan}[Lair]{reset}')
 --
 ---@param id string
 function Lair:new(id)
-    assert(type(id) == "string", "Function 'new': parameter 'id' must be a string.")
+    LogManager.info(id)
+    assert(type(id) == "string", string.format("Lair:new 'new': parameter 'id' must be a string: %s", id))
     local manifest = ManifestManager.loadEntityManifest("Lair", id)
     if not manifest then
         return nil
@@ -83,6 +84,8 @@ function Lair:generateEnemies()
             table.insert(enemies, enemy)
         end
     end
+
+
 
     self.generatedEnemies = enemies
     if self.debug then

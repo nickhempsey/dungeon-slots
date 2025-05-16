@@ -1,34 +1,39 @@
 -- debugging and logging
 if arg[#arg] == "vsc_debug" then require("lldebugger").start() end
 if love.filesystem then io.stdout:setvbuf("no") end
-
--- Debug
-Debug = true
+Debug           = true
 LogManagerColor = require "lib.LogManagerColor"
-LogManager = require "lib.LogManager"
+LogManager      = require "lib.LogManager"
 
 -- Utils
-Tween = require "utils.tween"
-
--- Entities
-Reel = require "src.entities.Reel"
-Hero = require "src.entities.Hero"
-Enemy = require "src.entities.Enemy"
-Lair = require "src.entities.Lair"
-GameState = require "src.entities.GameState"
-
--- Libraries
-FontsManager = require "lib.FontsManager"
-ColorsManager = require "lib.ColorsManager"
-InputManager = require "lib.InputManager"
-SceneManager = require "lib.SceneManager".newManager()
-EventBusManager = require "lib.EventBusManager"
-ManifestManager = require "lib.ManifestManager"
-ViewportManager = require "lib.ViewportManager"
+Tween           = require "utils.tween"
 
 -- Components
-Button = require "src.components.Button"
+Button          = require "src.components.Button"
 
+-- Libraries
+ColorsManager   = require "lib.ColorsManager"
+EntityManager   = require "lib.EntityManager"
+EventBusManager = require "lib.EventBusManager"
+FontsManager    = require "lib.FontsManager"
+InputManager    = require "lib.InputManager"
+ManifestManager = require "lib.ManifestManager"
+SceneManager    = require "lib.SceneManager".newManager()
+ViewportManager = require "lib.ViewportManager"
+
+-- GameState and Entities are always loaded
+Actor           = require "src.entities.Actor"
+Bank            = require "src.entities.Bank"
+Enemy           = require "src.entities.Enemy"
+GameState       = require "src.entities.GameState"
+Hero            = require "src.entities.Hero"
+Lair            = require "src.entities.Lair"
+LootTable       = require "src.entities.LootTable"
+PhaseState      = require "src.entities.PhaseState"
+Reel            = require "src.entities.Reel"
+InitiativeState = require "src.entities.InitiativeState"
+StatusEffect    = require "src.entities.StatusEffect"
+Symbol          = require "src.entities.Symbol"
 
 
 local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
@@ -39,12 +44,10 @@ local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
 function love.load()
   LogManager.startSession()
   LogManager.info("%s ⌛ Game loading...", sceneLabel)
+  local cursorImageData = love.image.newImageData("assets/images/cursor.png")
+  local customCursor = love.mouse.newCursor(cursorImageData, 0, 0)
+  love.mouse.setCursor(customCursor)
 
-  -- Clear out the system cache.
-  love.math.setRandomSeed(os.time())
-  love.math.random()
-  love.math.random()
-  love.math.random()
 
   ViewportManager:load()
   ViewportManager:update()
@@ -53,6 +56,7 @@ function love.load()
   FontsManager:loadBMP()
 
   GameState:load()
+  GameState.resetRNG()
   LogManager.info("%s ✅ Game loaded!", sceneLabel)
 end
 

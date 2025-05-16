@@ -1,3 +1,5 @@
+local unpack = require "utils.unpack"
+
 FontsManager = {}
 FontsManager.__index = FontsManager
 
@@ -29,7 +31,21 @@ FontsManager.fonts = {
 }
 
 FontsManager.bmpfonts = {
-  FreePixelBMP = 'assets/fonts/pixelfree.png'
+  FreePixelBMP = {
+    image = 'assets/fonts/pixelfree.png',
+    characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#.!?: ",
+    space = 3
+  },
+  Tiny = {
+    image = 'assets/fonts/tiny_font.png',
+    characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,:;!?\'\"()[]{}-_+=*/\\@#$%^& ",
+    space = 1
+  },
+  Medium = {
+    image = 'assets/fonts/medium_font.png',
+    characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.,:;!?\'\"()[]{}-_+=*/\\@#$%^& ",
+    space = 1
+  }
 }
 
 --- A cache for the loaded fonts that we'll be using.
@@ -88,13 +104,10 @@ end
 function FontsManager:loadBMP()
   self.bmpcache = {}
 
-  for name, path in pairs(self.bmpfonts) do
+  for name, v in pairs(self.bmpfonts) do
     self.bmpcache[name] = {}
 
-    local font = love.graphics.newImageFont(
-      path,
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789#.!?: ",
-      3)
+    local font = love.graphics.newImageFont(v.image, v.characters, v.space or 1)
     -- font:setFilter("nearest", "nearest")
     self.bmpcache[name] = font
     if self.debug then

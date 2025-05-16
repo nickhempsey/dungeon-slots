@@ -23,10 +23,17 @@ Colors.secondary = {
   11 / 255,  --G
   33 / 255   --B
 }
+
 Colors.accent = {
   239 / 255, -- R
   94 / 255,  -- G
   41 / 255   -- B
+}
+
+Colors.green = {
+  0,
+  1,
+  0
 }
 
 return Colors;

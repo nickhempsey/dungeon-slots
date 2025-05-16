@@ -1,6 +1,3 @@
-local Actor = require "src.entities.Actor"
-local Bank = require "src.entities.Bank"
-
 local Hero = setmetatable({}, { __index = Actor })
 Hero.__index = Hero
 
@@ -10,6 +7,7 @@ Hero.debugLabel = LogManagerColor.colorf('{green}[Hero]{reset}')
 -- Instantiate a new hero by their id.
 --
 ---@param id string
+---@return table Hero
 ---@diagnostic disable-next-line: duplicate-set-field
 function Hero:new(id)
   local hero = Actor:new('Hero', id)
@@ -19,12 +17,18 @@ function Hero:new(id)
   setmetatable(hero, Hero)
 
   hero.bank     = Bank:new()
-  hero.currency = {} -- map e.g. { gold=0, gems=0 }
+  hero.currency = {
+    gold       = 0,
+    gems       = 0,
+    spinTokens = 0,
+  }
   hero.reels    = {} -- list of Reel
   hero.xpAmount = 0
   hero.xpRecord = { amount = 0 }
 
   LogManager.info(string.format("%s New Hero: %s", Hero.debugLabel, id))
+
+  EntityManager.register(hero, GameState.heroId)
 
   return hero
 end

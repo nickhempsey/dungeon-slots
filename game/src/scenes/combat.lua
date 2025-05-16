@@ -1,15 +1,11 @@
+local hexToRGBA = require "utils.hexToRGBA"
+
 -----------------------
 --   COMBAT SCENE    --
 -----------------------
 local scene = {}
 local cur = SceneManager.current
 
-scene.playerReel = nil
-scene.currentReel = nil
-scene.playerReelAnimations = {}
-
-scene.current_turn = nil
-scene.turn_order = {}
 scene.lair = nil
 
 -- Stacking Scene Manager can be used to call a scenes modify function.
@@ -27,54 +23,57 @@ end
 -- initialized outside of the load function for persistent state.
 function scene.load()
   local lairId = "tutorial_lair"
-  scene.lair = Lair:new(lairId)
+  local lair = Lair:new(lairId)
 
+  if lair then
+    LogManager.info(lair)
+    lair:setStage()
 
-  if scene.lair then
-    LogManager.info(scene.lair)
-    scene.lair:setStage()
-
-    assert(scene.lair.stageSet, string.format('The stage %s failed to set properly.', lairId))
+    assert(lair.stageSet, string.format('The stage %s failed to set properly.', lairId))
   end
 
-  scene.playerReel = Reel:new(GameState.hero:getBaseSymbols())
+  local initiative = InitiativeState:new()
+  initiative:roll()
+  -- temp tick forward to 0 eventually will check for loadmode first.
+  initiative:advanceInitiative()
 
-  -- LogManager.info(scene.playerReel)
-  -- HeroButton = Button:new('Hero', 100, 100, function()
-  --   scene.playerReel:spin()
+  -- Create References for easier system wide management
+  GameState.lair       = lair
+  GameState.initiative = initiative
 
-  --   LogManager.info(scene.playerReel:getResults())
+  IncrementTurn        = Button:new("Increment Turn", 8, 48, function()
+    initiative:advanceInitiative()
+  end)
+  DecrementTurn        = Button:new("Decrement Turn", 8, 68, function()
+    initiative:reverseInitiative()
+  end)
+  IncrementPhase       = Button:new("Increment Phase", 8, 96, function()
+    initiative:advancePhase()
+  end)
+  DecrementPhase       = Button:new("Decrement Phase", 8, 114, function()
+    initiative:reversePhase()
+  end)
+  local green          = hexToRGBA('#37946E')
+  local darkgreen      = hexToRGBA('#277052')
+  local white          = hexToRGBA('#ffffff')
 
-  --   for _, symbol in pairs(scene.playerReel:getResults()) do
-  --     local isCrit = symbol:roll('crit')
-  --     local baseDamage = symbol:roll('damage')
-  --     local totalDamage = baseDamage
-  --     if isCrit then
-  --       totalDamage = baseDamage * 1.3
-  --     end
-
-  --     LogManager.info(string.format("Symbols: %s crit: %s basedmg: %d total: %f", symbol.name, isCrit, baseDamage,
-  --       totalDamage))
-  --   end
-  -- end)
-  -- HeroButton:size('md')
-  -- HeroButton:modify({
-  --   keybind = 'r',
-  --   bg = Colors.primary,
-  --   hoverBg = Colors.secondary,
-  --   color = Colors.background,
-  --   hoverColor = Colors.text
-  -- })
+  IncrementTurn:set('width', 160)
+  IncrementTurn:modify({ bg = green, hoverBg = darkgreen, hoverColor = white })
+  DecrementTurn:set('width', 160)
+  IncrementPhase:set('width', 160)
+  IncrementPhase:modify({ bg = green, hoverBg = darkgreen, hoverColor = white })
+  DecrementPhase:set('width', 160)
 end
 
 -- Scene updates loop
 function scene.update(dt)
-  scene.lair:update(dt)
-  -- HeroButton:update(dt)
-  -- GameState.lair:update(dt)
-  GameState.hero:update(dt)
-  if scene.lair and scene.lair.generatedEnemies then
-    for _, v in pairs(scene.lair.generatedEnemies) do
+  IncrementTurn:update(dt)
+  DecrementTurn:update(dt)
+  IncrementPhase:update(dt)
+  DecrementPhase:update(dt)
+  GameState.lair:update(dt)
+  if EntityManager.registry then
+    for _, v in pairs(EntityManager.registry) do
       v:update(dt)
     end
   end
@@ -82,16 +81,17 @@ end
 
 -- Scene draw loop
 function scene.draw()
-  scene.lair:draw()
+  GameState.lair:draw()
   GameState:draw()
-  -- GameState.lair:draw()
-  GameState.hero:draw()
-  -- HeroButton:draw()
-  if scene.lair and scene.lair.generatedEnemies then
-    for _, v in pairs(scene.lair.generatedEnemies) do
+  if EntityManager.registry then
+    for _, v in pairs(EntityManager.registry) do
       v:draw()
     end
   end
+  IncrementTurn:draw()
+  DecrementTurn:draw()
+  IncrementPhase:draw()
+  DecrementPhase:draw()
 end
 
 return scene
