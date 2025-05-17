@@ -1,3 +1,4 @@
+local hexToRGBA = require "utils.hexToRGBA"
 local cur = SceneManager.current
 local scene = {}
 scene.zsort = 100000
@@ -6,6 +7,9 @@ scene.overlay_image = nil
 scene.activeModifers = {}
 
 local grid_overlay_image = love.graphics.newImage("assets/images/grid_overlay.png")
+local debugCursorHeight = 31
+local debugCursorImageData = love.image.newImageData("assets/images/cursor_debug.png")
+local debugCursor = love.mouse.newCursor(debugCursorImageData, 15, 15)
 
 
 -- Stacking Scene Manager can be used to call a scenes modify function.
@@ -108,6 +112,7 @@ function scene.update(dt)
   end
 
   if love.keyboard.isDown('escape') then
+    love.mouse.setCursor(DefaultCursor)
     if not scene.hasPanel then
       scene.activeModifers = {}
       scene.drawOverlay = false
@@ -156,6 +161,10 @@ ACTOR: %s
       actor.stats.spinTokens or 0
     )
   end
+
+  if scene.activeModifers['m'] or scene.activeModifers['g'] then
+    love.mouse.setCursor(debugCursor)
+  end
 end
 
 -- Scene draw loop
@@ -176,40 +185,55 @@ function scene.draw()
         panel.width - panel.padding * 2, "left")
     end
 
-    if scene.activeModifers['m'] ~= nil then
+    if scene.activeModifers['m'] or scene.activeModifers['g'] then
+      -- viewport and mouse measurements
       local mx, my = ViewportManager:getMousePosition()
       local w, h = ViewportManager:getDimensions()
-      -- Set the width and height for the mouse coordinate display box
-      local m_width, m_height = 48, 15
 
-      local adjusted_mx = mx
-      local adjusted_my = my
+      -- Set the width and height for the mouse coordinate display box
+      local d_w, d_h = 48, 15
+      local d_w_center, d_y_center = math.floor(d_w / 2), math.floor(d_h / 2)
+      local d_letter_ox, d_letter_oy = 0, 4
+      local half_cursor = debugCursorHeight / 2
+
+      -- default positions for the display,
+      local adjusted_mx = mx - d_w_center
+      local adjusted_my = my - d_y_center + half_cursor
+
+      local d_y_bottom = my + d_h / 2 + half_cursor
+
+      local distance_from_edge = 8
 
       -- If the box would go off the right edge, shift it left
-      if mx + m_width >= w then
-        adjusted_mx = mx - m_width
+      if mx + distance_from_edge + d_w_center >= w then
+        adjusted_mx = w - d_w - distance_from_edge
+      end
+
+      -- If the box would go off the left edge, shift it right
+      if mx - distance_from_edge - d_w_center <= 0 then
+        adjusted_mx = distance_from_edge
       end
 
       -- If the box would go off the bottom edge, shift it up
-      if my + m_height * 2 >= h then
-        adjusted_my = my - m_height * 3
+      if d_y_bottom >= h - distance_from_edge then
+        adjusted_my = my - d_h - half_cursor / 2
       end
 
       -- If the mouse is below the viewport, clamp the box to the bottom
       if my > h then
-        adjusted_my = h - m_height * 3
+        adjusted_my = h - distance_from_edge - d_h -- THis pins to the bottom.
       end
 
       -- If the mouse is above the viewport, clamp the box to the top
       if my < 0 then
-        adjusted_my = 0
+        adjusted_my = distance_from_edge
       end
 
       love.graphics.setColor(1, 1, 1, 0.80)
-      love.graphics.rectangle("fill", adjusted_mx, adjusted_my + m_height, m_width, m_height, 3, 3)
+      love.graphics.rectangle("fill", adjusted_mx, adjusted_my, d_w, d_h, 3, 3)
       love.graphics.setColor(0, 0, 0, 1)
-      love.graphics.rectangle("line", adjusted_mx, adjusted_my + m_height, m_width, m_height, 3, 3)
-      love.graphics.printf(string.format("%d, %d", mx, my), adjusted_mx, adjusted_my + m_height + 4, m_width, "center")
+      love.graphics.rectangle("line", adjusted_mx, adjusted_my, d_w, d_h, 3, 3)
+      love.graphics.printf(string.format("%d, %d", mx, my), adjusted_mx, adjusted_my + d_letter_oy, d_w, "center")
     end
   end
 end

@@ -37,6 +37,8 @@ Symbol          = require "src.entities.Symbol"
 
 
 local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
+local cursorImageData = love.image.newImageData("assets/images/cursor.png")
+DefaultCursor = love.mouse.newCursor(cursorImageData, 0, 0)
 
 -------------------------------------
 ---              LOAD             ---
@@ -44,9 +46,7 @@ local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
 function love.load()
   LogManager.startSession()
   LogManager.info("%s ⌛ Game loading...", sceneLabel)
-  local cursorImageData = love.image.newImageData("assets/images/cursor.png")
-  local customCursor = love.mouse.newCursor(cursorImageData, 0, 0)
-  love.mouse.setCursor(customCursor)
+  love.mouse.setCursor(DefaultCursor)
 
 
   ViewportManager:load()

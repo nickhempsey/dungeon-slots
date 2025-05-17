@@ -14,16 +14,18 @@ return {
       initiative = 4,
     }
   end,
-  symbols     = {
-    "defense",
-    "heal",
-    "magic",
-    "melee",
-    "mobility",
-    "potion",
-    "ranged",
-    "wild"
-  },
+  baseSymbols = function()
+    return {
+      "defense",
+      "heal",
+      "magic",
+      "melee",
+      "mobility",
+      "potion",
+      "ranged",
+      "wild"
+    }
+  end,
   abilities   = {
     "quick_slash",
     "taunt",

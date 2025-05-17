@@ -4,7 +4,8 @@
 1. Resolve Status Effects Phase
 	1. Negative effects first
 	2. Positives next
-2. Roll Phase
+2.  Management Phase
+3. Roll Phase
 	1. Roll up to as many coins as you have available
 	2. You roll for symbols that can be used to charge up abilities
 		1. Melee - (Swords) charge melee attacks
@@ -16,7 +17,7 @@
 		7. Mobility - (Boots) charge mobility abilities
 		8. Wild or specials per character? 
 	3. These symbols will go into a symbol bank or something similar that you can use in your main phase. This bank might have a limited size that you can increase as a prestige upgrade?
-3. Main Phase
+4. Main Phase
 	1. Target an enemy/creature
 	2. Use your symbols on unlocked abilities to do damage/stun/heal
 		1. Each ability will have specific requirements for example:
@@ -49,7 +50,7 @@
 			3. An enemies ability
 		2. Collect XP
 		3. Collect Currencies
-4. Upgrade phase
+5. Management phase
 		1. Collect currencies earned from the round. 
 		2. Use (some currency) to upgrade:
 			1. More reels (expensive)
@@ -58,7 +59,7 @@
 				1. Sword 1 -> Sword 2
 				2. Heart 2 -> Heart 3
 				3. etc
-5. End Turn
+6. End Turn
 
 
 ## Enemy turns

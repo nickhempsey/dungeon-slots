@@ -14,10 +14,10 @@ function love.conf(t)
   t.window.fullscreen = true
 
   -- Dev only adjusments
-  -- if isDevelopment then
-  --   t.window.x = 200
-  --   t.window.y = 200
-  --   t.window.display = 1
-  --   t.console = false
-  -- end
+  if isDevelopment then
+    --t.window.x = 200
+    --t.window.y = 200
+    t.window.display = 2
+    t.console = false
+  end
 end

@@ -1,7 +1,7 @@
 return {
   id = "slotomancer",
   name = "Slotomancer",
-  stats = {
+  baseStats = {
     health = 30,
     attack = 5,
     defense = 2,

@@ -1,4 +1,4 @@
-local function distance(point1, point2)
+return function(point1, point2)
   local px, py, dist
   px = math.abs(point1.x - point2.x)
   py = math.abs(point1.y - point2.y)
@@ -6,5 +6,3 @@ local function distance(point1, point2)
 
   return dist
 end
-
-return distance

@@ -12,7 +12,12 @@
 		{"id":"4e09196ba1434f9d","type":"text","text":"ManifestManager gets all of their data and passes that to:","x":-242,"y":180,"width":250,"height":81},
 		{"id":"976ebf24e0ef3fbd","type":"text","text":"EntityManager, incremented ids","x":-243,"y":300,"width":250,"height":70},
 		{"id":"2c9c4302be706ae8","type":"text","text":"set id references to GameState","x":-243,"y":400,"width":250,"height":60},
-		{"id":"513d4b7acf45e4fd","type":"text","text":"Loads to figure out around procedural map and lair generation.","x":-680,"y":-80,"width":250,"height":100,"color":"1"}
+		{"id":"513d4b7acf45e4fd","type":"text","text":"Loads to figure out around procedural map and lair generation.","x":-680,"y":-80,"width":250,"height":100,"color":"1"},
+		{"id":"af917b82ec0568e5","x":266,"y":-260,"width":250,"height":60,"type":"text","text":"Rounds"},
+		{"id":"546250484ac59009","x":271,"y":-160,"width":250,"height":60,"type":"text","text":"Turns\n"},
+		{"id":"b56164adebcbb0c6","x":277,"y":-67,"width":250,"height":60,"type":"text","text":"Phases\n"},
+		{"id":"2938634cc6ef7eaa","x":273,"y":32,"width":250,"height":60,"type":"text","text":"Actions"},
+		{"id":"e8a0f004067a70d1","x":260,"y":-377,"width":250,"height":60,"type":"text","text":"Room\n"}
 	],
 	"edges":[
 		{"id":"018a66553ee43d68","fromNode":"367d86483b0f0d17","fromSide":"bottom","toNode":"c4c9555de6c97a45","toSide":"top"},
@@ -28,6 +33,12 @@
 		{"id":"1d28a999b6aef91b","fromNode":"7e4db5f29b6557b8","fromSide":"bottom","toNode":"367d86483b0f0d17","toSide":"top"},
 		{"id":"98d9ca1ef51c6632","fromNode":"4e09196ba1434f9d","fromSide":"bottom","toNode":"976ebf24e0ef3fbd","toSide":"top"},
 		{"id":"efb3baf4424235cd","fromNode":"513d4b7acf45e4fd","fromSide":"right","toNode":"c4c9555de6c97a45","toSide":"left"},
-		{"id":"ee3117e31592a835","fromNode":"513d4b7acf45e4fd","fromSide":"right","toNode":"ecd11feb19e4277e","toSide":"left"}
+		{"id":"ee3117e31592a835","fromNode":"513d4b7acf45e4fd","fromSide":"right","toNode":"ecd11feb19e4277e","toSide":"left"},
+		{"id":"263f54f25476afcb","fromNode":"e8a0f004067a70d1","fromSide":"bottom","toNode":"af917b82ec0568e5","toSide":"top"},
+		{"id":"e5f0237a8ce9a60a","fromNode":"af917b82ec0568e5","fromSide":"bottom","toNode":"546250484ac59009","toSide":"top"},
+		{"id":"18744dfaae01da4f","fromNode":"546250484ac59009","fromSide":"bottom","toNode":"b56164adebcbb0c6","toSide":"top"},
+		{"id":"f7c5061961b5d4c9","fromNode":"b56164adebcbb0c6","fromSide":"bottom","toNode":"2938634cc6ef7eaa","toSide":"top"},
+		{"id":"832d2952021b4eb5","fromNode":"2938634cc6ef7eaa","fromSide":"left","toNode":"546250484ac59009","toSide":"left"},
+		{"id":"3909951e2af625ce","fromNode":"2938634cc6ef7eaa","fromSide":"left","toNode":"af917b82ec0568e5","toSide":"left"}
 	]
 }
