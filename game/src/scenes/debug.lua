@@ -31,27 +31,6 @@ end
 
 scene.modes = {
   {
-    modifier = 'a',
-    id = 'refresh_all',
-    mode = 'Some future Debug panel',
-    description = 'Refresh the current scene',
-    content =
-    'In sunt officia ex.\n\nSint Lorem qui minim elit laborum ipsum voluptate veniam id. Aliquip id ex labore magna veniam velit mollit exercitation aute cupidatat fugiat magna. Tempor non mollit esse voluptate quis pariatur. Elit consequat amet aliqua irure magna consequat ex ut cillum cupidatat non. Voluptate eiusmod nostrud velit consequat.\n\nCommodo ipsum amet ad amet ut nulla ad sint id eiusmod Lorem irure mollit. Deserunt ipsum esse qui laborum dolor Lorem sunt Lorem magna tempor veniam consequat proident est laborum. Ex eu in consectetur cillum exercitation Lorem veniam minim. Dolor id ex deserunt tempor duis in fugiat. Aliqua sint ut id anim veniam culpa do deserunt aliquip do anim nulla. Duis veniam magna eu elit quis aliquip. Ea tempor sit exercitation id nulla ad laborum consectetur do in. Anim officia aliquip amet excepteur voluptate mollit enim eu occaecat magna eiusmod veniam.',
-    visible = true,
-    callback = nil,
-    hasPanel = true
-  },
-  {
-    modifier = 'b',
-    id = 'something_else',
-    mode = 'A different debug panel',
-    description = 'Does something else?',
-    content = 'Velit qui aliqua culpa Lorem non velit tempor.',
-    callback = nil,
-    visible = true,
-    hasPanel = true
-  },
-  {
     modifier = 'c',
     id = 'combat',
     mode = 'Combat Debug',
@@ -81,8 +60,8 @@ scene.modes = {
   {
     modifier = 'm',
     id = 'mouse',
-    mode = 'Mouse Position',
-    description = '',
+    mode = '',
+    description = 'Mouse Position',
     content = '',
     callback = nil,
     visible = true,
@@ -150,23 +129,31 @@ function scene.update(dt)
     scene.content = string.format([[
 CURRENT:
   ROUND: %s
-  TURN: %s - %d
-  PHASE: %s
-    NextPhase: %s
+  CURR PHASE: %s
+  NEXT PHASE: %s
 
-ACTOR:
+ACTOR: %s
+  ID: %d
   HP: %d
   INIT: %d
   DEF: %d
+  XP: %d
+  GOLD: %d
+  GEM: %d
+  TOKEN: %d
 ]],
       GameState.initiative.round,
-      actor.name,
-      actor.uid,
       actor.phaseState.id,
       actor.phaseState.next,
-      actor.stats.health,
-      actor.stats.rolledInitiative,
-      actor.stats.defense
+      actor.name,
+      actor.uid,
+      actor.stats.health or 0,
+      actor.stats.rolledInitiative or 0,
+      actor.stats.defense or 0,
+      actor.stats.xpAmount or 0,
+      actor.stats.gold or 0,
+      actor.stats.gems or 0,
+      actor.stats.spinTokens or 0
     )
   end
 end

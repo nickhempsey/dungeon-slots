@@ -36,11 +36,11 @@ end
 function EntityManager.unregister(uid)
     local entity = EntityManager.get(uid)
 
-    if entity.dead and entity.animationsComplete then
-        EntityManager.registry[uid] = nil
-        return true
-    end
-    return false
+    -- if entity.dead and entity.animationsComplete then
+    EntityManager.registry[uid] = nil
+    return true
+    -- end
+    -- return false
 end
 
 -- Lookup by ID

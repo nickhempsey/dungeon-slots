@@ -49,6 +49,7 @@ function Lair:setStage()
 
     local midX = ViewportManager:getMidScreen()
     GameState.hero:modify({ x = midX - 64, y = self.floorLevel })
+    GameState.hero.currentAnimation:setTag('idle')
 
     if self.generatedEnemies then
         self.stageSet = true

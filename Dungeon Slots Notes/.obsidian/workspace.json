@@ -11,17 +11,24 @@
             "id": "20c7759ee9a7fcb2",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "+ Combat/Combat setup sequence.canvas",
-                "viewState": {
-                  "x": 27.591522799441915,
-                  "y": -191.72570970894213,
-                  "zoom": 0
+                "file": "+ Combat/Combat Overview.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
                 }
               },
-              "icon": "lucide-layout-dashboard",
-              "title": "Combat setup sequence"
+              "icon": "lucide-file",
+              "title": "Combat Overview"
             }
           }
         ]
@@ -174,8 +181,8 @@
   },
   "active": "20c7759ee9a7fcb2",
   "lastOpenFiles": [
-    "+ Combat/Combat Overview.md",
     "+ Combat/Combat setup sequence.canvas",
+    "+ Combat/Combat Overview.md",
     "+ Combat",
     "Roadmap/0.0.3 Combat System.md",
     "Technical Notes/+ Technical Style Guide.md",
