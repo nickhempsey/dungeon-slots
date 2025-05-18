@@ -11,9 +11,9 @@ return {
   --- oy = 'floor' | 'bottom' | 'center' | 'top' | number
   baseStats = function()
     return {
-      health = love.math.random(5, 15),
-      attack = love.math.random(1, 3),
-      defense = love.math.random(5, 10),
+      health     = love.math.random(5, 15),
+      attack     = love.math.random(1, 3),  -- additional modifers
+      defense    = love.math.random(5, 10), -- addtional mitigation / shield
       initiative = love.math.random(3, 5),
     }
   end,

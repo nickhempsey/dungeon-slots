@@ -27,6 +27,7 @@ kanban-plugin: board
 - [ ] Research the current third party modules and make sure there aren't active dev replacements before refactoring.
 - [ ] Ensure variables follow the guidelines
 - [ ] Ensure functions follow the guidelines
+- [ ] Tooltips are using floats but the mouse is using fixed integers so tooltips read off by one in some cases.
 
 
 

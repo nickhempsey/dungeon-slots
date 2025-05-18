@@ -22,7 +22,7 @@ end
 -- this function is to initialize variables. Though they can also be
 -- initialized outside of the load function for persistent state.
 function scene.load()
-  local lairId   = "tutorial_lair"
+  local lairId   = "vault"
   local lair     = Lair:new(lairId)
   GameState.lair = lair
 
@@ -70,7 +70,6 @@ function scene.load()
         EntityManager.unregister(v.uid)
       end
     end
-    lairId = "tutorial_lair"
     local newlair = Lair:new(lairId)
     GameState.lair = newlair
     GameState.lair:setStage()

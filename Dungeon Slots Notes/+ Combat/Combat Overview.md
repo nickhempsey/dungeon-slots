@@ -4,10 +4,13 @@
 1. Resolve Status Effects Phase
 	1. Negative effects first
 	2. Positives next
-2.  Management Phase
+2. Reel Management Phase
 3. Roll Phase
 	1. Roll up to as many coins as you have available
-	2. You roll for symbols that can be used to charge up abilities
+	2. An ante mechanic will increase the cost of each spin every x rounds
+		1. There will be a currency that allows you to reduce the ante. 
+		2. I don't love the name ante, it's a little too Balatro. 
+	3. You roll for symbols that can be used to charge up abilities
 		1. Melee - (Swords) charge melee attacks
 		2. Ranged - (Arrow) charge range attacks
 		3. Defense - (Shield) charge defense abilities
@@ -16,9 +19,20 @@
 		6. Potion - (Potion) charge status effects
 		7. Mobility - (Boots) charge mobility abilities
 		8. Wild or specials per character? 
-	3. These symbols will go into a symbol bank or something similar that you can use in your main phase. This bank might have a limited size that you can increase as a prestige upgrade?
+	4. These symbols will go into a symbol bank or something similar that you can use in your main phase. 
+		1. This bank might have a limited size that you can increase
+			1. Increase as 
+				1. prestige
+				2. run currency
+				3. A game mode
+	5. Symbol weighting will be based on the number of each of symbol in the reel. 
+		1. You can only earn as many symbols as you have in your reel.
+			1. REEL: 3 melee, 2, ranged, 1 defense, 2 heal
+			2. ROLL could yield max: 3 melee, 2 ranged, 1 defense, 2 heal. 
 4. Main Phase
-	1. Target an enemy/creature
+	1. Target an actor
+		1. Enemy
+		2. Hero
 	2. Use your symbols on unlocked abilities to do damage/stun/heal
 		1. Each ability will have specific requirements for example:
 			1. Dash and Slash
@@ -49,8 +63,10 @@
 			2. One of their Symbols
 			3. An enemies ability
 		2. Collect XP
+			1. Player - TODO: Need to map out progression path
+			2. Hero - Affinity (AFK Journey)
 		3. Collect Currencies
-5. Management phase
+5. Ability Management phase
 		1. Collect currencies earned from the round. 
 		2. Use (some currency) to upgrade:
 			1. More reels (expensive)

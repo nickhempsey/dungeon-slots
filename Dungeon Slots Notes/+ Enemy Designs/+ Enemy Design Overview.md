@@ -14,13 +14,13 @@ Below are some starting points for enemy characters.
 
 ## **Mid-Tier Enemies (After First Boss)**
 
-|Name|Description|Abilities|
-|---|---|---|
-|**Dice Golem**|Giant dice monster. Rolls itself to trigger random effects.|Hits harder the higher it rolls.|
-|**Audit Slime**|A living tax form. Literally.|Debuffs your reel (locks one slot next spin).|
-|**Regulation Rat**|Rat in a tiny business suit. Bureaucratic little menace.|"Inspects" you, lowering your defense.|
-|**Lucky Rabbit**|Mutant rabbit with too many lucky feet.|Dodges attacks easily unless stunned.|
-|**Jackpot Jelly**|Gelatinous blob full of glittering coins.|Explodes into buffs or traps when defeated.|
+| Name               | Description                                                               | Abilities                                     |
+| ------------------ | ----------------------------------------------------------------------- | --------------------------------------------- |
+| **Dice Golem**     | Giant dice monster. Rolls itself to trigger random effe                   | Hits harder the higher it rolls.              |
+| **Audit Slime**    | A living tax form. Lite                                                   | Debuffs your reel (locks one slot next spin). |
+| **Regulation A BureaucRat. Rat in a tiny business suit. Bureaucratic little menace.  ce.  ce.  | "Inspects" you, lowering your defense.        |
+| **Lucky Rabbit**   | Mutant rabbit with too many l                                             | Dodges attacks easily unless stunned.         |
+| **Jackpot Jelly**  | Gelatinous blob full of glitt                                             | Explodes into buffs or traps when defeated.   |
 
 ---
 

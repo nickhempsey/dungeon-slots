@@ -176,27 +176,27 @@ function Tooltip:draw()
     FontsManager:setFontBMP('sm', 'Medium')
     love.graphics.setColor(hexToRGBA(unpack(self.color)))
     --[[
-        local debugText = string.format([[
-            %s
-            x: %d   y: %d
-            ox: %d  oy: %d
-            ax: %d  ay: %d
-            w: %d   h: %d
-            cw: %d  ch: %d
-            ]]
+    local debugText = string.format([[
+%s
+x: %d   y: %d
+ox: %d  oy: %d
+ax: %d  ay: %d
+w: %d   h: %d
+cw: %d  ch: %d
+]]
     --[[, -- remove the comment and keep the comma
-            self.content,
-            self.x,
-            self.y,
-            self.ox,
-            self.oy,
-            self.adjusted_x,
-            self.adjusted_y,
-            self.w,
-            self.h,
-            self.cursor_w,
-            self.cursor_h)
-    ---]]
+        self.content,
+        self.x,
+        self.y,
+        self.ox,
+        self.oy,
+        self.adjusted_x,
+        self.adjusted_y,
+        self.w,
+        self.h,
+        self.cursor_w,
+        self.cursor_h)
+--]]
     love.graphics.printf(self.content,
         math.floor(self.adjusted_x + self.content_ox),
         math.floor(self.adjusted_y + self.content_oy),

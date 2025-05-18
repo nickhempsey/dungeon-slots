@@ -8,6 +8,7 @@ kanban-plugin: board
 
 **Complete**
 - [x] [[0.0.1 Project Setup]]
+- [x] [[0.0.2 Manifest and Asset Manager]]
 
 
 ## Testing
@@ -16,7 +17,7 @@ kanban-plugin: board
 
 ## Development
 
-- [ ] [[0.0.2 Manifest and Asset Manager]]
+- [ ] [[0.0.3 Combat System]]
 - [ ] [[Rough Art Direction]]
 
 
@@ -26,7 +27,6 @@ kanban-plugin: board
 
 ## In Queue
 
-- [ ] [[0.0.3 Combat System]]
 - [ ] [[0.0.4 Dungeon & Node Map Generation]]
 - [ ] [[0.0.5 Mystery Room System]]
 - [ ] [[0.0.6 Class System]]
