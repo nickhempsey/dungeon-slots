@@ -1,14 +1,18 @@
+local tableMerge = require "utils.tableMerge"
+
 local InitiativeState = {}
 InitiativeState.__index = InitiativeState
 
 function InitiativeState:new(savedState)
     local instance = savedState or {
-        order = {},
-        prev = nil,
-        next = nil,
-        curr = nil,
-        round = 0,
-        actor = 0,
+        actor       = 0,
+        order       = {},
+        prev        = nil,
+        next        = nil,
+        curr        = nil,
+        round       = 0,
+        prevRound   = 0,
+        roundChange = false,
     }
 
     setmetatable(instance, InitiativeState)
@@ -64,19 +68,23 @@ end
 --- @sideeffect Modifies self.prev, self.curr, self.next, self.round.
 function InitiativeState:increment()
     if self.curr == nil then
-        self.prev  = #self.order
-        self.curr  = 1
-        self.next  = 2
-        self.round = 0
+        self.prev        = #self.order
+        self.curr        = 1
+        self.next        = 2
+        self.round       = 0
+        self.roundChange = true
     elseif self.curr == #self.order then
-        self.prev  = #self.order
-        self.curr  = 1
-        self.next  = 2
-        self.round = self.round + 1
+        self.prev        = #self.order
+        self.curr        = 1
+        self.next        = 2
+        self.prevRound   = self.round
+        self.round       = self.round + 1
+        self.roundChange = true
     else
         self.prev = self.prev + 1
         self.curr = self.curr + 1
         self.next = self.next + 1
+        self.roundChange = false
     end
 
     if self.debug then
@@ -142,38 +150,22 @@ function InitiativeState:advanceInitiative()
     assert(#self.order > 0,
         "InitiativeState:getActorForCurrent: 'order' does not have items")
 
-    if self.curr ~= nil then
-        -- Set the entitiies turn to false.
-        self.actor.isTurn = false
-        self.actor.currentAnimation:setTag('idle')
-    end
-
     -- Setup the next actor
     self:increment()
     self.actor = self:getActorForCurrent()
-    self.actor.isTurn = true
-    local newPhase = PhaseState:new(PhaseState.types.RESOLVE_STATUS)
-    self.actor.phaseState = newPhase
-    self.actor.currentAnimation:setTag('attack')
+
+    self:publishEvents()
 end
 
 function InitiativeState:reverseInitiative()
     assert(#self.order > 0,
         "InitiativeState:getActorForCurrent: 'order' does not have items")
 
-    if self.curr ~= nil then
-        -- Set the entitiies turn to false.
-        self.actor.isTurn = false
-        self.actor.currentAnimation:setTag('idle')
-    end
-
     -- Setup the next actor
     self:decrement()
     self.actor = self:getActorForCurrent()
-    self.actor.isTurn = true
-    local newPhase = PhaseState:new(PhaseState.types.RESOLVE_STATUS)
-    self.actor.phaseState = newPhase
-    self.actor.currentAnimation:setTag('attack')
+
+    self:publishEvents()
 end
 
 function InitiativeState:advancePhase()
@@ -187,6 +179,26 @@ function InitiativeState:reversePhase()
     local newPhase = self.actor.phaseState:decrement()
     if newPhase then
         self.actor.phaseState = newPhase
+    end
+end
+
+function InitiativeState:publishEvents(eventId)
+    local data = {
+        roundChange = self.roundChange,
+        prevRound = self.prevRound,
+        round = self.round,
+        prev = self.prev,
+        next = self.next,
+        curr = self.curr,
+        actor = {
+            id = self.actor.id,
+            uid = self.actor.uid,
+        }
+    }
+
+    EventBusManager:publish('initiative_change_turn', data)
+    if self.roundChange then
+        EventBusManager:publish('initiative_change_round', data)
     end
 end
 

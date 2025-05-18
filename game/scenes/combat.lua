@@ -25,13 +25,9 @@ function scene.load()
   local lairId   = "vault"
   local lair     = Lair:new(lairId)
   GameState.lair = lair
+  GameState.lair:setStage()
 
-  if lair then
-    LogManager.info(lair)
-    GameState.lair:setStage()
-
-    assert(lair.stageSet, string.format('The stage %s failed to set properly.', lairId))
-  end
+  EntityManager.load()
 
   local initiative = InitiativeState:new()
   GameState.initiative = initiative

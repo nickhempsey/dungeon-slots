@@ -2,40 +2,42 @@
 if arg[#arg] == "vsc_debug" then require("lldebugger").start() end
 if love.filesystem then io.stdout:setvbuf("no") end
 Debug           = true
-LogManagerColor = require "lib.LogManagerColor"
-LogManager      = require "lib.LogManager"
+LogManagerColor = require "engine.LogManagerColor"
+LogManager      = require "engine.LogManager"
 
 -- Utils
 Tween           = require "utils.tween"
 
 -- Components
-Button          = require "src.components.Button"
-Tooltip         = require "src.components.Tooltip"
+Button          = require "components.Button"
+Tooltip         = require "components.Tooltip"
 
--- Libraries
-ColorsManager   = require "lib.ColorsManager"
-EntityManager   = require "lib.EntityManager"
-EventBusManager = require "lib.EventBusManager"
-FontsManager    = require "lib.FontsManager"
-InputManager    = require "lib.InputManager"
-ManifestManager = require "lib.ManifestManager"
-SceneManager    = require "lib.SceneManager".newManager()
-ViewportManager = require "lib.ViewportManager"
-TooltipManager  = require "lib.TooltipManager"
+-- Engine
+ColorsManager   = require "engine.ColorsManager"
+EntityManager   = require "engine.EntityManager"
+EventBusManager = require "engine.EventBusManager"
+FontsManager    = require "engine.FontsManager"
+InputManager    = require "engine.InputManager"
+ManifestManager = require "engine.ManifestManager"
+SceneManager    = require "engine.SceneManager".newManager()
+ViewportManager = require "engine.ViewportManager"
+TooltipManager  = require "engine.TooltipManager"
 
--- GameState and Entities are always loaded
-Actor           = require "src.entities.Actor"
-Bank            = require "src.entities.Bank"
-Enemy           = require "src.entities.Enemy"
-GameState       = require "src.entities.GameState"
-Hero            = require "src.entities.Hero"
-Lair            = require "src.entities.Lair"
-LootTable       = require "src.entities.LootTable"
-PhaseState      = require "src.entities.PhaseState"
-Reel            = require "src.entities.Reel"
-InitiativeState = require "src.entities.InitiativeState"
-StatusEffect    = require "src.entities.StatusEffect"
-Symbol          = require "src.entities.Symbol"
+-- State
+GameState       = require "state.GameState"
+InitiativeState = require "state.InitiativeState"
+PhaseState      = require "state.PhaseState"
+
+-- Entities
+Actor           = require "entities.Actor"
+Bank            = require "entities.Bank"
+Enemy           = require "entities.Enemy"
+Hero            = require "entities.Hero"
+Lair            = require "entities.Lair"
+LootTable       = require "entities.LootTable"
+Reel            = require "entities.Reel"
+StatusEffect    = require "entities.StatusEffect"
+Symbol          = require "entities.Symbol"
 
 
 local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
@@ -61,16 +63,6 @@ function love.load()
 
   GameState:load()
   GameState.resetRNG()
-
-
-  -- Tooltip:new('Right Bottom', 'left', 100, 76, 'right', 'bottom', -4)
-  -- Tooltip:new('Left Bottom', 'left', 100, 76, 'left', 'bottom', -4)
-  -- Tooltip:new('Right Top', 'left', 100, 76, 'right', 'top', -4)
-  -- Tooltip:new('Left Top', 'left', 100, 76, 'left', 'top', -4)
-  -- Tooltip:new('Center Bottom', 'left', 100, 76, 'center', 'bottom')
-  -- Tooltip:new('Center Top', 'left', 100, 76, 'center', 'top')
-  -- Tooltip:new('Right Center', 'left', 100, 76, 'right', 'center')
-  -- Tooltip:new('Left Center', 'left', 100, 76, 'left', 'center')
 
   LogManager.info("%s ✅ Game loaded!", sceneLabel)
 end

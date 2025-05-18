@@ -58,6 +58,16 @@ function EntityManager.getAll()
     return EntityManager.registry
 end
 
+function EntityManager.load()
+    if EntityManager.getAll() then
+        for _, v in pairs(EntityManager.getAll()) do
+            if v.load then
+                v:load()
+            end
+        end
+    end
+end
+
 function EntityManager.update(dt)
     if EntityManager.getAll() then
         for _, v in pairs(EntityManager.getAll()) do

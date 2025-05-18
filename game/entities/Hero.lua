@@ -15,7 +15,7 @@ function Hero:new(id)
   assert(hero, 'Hero failed to load')
 
   setmetatable(hero, Hero)
-
+  hero.uid      = 0
   hero.bank     = Bank:new()
   hero.currency = {
     gold       = 0,
@@ -33,9 +33,7 @@ function Hero:new(id)
   return hero
 end
 
--- Runs in love.load
-function Hero:load()
-  Hero:subscribeToEvents()
+function Hero:postLoad()
 end
 
 -- Runs in love.update
@@ -69,15 +67,6 @@ end
 function Hero:applyDamage(amount)
   local dmg = math.max(0, amount - self.stats.defense)
   self.stats.health = self.stats.health - dmg
-end
-
-function Hero:subscribeToEvents()
-  EventBusManager:subscribe('hero_take_damage',
-    function(amount)
-      Hero:applyDamage(amount)
-    end,
-    'Hero',
-    10)
 end
 
 return Hero

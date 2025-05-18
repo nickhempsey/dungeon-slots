@@ -50,10 +50,7 @@ function Lair:setStage()
     local midX = ViewportManager:getMidScreen()
     GameState.hero:modify({ x = midX - 64, y = self.floorLevel })
     GameState.hero.currentAnimation:setTag('idle')
-
-    if self.generatedEnemies then
-        self.stageSet = true
-    end
+    assert(self.generatedEnemies, string.format('The stage %s failed to set properly.', self.id))
 end
 
 function Lair:getGeneratedEnemies()

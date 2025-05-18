@@ -1,5 +1,5 @@
 -- LogManager.lua
-local LogManagerColor = require "lib.LogManagerColor"
+local LogManagerColor = require "engine.LogManagerColor"
 local getTimestamp = require "utils.getTimestamp"
 local serialize = require "utils.serialize"
 local unpack = require "utils.unpack"

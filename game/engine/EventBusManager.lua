@@ -1,25 +1,31 @@
-EventBusManager = {}
+local unpack = require "utils.unpack"
+
+local EventBusManager = {}
 
 EventBusManager.listeners = {}
 
 EventBusManager.debug = Debug
 EventBusManager.debugLabel = LogManagerColor.colorf('{magenta}[EventBusManager]{reset}')
 
--- Subscribe to an event
+--- Subscribe to an event
+---
 ---@param event string
 ---@param callback function
----@param owner string
+---@param owner table
 ---@param priority number
-function EventBusManager:subscribe(event, callback, owner, priority)
+---@param context table
+function EventBusManager:subscribe(event, callback, owner, priority, context)
   assert(type(event) == "string", "Function 'subscribe': first parameter must be a string.")
   assert(type(callback) == "function", "Function 'subscribe': second parameter must be a function.")
 
   if not self.listeners[event] then
     self.listeners[event] = {}
   end
+
   table.insert(self.listeners[event], {
     callback = callback,
-    owner = owner,
+    context  = context,
+    owner    = owner,
     priority = priority or 0
   })
 
@@ -34,7 +40,8 @@ function EventBusManager:subscribe(event, callback, owner, priority)
   end
 end
 
--- Subscribe to an event, but only once
+--- Subscribe to an event, but only once
+---
 ---@param event string
 ---@param callback function
 ---@param owner string
@@ -51,7 +58,8 @@ function EventBusManager:once(event, callback, owner, priority)
   self:subscribe(event, wrapper, owner, priority)
 end
 
--- Unsubscribe a specific callback from an event
+--- Unsubscribe a specific callback from an event
+---
 ---@param event string
 ---@param callback function
 function EventBusManager:unsubscribe(event, callback)
@@ -69,12 +77,13 @@ function EventBusManager:unsubscribe(event, callback)
   end
 end
 
--- Clear all listeners tied to an owner
+--- Clear all listeners tied to an owner
+---
 ---@param owner string
 function EventBusManager:clearByOwner(owner)
   assert(type(owner) == "string", "Function 'clearByOwner': parameter must be a string.")
 
-  for event, listeners in pairs(self.listeners) do
+  for _, listeners in pairs(self.listeners) do
     for i = #listeners, 1, -1 do
       if listeners[i].owner == owner then
         table.remove(listeners, i)
@@ -83,7 +92,8 @@ function EventBusManager:clearByOwner(owner)
   end
 end
 
--- Publish an event, calling all listeners
+--- Publish an event, calling all listeners
+---
 ---@param event string
 ---@param ... any
 function EventBusManager:publish(event, ...)
@@ -96,19 +106,22 @@ function EventBusManager:publish(event, ...)
     end
   end
 
-  if not self.listeners[event] then return end
+  if not self:hasListeners(event) then return end
 
-  -- Copy the list first to avoid issues if listeners unsubscribe during iteration
-  local listenersCopy = {}
-  for i, listener in ipairs(self.listeners[event]) do
-    listenersCopy[i] = listener
-  end
-  for _, listener in ipairs(listenersCopy) do
-    listener.callback(...)
+  local ls = self.listeners[event]
+  local copy = { unpack(ls) }
+
+  for _, listener in ipairs(copy) do
+    if listener.context then
+      listener.callback(listener.context, ...)
+    else
+      listener.callback(...)
+    end
   end
 end
 
--- Helper: Check if there are any listeners for an event
+--- Helper: Check if there are any listeners for an event
+---
 ---@param event string
 function EventBusManager:hasListeners(event)
   assert(type(event) == "string", "Function 'hasListeners': parameter must be a string.")
