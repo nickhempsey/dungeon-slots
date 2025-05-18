@@ -40,6 +40,7 @@ function scene.load()
   GameState.initiative:advanceInitiative()
 
 
+  -- TEMP START
   IncrementTurn   = Button:new("Increment Turn", 8, 48, function()
     GameState.initiative:advanceInitiative()
   end)
@@ -64,7 +65,7 @@ function scene.load()
   DecrementPhase:set('width', 160)
 
   RerollLair = Button:new("Reroll Lair", 8, 140, function()
-    for k, v in pairs(EntityManager.registry) do
+    for k, v in pairs(EntityManager.getAll()) do
       if k > 1 then
         EntityManager.unregister(v.uid)
       end
@@ -81,47 +82,35 @@ function scene.load()
     GameState.initiative:advanceInitiative()
   end)
   RerollLair:set('width', 160)
+  -- TEMP END
 end
 
 -- Scene updates loop
 function scene.update(dt)
+  GameState.lair:update(dt)
+  EntityManager.update(dt)
+
+  -- TEMP START
   IncrementTurn:update(dt)
   DecrementTurn:update(dt)
   IncrementPhase:update(dt)
   DecrementPhase:update(dt)
   RerollLair:update(dt)
-  GameState.lair:update(dt)
-  if EntityManager.registry then
-    for _, v in pairs(EntityManager.registry) do
-      v:update(dt)
-    end
-  end
+  -- TEMP END
 end
 
 -- Scene draw loop
 function scene.draw()
   GameState.lair:draw()
-  GameState:draw()
-  if EntityManager.getAll() then
-    for _, v in pairs(EntityManager.getAll()) do
-      v:draw()
-      love.graphics.setColor(hexToRGBA('#fff', 0.8))
-      love.graphics.rectangle("fill", v.x - 16, v.y + 5, 32, 15, 4, 4)
-      love.graphics.setColor(hexToRGBA('#000', 1))
-      love.graphics.rectangle("line", v.x - 16, v.y + 5, 32, 15, 4, 4)
-      FontsManager:setFontBMP('sm', 'Medium')
-      love.graphics.setColor(hexToRGBA('#000', 1))
-      love.graphics.printf(string.format("I: %s", v.stats.rolledInitiative), v.x - 16, v.y + 9, 32, "center")
+  EntityManager.draw()
 
-      -- reset tint for next sprite
-      love.graphics.setColor(1, 1, 1, 1)
-    end
-  end
+  -- TEMP START
   IncrementTurn:draw()
   DecrementTurn:draw()
   IncrementPhase:draw()
   DecrementPhase:draw()
   RerollLair:draw()
+  -- TEMP END
 end
 
 return scene

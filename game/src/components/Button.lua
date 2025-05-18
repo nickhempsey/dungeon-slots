@@ -4,15 +4,17 @@ Button = {}
 Button.__index = Button
 
 Button.debug = Debug
-Button.debugLabel = LogManagerColor.colorf('{green}[Button]{reset}')
+Button.debugLabel = LogManagerColor.colorf('{blue}[Button]{reset}')
 
 -- Creates a new button
 ---@param label string
 ---@param x number
 ---@param y number
----@param callback function
+---@param onClick function|nil
+---@param onHover function|nil
+---@param onBlur function|nil
 ---@return table
-function Button:new(label, x, y, callback)
+function Button:new(label, x, y, onClick, onHover, onBlur)
   -- Avaliable sizes
   local btnSizes   = {}
   btnSizes.sm      = { width = 80, height = 16 }
@@ -24,11 +26,16 @@ function Button:new(label, x, y, callback)
   btn.label        = label
   btn.x            = x
   btn.y            = y
-  btn.callback     = callback or function() end
+
   btn.width        = btnSizes.sm.width
   btn.height       = btnSizes.sm.height
+
   btn.fontSize     = 'sm'
   btn.font         = 'PressStart'
+
+  btn.onClick      = onClick or function() end
+  btn.onHover      = onHover or function() end
+  btn.onBlur       = onBlur or function() end
 
   btn.hover        = false
   btn.color        = hexToRGBA('#000000')
@@ -36,9 +43,12 @@ function Button:new(label, x, y, callback)
   btn.hoverColor   = hexToRGBA('#ffffff')
   btn.hoverBg      = hexToRGBA('#7E2553')
   btn.borderRadius = 4
+
   btn.mousebind    = 1
   btn.keybind      = nil
+
   btn.sound        = love.audio.newSource("assets/audio/button-click.wav", 'static')
+
   btn.btnSizes     = btnSizes
   return btn
 end
@@ -88,6 +98,12 @@ function Button:update(dt)
   local keypressed = self.keybind ~= nil and love.keyboard.isPressed(self.keybind)
   local mousepressed = self.mousebind ~= nil and love.mouse.isPressed(self.mousebind) and self.hover
 
+  if self.hover then
+    self.onHover(self)
+  else
+    self.onBlur(self)
+  end
+
   if keypressed or mousepressed then
     if self.debug then
       local activationType = keypressed and "keybind" or "mousebind"
@@ -96,8 +112,8 @@ function Button:update(dt)
         bindType))
     end
 
-    self:playsound()
-    self.callback()
+    -- self:playsound()
+    self.onClick(self)
   end
 end
 

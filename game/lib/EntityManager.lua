@@ -1,3 +1,5 @@
+local hexToRGBA          = require "utils.hexToRGBA"
+
 local EntityManager      = {}
 EntityManager.debug      = Debug
 EntityManager.debugLabel = LogManagerColor.colorf("{green}[EntityManager]{reset}")
@@ -54,6 +56,32 @@ end
 
 function EntityManager.getAll()
     return EntityManager.registry
+end
+
+function EntityManager.update(dt)
+    if EntityManager.getAll() then
+        for _, v in pairs(EntityManager.getAll()) do
+            v:update(dt)
+        end
+    end
+end
+
+function EntityManager.draw()
+    if EntityManager.getAll() then
+        for _, v in pairs(EntityManager.getAll()) do
+            v:draw()
+            love.graphics.setColor(hexToRGBA('#fff', 0.8))
+            love.graphics.rectangle("fill", v.x - 16, v.y + 5, 32, 15, 4, 4)
+            love.graphics.setColor(hexToRGBA('#000', 1))
+            love.graphics.rectangle("line", v.x - 16, v.y + 5, 32, 15, 4, 4)
+            FontsManager:setFontBMP('sm', 'Medium')
+            love.graphics.setColor(hexToRGBA('#000', 1))
+            love.graphics.printf(string.format("I: %s", v.stats.rolledInitiative), v.x - 16, v.y + 9, 32, "center")
+
+            -- reset tint for next sprite
+            love.graphics.setColor(1, 1, 1, 1)
+        end
+    end
 end
 
 return EntityManager

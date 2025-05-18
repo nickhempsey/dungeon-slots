@@ -10,6 +10,7 @@ Tween           = require "utils.tween"
 
 -- Components
 Button          = require "src.components.Button"
+Tooltip         = require "src.components.Tooltip"
 
 -- Libraries
 ColorsManager   = require "lib.ColorsManager"
@@ -20,6 +21,7 @@ InputManager    = require "lib.InputManager"
 ManifestManager = require "lib.ManifestManager"
 SceneManager    = require "lib.SceneManager".newManager()
 ViewportManager = require "lib.ViewportManager"
+TooltipManager  = require "lib.TooltipManager"
 
 -- GameState and Entities are always loaded
 Actor           = require "src.entities.Actor"
@@ -37,8 +39,9 @@ Symbol          = require "src.entities.Symbol"
 
 
 local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
-local cursorImageData = love.image.newImageData("assets/images/cursor.png")
-DefaultCursor = love.mouse.newCursor(cursorImageData, 0, 0)
+-- local cursorImageData = love.image.newImageData("assets/images/cursor.png")
+-- local debugImageData = love.image.newImageData("assets/images/cursor_debug.png")
+-- DefaultCursor = love.mouse.newCursor(debugImageData, CursorImage:getWidth() / 2, CursorImage:getWidth() / 2)
 
 -------------------------------------
 ---              LOAD             ---
@@ -46,7 +49,8 @@ DefaultCursor = love.mouse.newCursor(cursorImageData, 0, 0)
 function love.load()
   LogManager.startSession()
   LogManager.info("%s ⌛ Game loading...", sceneLabel)
-  love.mouse.setCursor(DefaultCursor)
+  -- Hide the system cursor
+  love.mouse.setVisible(false)
 
 
   ViewportManager:load()
@@ -57,6 +61,17 @@ function love.load()
 
   GameState:load()
   GameState.resetRNG()
+
+
+  -- table.insert(GameState.tooltips, Tooltip:new('Right Bottom', 'left', 'right', 'bottom', 100, 76, -4))
+  -- table.insert(GameState.tooltips, Tooltip:new('Left Bottom', 'left', 'left', 'bottom', 100, 76, -4))
+  -- table.insert(GameState.tooltips, Tooltip:new('Right Top', 'left', 'right', 'top', 100, 76, -4))
+  -- table.insert(GameState.tooltips, Tooltip:new('Left Top', 'left', 'left', 'top', 100, 76, -4))
+  -- table.insert(GameState.tooltips, Tooltip:new('Center Bottom', 'left', 'center', 'bottom', 100, 76))
+  -- table.insert(GameState.tooltips, Tooltip:new('Center Top', 'left', 'center', 'top', 100, 76))
+  -- table.insert(GameState.tooltips, Tooltip:new('Right Center', 'left', 'right', 'center', 100, 76))
+  -- table.insert(GameState.tooltips, Tooltip:new('Left Center', 'left', 'left', 'center', 100, 76))
+
   LogManager.info("%s ✅ Game loaded!", sceneLabel)
 end
 
@@ -68,6 +83,7 @@ function love.update(dt)
   SceneManager.update(dt)
   GameState:update(dt)
 
+  TooltipManager.update(dt)
   love.keyboard.resetInputStates()
 end
 
@@ -90,6 +106,7 @@ function love.draw()
   SceneManager.draw()
   GameState:draw()
 
+  TooltipManager.draw()
   -- Now draw the canvas to the real screen, scaled and centered
   ViewportManager:scaleCanvas()
 end
