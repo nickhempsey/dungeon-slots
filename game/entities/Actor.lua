@@ -27,14 +27,18 @@ function Actor:new(actorType, actorId)
         uid              = 0,
         x                = 0,
         y                = 0,
+
         ox               = 0,
         oy               = 0,
+
         actorType        = actorType,
+
         currentAnimation = nil,
         currentSprite    = nil,
-        phaseState       = {},
+
+        symbolBank       = Bank:new(),
         statusEffects    = {},
-        symbolBank       = {},
+        phaseState       = {},
         InitiativeState  = nil,
     }, manifest), self)
 
@@ -46,6 +50,12 @@ function Actor:new(actorType, actorId)
             "Actors must have a default 'idle' animation with a base idle animaton.")
         instance.currentAnimation = instance.assets.images.sprite.animations.factory('idle')
     end
+
+    -- handle symbol setup
+    if instance.baseSymbols then
+
+    end
+
 
     return instance
 end

@@ -1,7 +1,6 @@
 return {
   id = "mobility",
-  name = "Mobility Symbol",
-  effects = {},
+  qty = 1,
   assets = {
     images = {
       sprite = {

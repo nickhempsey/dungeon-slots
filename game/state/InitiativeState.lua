@@ -3,6 +3,9 @@ local tableMerge = require "utils.tableMerge"
 local InitiativeState = {}
 InitiativeState.__index = InitiativeState
 
+InitiativeState.debug = Debug
+InitiativeState.debugLabel = LogManagerColor.colorf('{yellow}[InitiativeState]{reset}')
+
 function InitiativeState:new(savedState)
     local instance = savedState or {
         actor       = 0,

@@ -76,6 +76,12 @@ function scene.load()
     -- temp tick forward to 0 eventually will check for loadmode first.
     GameState.initiative:advanceInitiative()
   end)
+  Spin = Button:new("Spin", 8, 160, function()
+    local reel = Reel:new(GameState.initiative.actor.symbols)
+    reel:spin()
+    local results = reel:getResults()
+    LogManager.info(results)
+  end)
   RerollLair:set('width', 160)
   -- TEMP END
 end
@@ -91,6 +97,7 @@ function scene.update(dt)
   IncrementPhase:update(dt)
   DecrementPhase:update(dt)
   RerollLair:update(dt)
+  Spin:update(dt)
   -- TEMP END
 end
 
@@ -105,6 +112,7 @@ function scene.draw()
   IncrementPhase:draw()
   DecrementPhase:draw()
   RerollLair:draw()
+  Spin:draw()
   -- TEMP END
 end
 

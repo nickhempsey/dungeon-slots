@@ -1,6 +1,5 @@
 return {
   id = "wild",
-  name = "Wild Symbol",
   effects = {},
   assets = {
     images = {
@@ -8,9 +7,6 @@ return {
         src = "wild.png",
         animation = "wild.json"
       }
-    },
-    sounds = {
-      --spin = "spin.wav",
     },
   }
 }

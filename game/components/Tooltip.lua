@@ -4,6 +4,7 @@ local unpack = require "utils.unpack"
 local Tooltip = {}
 Tooltip.__index = Tooltip
 
+Tooltip.debugSummary = false
 Tooltip.debug = Debug
 Tooltip.debugLabel = LogManagerColor.colorf("{blue}[Tooltip]{reset}")
 
@@ -16,6 +17,7 @@ Tooltip.debugLabel = LogManagerColor.colorf("{blue}[Tooltip]{reset}")
 ---@param mouse_rel_x 'left'|'center'|'right'|nil
 ---@param mouse_rel_y 'top'|'center'|'bottom'|nil
 ---@param curser_buffer number|nil
+---@param explicit_id number|nil
 ---@param bg table|nil hexToRGBA
 ---@param color table|nil hexToRGBA
 ---@param border_radius number|nil
@@ -27,6 +29,7 @@ function Tooltip:new(
     width, height,
     mouse_rel_x, mouse_rel_y,
     curser_buffer,
+    explicit_id,
     bg, color,
     border_radius, border_color,
     viewport_buffer)
@@ -52,8 +55,8 @@ function Tooltip:new(
 
         mouse_rel_x     = mouse_rel_x or 'center', -- left | center | right
         mouse_rel_y     = mouse_rel_y or 'top',    -- top | center | bottom
-        cursor_w        = GameState.cursor:getWidth() / 2,
-        cursor_h        = GameState.cursor:getHeight() / 2,
+        cursor_w        = CursorManager.current.image:getWidth() / 2,
+        cursor_h        = CursorManager.current.image:getHeight() / 2,
         cursor_buffer   = curser_buffer or 4,
 
         viewport_buffer = viewport_buffer or 8,
@@ -67,7 +70,7 @@ function Tooltip:new(
 
     setmetatable(instance, Tooltip)
 
-    instance.uid = TooltipManager.register(instance)
+    instance.uid = TooltipManager.register(instance, explicit_id)
 
     if Tooltip.debug then
         LogManager.info(string.format("%s new Tooltip", Tooltip.debugLabel))
@@ -175,8 +178,9 @@ function Tooltip:draw()
     ---------------
     FontsManager:setFontBMP('sm', 'Medium')
     love.graphics.setColor(hexToRGBA(unpack(self.color)))
-    --[[
-    local debugText = string.format([[
+
+    if self.debugSummary then
+        local debugText = string.format([[
 %s
 x: %d   y: %d
 ox: %d  oy: %d
@@ -184,24 +188,30 @@ ax: %d  ay: %d
 w: %d   h: %d
 cw: %d  ch: %d
 ]]
-    --[[, -- remove the comment and keep the comma
-        self.content,
-        self.x,
-        self.y,
-        self.ox,
-        self.oy,
-        self.adjusted_x,
-        self.adjusted_y,
-        self.w,
-        self.h,
-        self.cursor_w,
-        self.cursor_h)
---]]
-    love.graphics.printf(self.content,
-        math.floor(self.adjusted_x + self.content_ox),
-        math.floor(self.adjusted_y + self.content_oy),
-        math.floor(self.w - self.content_ox * 2),
-        self.content_pos)
+            , -- remove the comment and keep the comma
+            self.content,
+            self.x,
+            self.y,
+            self.ox,
+            self.oy,
+            self.adjusted_x,
+            self.adjusted_y,
+            self.w,
+            self.h,
+            self.cursor_w,
+            self.cursor_h)
+        love.graphics.printf(debugText,
+            math.floor(self.adjusted_x + self.content_ox),
+            math.floor(self.adjusted_y + self.content_oy),
+            math.floor(self.w - self.content_ox * 2),
+            self.content_pos)
+    else
+        love.graphics.printf(self.content,
+            math.floor(self.adjusted_x + self.content_ox),
+            math.floor(self.adjusted_y + self.content_oy),
+            math.floor(self.w - self.content_ox * 2),
+            self.content_pos)
+    end
 end
 
 function Tooltip:set(flag, value)

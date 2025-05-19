@@ -1,19 +1,17 @@
 -- debugging and logging
 if arg[#arg] == "vsc_debug" then require("lldebugger").start() end
 if love.filesystem then io.stdout:setvbuf("no") end
-Debug           = true
-LogManagerColor = require "engine.LogManagerColor"
-LogManager      = require "engine.LogManager"
+Debug           = false
 
 -- Utils
 Tween           = require "utils.tween"
 
--- Components
-Button          = require "components.Button"
-Tooltip         = require "components.Tooltip"
-
 -- Engine
+I18n            = require "engine.LocalizationManager"
+LogManagerColor = require "engine.LogManagerColor"
+LogManager      = require "engine.LogManager"
 ColorsManager   = require "engine.ColorsManager"
+CursorManager   = require "engine.CursorManager"
 EntityManager   = require "engine.EntityManager"
 EventBusManager = require "engine.EventBusManager"
 FontsManager    = require "engine.FontsManager"
@@ -22,6 +20,10 @@ ManifestManager = require "engine.ManifestManager"
 SceneManager    = require "engine.SceneManager".newManager()
 ViewportManager = require "engine.ViewportManager"
 TooltipManager  = require "engine.TooltipManager"
+
+-- Components
+Button          = require "components.Button"
+Tooltip         = require "components.Tooltip"
 
 -- State
 GameState       = require "state.GameState"
@@ -41,19 +43,19 @@ Symbol          = require "entities.Symbol"
 
 
 local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
--- local cursorImageData = love.image.newImageData("assets/images/cursor.png")
--- local debugImageData = love.image.newImageData("assets/images/cursor_debug.png")
--- DefaultCursor = love.mouse.newCursor(debugImageData, CursorImage:getWidth() / 2, CursorImage:getWidth() / 2)
 
 -------------------------------------
 ---              LOAD             ---
 -------------------------------------
 function love.load()
-  LogManager.startSession()
-  LogManager.info("%s ⌛ Game loading...", sceneLabel)
-  -- Hide the system cursor
-  love.mouse.setVisible(false)
+  I18n.load('en')
 
+  LogManager.startSession()
+  LogManager.info(I18n.t('ui.main.loading', sceneLabel))
+
+  CursorManager.load()
+
+  -- TooltipManager.debugPositions()
 
   ViewportManager:load()
   ViewportManager:update()
@@ -64,7 +66,7 @@ function love.load()
   GameState:load()
   GameState.resetRNG()
 
-  LogManager.info("%s ✅ Game loaded!", sceneLabel)
+  LogManager.info(I18n.t('ui.main.loaded', sceneLabel))
 end
 
 -------------------------------------
@@ -98,6 +100,7 @@ function love.draw()
   SceneManager.draw()
   GameState:draw()
 
+  CursorManager.draw()
   TooltipManager.draw()
   -- Now draw the canvas to the real screen, scaled and centered
   ViewportManager:scaleCanvas()

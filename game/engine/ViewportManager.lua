@@ -52,7 +52,7 @@ end
 -------------------------------------
 function ViewportManager:getMousePosition()
   local mx, my = love.mouse.getPosition()
-  return (mx - self.offsetX) / self.scale, (my - self.offsetY) / self.scale
+  return math.floor((mx - self.offsetX) / self.scale), math.floor((my - self.offsetY) / self.scale)
 end
 
 function ViewportManager:getWidth()

@@ -1,6 +1,6 @@
 local TooltipManager      = {}
 TooltipManager.debug      = Debug
-TooltipManager.debugLabel = LogManagerColor.colorf("{green}[TooltipManager]{reset}")
+TooltipManager.debugLabel = LogManagerColor.colorf("{red}[TooltipManager]{reset}")
 
 TooltipManager.nextId     = 1
 TooltipManager.registry   = {}
@@ -67,15 +67,30 @@ function TooltipManager.draw()
     end
 end
 
+function TooltipManager.debugPositions()
+    local left_top = Tooltip:new('Left Top', 'left', 100, 76, 'left', 'top')
+    local left_center = Tooltip:new('Left Center', 'left', 100, 76, 'left', 'center')
+    local left_bottom = Tooltip:new('Left Bottom', 'left', 100, 76, 'left', 'bottom')
+    left_top:set('debugSummary', true)
+    left_center:set('debugSummary', true)
+    left_bottom:set('debugSummary', true)
+
+    local right_top = Tooltip:new('Right Top', 'left', 100, 76, 'right', 'top')
+    local right_center = Tooltip:new('Right Center', 'left', 100, 76, 'right', 'center')
+    local right_bottom = Tooltip:new('Right Bottom', 'left', 100, 76, 'right', 'bottom')
+    right_top:set('debugSummary', true)
+    right_center:set('debugSummary', true)
+    right_bottom:set('debugSummary', true)
+
+
+    local center_top = Tooltip:new('Center Top', 'left', 100, 76, 'center', 'top')
+    -- center_center:set('debugSummary', true)
+    local center_bottom = Tooltip:new('Center Bottom', 'left', 100, 76, 'center', 'bottom')
+    center_top:set('debugSummary', true)
+    -- local center_center = Tooltip:new('Center Center', 'left', 100, 76, 'center', 'center')
+    center_bottom:set('debugSummary', true)
+end
+
 return TooltipManager
 
 --- Examples:
--- Tooltip:new('Right Bottom', 'left', 100, 76, 'right', 'bottom', -4)
--- Tooltip:new('Left Bottom', 'left', 100, 76, 'left', 'bottom', -4)
--- Tooltip:new('Center Bottom', 'left', 100, 76, 'center', 'bottom')
--- Tooltip:new('Right Top', 'left', 100, 76, 'right', 'top', -4)
--- Tooltip:new('Left Top', 'left', 100, 76, 'left', 'top', -4)
--- Tooltip:new('Center Top', 'left', 100, 76, 'center', 'top')
--- Tooltip:new('Right Center', 'left', 100, 76, 'right', 'center')
--- Tooltip:new('Left Center', 'left', 100, 76, 'left', 'center')
--- Tooltip:new('Center Center', 'left', 100, 76, 'center', 'center')

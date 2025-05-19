@@ -1,6 +1,9 @@
 local ActionState = {}
 ActionState.__index = ActionState
 
+ActionState.debug = Debug
+ActionState.debugLabel = LogManagerColor.colorf('{yellow}[ActionState]{reset}')
+
 function ActionState:new()
 end
 

@@ -4,7 +4,7 @@ local Lair = {}
 Lair.__index = Lair
 
 Lair.debug = Debug
-Lair.debugLabel = LogManagerColor.colorf('{cyan}[Lair]{reset}')
+Lair.debugLabel = LogManagerColor.colorf('{green}[Lair]{reset}')
 
 -- Instantiate a new Lair by their id.
 --

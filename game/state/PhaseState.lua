@@ -4,6 +4,10 @@ local tableMerge = require "utils.tableMerge"
 local PhaseState = {}
 PhaseState.__index = PhaseState
 
+PhaseState.debug = Debug
+PhaseState.debugLabel = LogManagerColor.colorf('{yellow}[PhaseState]{reset}')
+
+
 local TYPES = readonly({
     RESOLVE_STATUS = {
         id = 'RESOLVE_STATUS',

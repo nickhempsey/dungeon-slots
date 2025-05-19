@@ -2,7 +2,7 @@ local hexToRGBA          = require "utils.hexToRGBA"
 
 local EntityManager      = {}
 EntityManager.debug      = Debug
-EntityManager.debugLabel = LogManagerColor.colorf("{green}[EntityManager]{reset}")
+EntityManager.debugLabel = LogManagerColor.colorf("{red}[EntityManager]{reset}")
 
 EntityManager.nextId     = 1
 EntityManager.registry   = {} -- [uid] = entity
@@ -26,7 +26,9 @@ function EntityManager.register(entity, explicitId)
         EntityManager.nextId = EntityManager.nextId + 1
     end
 
-    LogManager.info(string.format("%s added entity: %s with id %d", EntityManager.debugLabel, entity.id, uid))
+    if EntityManager.debug then
+        LogManager.info(string.format("%s added entity: %s with id %d", EntityManager.debugLabel, entity.id, uid))
+    end
 
     return uid
 end

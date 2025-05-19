@@ -26,7 +26,9 @@ function Hero:new(id)
   hero.xpAmount = 0
   hero.xpRecord = { amount = 0 }
 
-  LogManager.info(string.format("%s New Hero: %s", Hero.debugLabel, id))
+  if Hero.debug then
+    LogManager.info(string.format("%s New Hero: %s", Hero.debugLabel, id))
+  end
 
   EntityManager.register(hero, GameState.heroId)
 

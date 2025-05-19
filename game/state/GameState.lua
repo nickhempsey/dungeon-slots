@@ -4,7 +4,7 @@ local GameState = {}
 GameState.__index = GameState
 
 GameState.debug = Debug
-GameState.debugLabel = LogManagerColor.colorf('{green}[GameState]{reset}')
+GameState.debugLabel = LogManagerColor.colorf('{yellow}[GameState]{reset}')
 
 GameState.scenes = {
   SHOP      = 'shop',
@@ -16,7 +16,6 @@ GameState.scenes = {
   INVENTORY = 'inventory'
 }
 
-GameState.cursor = love.graphics.newImage('assets/images/cursor_debug.png')
 GameState.scene = nil
 GameState.heroId = 1
 GameState.initiative = {}
@@ -26,7 +25,7 @@ GameState.actor = nil
 GameState.rng = love.math.newRandomGenerator(os.time())
 
 function GameState:load()
-  SceneManager.setPath("src/scenes/")
+  SceneManager.setPath("scenes/")
   SceneManager.removeAll()
   SceneManager.add("debug")
 
@@ -45,14 +44,6 @@ function GameState:update(dt)
 end
 
 function GameState:draw()
-  GameState:handleCursorDraw()
-end
-
-function GameState:handleCursorDraw()
-  local mx, my = ViewportManager:getMousePosition()
-  local qx, qy = math.floor(mx - self.cursor:getWidth() / 2), math.floor(my - self.cursor:getHeight() / 2)
-  love.graphics.setColor(1, 1, 1, 1)
-  love.graphics.draw(self.cursor, qx, qy)
 end
 
 function GameState.resetRNG()

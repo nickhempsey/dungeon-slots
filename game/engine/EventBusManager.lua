@@ -5,7 +5,7 @@ local EventBusManager = {}
 EventBusManager.listeners = {}
 
 EventBusManager.debug = Debug
-EventBusManager.debugLabel = LogManagerColor.colorf('{magenta}[EventBusManager]{reset}')
+EventBusManager.debugLabel = LogManagerColor.colorf('{red}[EventBusManager]{reset}')
 
 --- Subscribe to an event
 ---

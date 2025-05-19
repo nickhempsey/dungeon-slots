@@ -1,9 +1,10 @@
-local Bank = {}
+local tableMerge = require "utils.tableMerge"
 
-function Bank:new()
-    return {
-        symbolCounts = {}, -- map SymbolType→count
-    }
+local Bank = {}
+Bank.__index = Bank
+
+function Bank:new(actorSymbols)
+    return {}
 end
 
 return Bank

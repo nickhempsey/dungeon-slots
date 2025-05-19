@@ -1,16 +1,11 @@
 return {
-  id = "defense",
-  name = "Defense Symbol",
-  effects = {},
+  id     = "defense",
   assets = {
     images = {
       sprite = {
-        src = "defense.png",
+        src       = "defense.png",
         animation = "defense.json"
       }
-    },
-    sounds = {
-      --spin = "spin.wav",
     },
   }
 }

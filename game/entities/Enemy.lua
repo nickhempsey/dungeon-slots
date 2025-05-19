@@ -2,7 +2,7 @@ local Enemy = setmetatable({}, { __index = Actor })
 Enemy.__index = Enemy
 
 Enemy.debug = Debug
-Enemy.debugLabel = LogManagerColor.colorf("{red}[Enemy]{reset}")
+Enemy.debugLabel = LogManagerColor.colorf("{green}[Enemy]{reset}")
 
 -- Instantiate a new hero by their id.
 --

@@ -1,5 +1,6 @@
 local pathDefined = require "utils.pathDefined"
 local deepcopy = require "utils.deepcopy"
+local tableMerge = require "utils.tableMerge"
 local json = require "utils.json"
 local peachy = require "utils.peachy"
 
@@ -11,7 +12,7 @@ end
 ManifestManager = {}
 ManifestManager.__index = ManifestManager
 ManifestManager.debug = Debug
-ManifestManager.debugLabel = LogManagerColor.colorf('{green}[ManifestManager]{reset}')
+ManifestManager.debugLabel = LogManagerColor.colorf('{red}[ManifestManager]{reset}')
 ManifestManager.storeRawAnimationJSON = false
 
 local basePath = 'data'
@@ -117,7 +118,7 @@ function ManifestManager.collectStaticAndRelationalValues(manifest, directory)
     local isStatic = type(k) == "string" and type(v) ~= "function"
     if isStatic then
       if k == 'symbols' then
-        output[k] = ManifestManager.handleRelationalTables('Symbol', v)
+        output[k] = ManifestManager.handleSymbols(v)
       elseif k == 'effects' then
         output[k] = ManifestManager.handleRelationalTables('Effect', v)
       elseif k == 'abilities' then
@@ -254,7 +255,16 @@ end
 function ManifestManager.handleFonts(manifestPath, fonts)
 end
 
-function ManifestManager.handleSounds(manifestPath, sounds)
+function ManifestManager.handleSymbols(actorSymbols)
+  local output = {}
+  if actorSymbols then
+    for k, v in pairs(actorSymbols) do
+      local baseSymbol = ManifestManager.handleRelationalTables('Symbol', { k })
+      local merged = tableMerge.deepMergeWithArray(baseSymbol[1] or {}, v or {})
+      table.insert(output, merged)
+    end
+  end
+  return output
 end
 
 -----------------------------
@@ -300,8 +310,7 @@ function ManifestManager.loadEntityManifest(manifestPath, id)
   local dynamicData = ManifestManager.collectDynamicFields(manifest)
   local rollFns     = ManifestManager.collectOnDemandFields(manifest)
 
-  LogManager.info(rollFns)
-  local entity = {}
+  local entity      = {}
 
   for k, v in pairs(staticData) do
     entity[k] = v

@@ -1,12 +1,10 @@
 return {
-  id          = "luck_punk",
-  name        = "Luck Punk",
-  description = "",
-  w           = 128,
-  h           = 128,
-  ox          = 64 / 2,
-  oy          = 128 - 16,
-  baseStats   = function()
+  id        = "luck_punk",
+  w         = 128,
+  h         = 128,
+  ox        = 64 / 2,
+  oy        = 128 - 16,
+  baseStats = function()
     return {
       health     = 30,
       attack     = 5,
@@ -14,24 +12,26 @@ return {
       initiative = 4,
     }
   end,
-  baseSymbols = function()
-    return {
-      "defense",
-      "heal",
-      "magic",
-      "melee",
-      "mobility",
-      "potion",
-      "ranged",
-      "wild"
-    }
-  end,
-  abilities   = {
+  symbols   = {
+    defense = {
+      qty = 3,
+      increase_cap = 3
+    },
+    heal = {
+      qty = 2,
+      increase_cap = 2
+    },
+    mobility = {
+      qty = 1,
+      increase_cap = 1
+    },
+  },
+  abilities = {
     "quick_slash",
     "taunt",
     "triple_arrow"
   },
-  assets      = {
+  assets    = {
     images = {
       sprite = {
         src       = "luck_punk.png",

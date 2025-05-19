@@ -27,7 +27,7 @@ function scene.load()
   end
   local handleHover = function(self)
     if not self.tooltip then
-      self.tooltip = Tooltip:new('This starts the game', 'center', 120, 18)
+      self.tooltip = Tooltip:new(I18n.t("ui.main.start_tooltip"), 'center', 120, 18)
     end
   end
   local handleBlur = function(self)
@@ -36,7 +36,7 @@ function scene.load()
       self.tooltip = nil
     end
   end
-  StartButton = Button:new('START', midX, midY, handleClick, handleHover, handleBlur)
+  StartButton = Button:new(I18n.t("ui.main.start_label"), midX, midY, handleClick, handleHover, handleBlur)
   StartButton:size('md')
   StartButton:set('x', midX - StartButton.width / 2)
   StartButton:set('y', midY - StartButton.height / 2)
