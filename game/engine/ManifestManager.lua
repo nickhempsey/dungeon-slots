@@ -306,23 +306,23 @@ function ManifestManager.loadEntityManifest(manifestPath, id)
     return nil
   end
 
-  local staticData  = ManifestManager.collectStaticAndRelationalValues(manifest, directory)
-  local dynamicData = ManifestManager.collectDynamicFields(manifest)
-  local rollFns     = ManifestManager.collectOnDemandFields(manifest)
+  local entity     = {}
 
-  local entity      = {}
-
+  -- HANDLE STATIC
+  local staticData = ManifestManager.collectStaticAndRelationalValues(manifest, directory)
   for k, v in pairs(staticData) do
     entity[k] = v
   end
 
+  -- HANDLE Dynamic
+  local dynamicData = ManifestManager.collectDynamicFields(manifest)
   for k, v in pairs(dynamicData) do
     entity[k] = v
   end
 
-  -- stash the compute-on-demand fns
+  -- HANDLE OnDemand
+  local rollFns = ManifestManager.collectOnDemandFields(manifest)
   entity._rolls = rollFns
-
   function entity:roll(name, ...)
     local fn = self._rolls[name]
     assert(fn, ("No roll-field '%s'"):format(name))

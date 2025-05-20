@@ -2,9 +2,9 @@ return {
   id     = "heal",
   assets = {
     images = {
-      sprite = {
-        src = "heal.png",
-        animation = "heal.json"
+      reel = {
+        src = "heal_reel.png",
+        --animation = "heal_reel.json"
       }
     },
   }

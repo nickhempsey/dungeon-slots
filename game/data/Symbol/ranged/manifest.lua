@@ -3,9 +3,9 @@ return {
   effects = {},
   assets = {
     images = {
-      sprite = {
-        src = "ranged.png",
-        animation = "ranged.json"
+      reel = {
+        src = "ranged_reel.png",
+        -- animation = "ranged_reel.json"
       }
     },
   }

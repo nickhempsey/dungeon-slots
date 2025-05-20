@@ -36,7 +36,7 @@ function Actor:new(actorType, actorId)
         currentAnimation = nil,
         currentSprite    = nil,
 
-        symbolBank       = Bank:new(),
+        symbolBank       = nil,
         statusEffects    = {},
         phaseState       = {},
         InitiativeState  = nil,
@@ -51,10 +51,12 @@ function Actor:new(actorType, actorId)
         instance.currentAnimation = instance.assets.images.sprite.animations.factory('idle')
     end
 
-    -- handle symbol setup
-    if instance.baseSymbols then
-
+    -- handle initial symbol setup
+    if instance.symbols then
+        instance.symbolBank = Bank:new(instance.symbols, instance.uid)
+        instance.reel       = Reel:new(instance.symbols, instance.uid)
     end
+
 
 
     return instance
@@ -97,8 +99,10 @@ end
 ---
 ---@param tag string
 function Actor:setAnimation(tag)
-    LogManager.info(string.format("%s animation change: %s %s", self.debugLabel, self.name, tag))
-    LogManager.info(self.currentSprite)
+    if self.debug then
+        LogManager.info(string.format("%s animation change: %s %s", self.debugLabel, self.name, tag))
+        LogManager.info(self.currentSprite)
+    end
 
     if self.currentAnimation and self.currentSprite.animations then
         self.currentAnimation = self.currentSprite.animations.factory(tag)
@@ -155,7 +159,7 @@ function Actor:onInitiativeRoundChange(data)
 end
 
 function Actor:onPhaseChange(data)
-    if self.isTurn then
+    if self.isTurn and self.phaseStart then
         self:phaseStart(data)
     end
 end

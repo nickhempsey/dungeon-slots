@@ -2,10 +2,14 @@ return {
   id     = "defense",
   assets = {
     images = {
-      sprite = {
-        src       = "defense.png",
-        animation = "defense.json"
-      }
+      reel = {
+        src = "defense_reel.png",
+        -- animation = "defense_reel.json"
+      },
+      -- bank = {
+      --   src       = "defense_bank.png",
+      --   animation = "defense_bank.json"
+      -- }
     },
   }
 }

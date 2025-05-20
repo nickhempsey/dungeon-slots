@@ -2,9 +2,9 @@ return {
   id = "melee",
   assets = {
     images = {
-      sprite = {
-        src = "melee.png",
-        animation = "melee.json",
+      reel = {
+        src = "melee_reel.png",
+        --animation = "melee.json",
       }
     },
   }

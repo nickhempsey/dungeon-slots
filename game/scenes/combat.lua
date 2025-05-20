@@ -77,10 +77,8 @@ function scene.load()
     GameState.initiative:advanceInitiative()
   end)
   Spin = Button:new("Spin", 8, 160, function()
-    local reel = Reel:new(GameState.initiative.actor.symbols)
-    reel:spin()
-    local results = reel:getResults()
-    LogManager.info(results)
+    GameState.initiative.actor.reel:spinReel()
+    LogManager.info(GameState.hero.reel.current)
   end)
   RerollLair:set('width', 160)
   -- TEMP END
@@ -105,6 +103,19 @@ end
 function scene.draw()
   GameState.lair:draw()
   EntityManager.draw()
+
+  if GameState.hero.reel.current then
+    local start_x = 336
+    for i, symbol in ipairs(GameState.hero.reel.current) do
+      local image = symbol.assets.images.reel.image
+      if i > 1 then
+        start_x = start_x + 10 + image:getWidth()
+      end
+      love.graphics.draw(image, start_x, 280)
+    end
+  end
+
+
 
   -- TEMP START
   IncrementTurn:draw()

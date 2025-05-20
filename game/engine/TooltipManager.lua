@@ -23,7 +23,9 @@ function TooltipManager.register(tooltip, explicitId)
         TooltipManager.nextId = TooltipManager.nextId + 1
     end
 
-    LogManager.info(string.format("%s added tooltip with id %d", TooltipManager.debugLabel, uid))
+    if TooltipManager.debug then
+        LogManager.info(string.format("%s added tooltip with id %d", TooltipManager.debugLabel, uid))
+    end
 
     return uid
 end

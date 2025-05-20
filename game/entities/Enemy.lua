@@ -15,7 +15,10 @@ function Enemy:new(id)
   assert(enemy, 'Enemy failed to load')
 
   setmetatable(enemy, Enemy)
-  LogManager.info(string.format("%s New enemy: %s", Enemy.debugLabel, id))
+
+  if Enemy.debug then
+    LogManager.info(string.format("%s New enemy: %s", Enemy.debugLabel, id))
+  end
 
   EntityManager.register(enemy)
 

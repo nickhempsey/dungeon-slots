@@ -16,7 +16,6 @@ function Hero:new(id)
 
   setmetatable(hero, Hero)
   hero.uid      = 0
-  hero.bank     = Bank:new()
   hero.currency = {
     gold       = 0,
     gems       = 0,

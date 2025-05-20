@@ -10,7 +10,6 @@ Lair.debugLabel = LogManagerColor.colorf('{green}[Lair]{reset}')
 --
 ---@param id string
 function Lair:new(id)
-    LogManager.info(id)
     assert(type(id) == "string", string.format("Lair:new 'new': parameter 'id' must be a string: %s", id))
     local manifest = ManifestManager.loadEntityManifest("Lair", id)
     if not manifest then
@@ -61,7 +60,9 @@ function Lair:generateEnemies()
     local quantity = self:roll('quantityOfEnemies')
     local availableEnemies = self.availableEnemies
 
-    LogManager.info(quantity, availableEnemies)
+    if self.debug then
+        LogManager.info(quantity, availableEnemies)
+    end
 
     assert(quantity, "Function 'generateEnemies': parameter 'quantity' must be a number.")
     assert(availableEnemies, "Function 'generateEnemies': parameter 'available' must be a table.")

@@ -21,7 +21,23 @@ return {
       qty = 2,
       increase_cap = 2
     },
+    magic = {
+      qty = 1,
+      increase_cap = 1
+    },
+    melee = {
+      qty = 1,
+      increase_cap = 1
+    },
     mobility = {
+      qty = 1,
+      increase_cap = 1
+    },
+    potion = {
+      qty = 1,
+      increase_cap = 1
+    },
+    ranged = {
       qty = 1,
       increase_cap = 1
     },
