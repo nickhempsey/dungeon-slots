@@ -104,14 +104,36 @@ function scene.draw()
   GameState.lair:draw()
   EntityManager.draw()
 
+  if GameState.hero.reel.before then
+    local start_x = 337
+    for i, symbol in ipairs(GameState.hero.reel.before) do
+      local image = symbol.assets.images.reel.image
+      if i > 1 then
+        start_x = start_x + 9 + image:getWidth()
+      end
+      love.graphics.draw(image, start_x, 280 - image:getHeight() - 5)
+    end
+  end
+
   if GameState.hero.reel.current then
-    local start_x = 336
+    local start_x = 337
     for i, symbol in ipairs(GameState.hero.reel.current) do
       local image = symbol.assets.images.reel.image
       if i > 1 then
-        start_x = start_x + 10 + image:getWidth()
+        start_x = start_x + 9 + image:getWidth()
       end
       love.graphics.draw(image, start_x, 280)
+    end
+  end
+
+  if GameState.hero.reel.after then
+    local start_x = 337
+    for i, symbol in ipairs(GameState.hero.reel.after) do
+      local image = symbol.assets.images.reel.image
+      if i > 1 then
+        start_x = start_x + 9 + image:getWidth()
+      end
+      love.graphics.draw(image, start_x, 280 + image:getHeight() + 5)
     end
   end
 

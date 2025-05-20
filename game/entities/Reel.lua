@@ -36,11 +36,24 @@ function Reel:new(symbols)
     symbols          = symbols,
     current          = {},
     previous         = {},
+    before           = {},
+    after            = {},
     slots            = 3,
     decrementingOdds = false,
     tempReel         = {} -- Used during roll to make a copy of the reel and decrement symbol values to adjust odds.
   }, self)
   instance:buildCumulative()
+
+  -- This is to build up a bit of history so we can use them
+  -- in our before and after position on the reel.
+  instance:spinReel()
+  instance:spinReel()
+  instance:spinReel()
+  instance:spinReel()
+  instance:spinReel()
+
+  LogManager.info(instance.previous)
+
   return instance
 end
 
@@ -122,7 +135,7 @@ end
 
 function Reel:spinReel()
   LogManager.info("-------- START REEL--------")
-  if self.currentSpin then
+  if self.current then
     table.insert(self.previous, self.current)
   end
 
@@ -145,6 +158,8 @@ function Reel:spinReel()
       self:updateCumulative(i, 'Reel')
     end
   end
+
+  self:setBeforeAndAfter()
 
 
   LogManager.info("")
@@ -200,6 +215,18 @@ end
 
 function Reel:getPrevious()
   return self.previous
+end
+
+function Reel:setBeforeAndAfter()
+  if #self.previous > 2 then
+    local beforeIdx = love.math.random(1, #self.previous)
+    local before = self.previous[beforeIdx]
+    self.before = before
+
+    local afterIdx = love.math.random(1, #self.previous)
+    local after = self.previous[afterIdx]
+    self.after = after
+  end
 end
 
 function Reel:draw()
