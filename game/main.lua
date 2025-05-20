@@ -1,7 +1,7 @@
 -- debugging and logging
 if arg[#arg] == "vsc_debug" then require("lldebugger").start() end
 if love.filesystem then io.stdout:setvbuf("no") end
-Debug           = false
+Debug           = true
 
 -- Utils
 Tween           = require "utils.tween"

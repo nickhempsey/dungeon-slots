@@ -76,11 +76,16 @@ function scene.load()
     -- temp tick forward to 0 eventually will check for loadmode first.
     GameState.initiative:advanceInitiative()
   end)
-  Spin = Button:new("Spin", 8, 160, function()
-    GameState.initiative.actor.reel:spinReel()
-    LogManager.info(GameState.hero.reel.current)
-  end)
   RerollLair:set('width', 160)
+
+  Spin = Button:new("Spin", 8, 160, function()
+    -- LogManager.info('SPIN!')
+    -- LogManager.info(GameState.hero.reel)
+    if GameState.hero.reel then
+      GameState.hero.reel:spinReel()
+    end
+  end)
+  Spin:set('width', 160)
   -- TEMP END
 end
 

@@ -37,7 +37,7 @@ function Button:new(label, x, y, onClick, onHover, onBlur)
   btn.onHover      = onHover or function() end
   btn.onBlur       = onBlur or function() end
 
-  btn.hover        = false
+  btn.is_hovered   = false
   btn.color        = hexToRGBA('#000000')
   btn.bg           = hexToRGBA('#FF004D')
   btn.hoverColor   = hexToRGBA('#ffffff')
@@ -93,14 +93,16 @@ end
 ---@param dt number
 function Button:update(dt)
   local mx, my = ViewportManager:getMousePosition()
-  self.hover = self:isInside(mx, my)
+  self.is_hovered = self:isInside(mx, my)
 
   local keypressed = self.keybind ~= nil and love.keyboard.isPressed(self.keybind)
-  local mousepressed = self.mousebind ~= nil and love.mouse.isPressed(self.mousebind) and self.hover
+  local mousepressed = self.mousebind ~= nil and love.mouse.isPressed(self.mousebind) and self.is_hovered
 
-  if self.hover then
+  if self.is_hovered and self.onHover then
     self.onHover(self)
-  else
+  end
+
+  if not self.is_hovered and self.onBlur then
     self.onBlur(self)
   end
 
@@ -113,7 +115,9 @@ function Button:update(dt)
     end
 
     -- self:playsound()
-    self.onClick(self)
+    if self.onClick then
+      self.onClick(self)
+    end
   end
 end
 
@@ -129,7 +133,7 @@ end
 --- Draw the button to the screen
 function Button:draw()
   -- Background
-  if self.hover then
+  if self.is_hovered then
     love.graphics.setColor(self.hoverBg) -- hover color
   else
     love.graphics.setColor(self.bg)      -- default color
@@ -137,7 +141,7 @@ function Button:draw()
   love.graphics.rectangle("fill", self.x, self.y, self.width, self.height, self.borderRadius, self.borderRadius)
 
   -- Label
-  if self.hover then
+  if self.is_hovered then
     love.graphics.setColor(self.hoverColor) -- hover color
   else
     love.graphics.setColor(self.color)      -- default color
