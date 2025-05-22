@@ -1,6 +1,35 @@
 local deepcopy = require "utils.deepcopy"
 
 --[[
+
+Based on conversations with Daiden, I agree with him, I'm not loving how this works.
+
+-----------------------
+
+What if we move to a system that actually builds out a reel and legit spins it.
+I was trying to be cautious with memory management by using a binary-search,
+but I don't think it feels good and is giving weird results.
+
+New approach:
+1. On :new create a reel by taking the symbols and their quantities and shuffling them randomly.
+2. Set that reel "shape" as a constant
+3. When the actor rolls, we'll do the following:
+  a. Pick a random number in the reel range
+  b. Grab the winner in that slot
+
+This will keep the results consistent and prevent more of the same symbols
+than the actor has from showing up in the reel.
+
+In addition, that reel can be brought in to the game and edited by the player since it's a static
+property. We can also use it to draw each reel slot and animate on a loop using TweenManager to
+change it's position from the current starting point, cycle 3 or 4 times and end on the selected value.
+Ideally we'd want a way to allow the user to increase the speed in which the rolls acure so that
+it's not always a 5s roll time. For the grinders out there...
+]]
+
+
+
+--[[
   Reel
 
   Allows you to define a “reel” of symbols, each with a `qty` weight,
@@ -46,7 +75,6 @@ function Reel:new(symbols)
 
   -- This is to build up a bit of history so we can use them
   -- in our before and after position on the reel.
-  instance:spinReel()
   instance:spinReel()
   instance:spinReel()
   instance:spinReel()
@@ -161,6 +189,10 @@ function Reel:spinReel()
 
   self:setBeforeAndAfter()
 
+  if self.decrementingOdds then
+    -- rebuild the reel after the spin is done so that the odds reset.
+    self:buildCumulative()
+  end
 
   LogManager.info("")
   LogManager.info("")
@@ -219,11 +251,13 @@ end
 
 function Reel:setBeforeAndAfter()
   if #self.previous > 2 then
-    local beforeIdx = love.math.random(1, #self.previous)
+    local beforeIdx = love.math.random(2, #self.previous)
     local before = self.previous[beforeIdx]
     self.before = before
 
-    local afterIdx = love.math.random(1, #self.previous)
+    LogManager.info("idx: %d Count: %d", beforeIdx, #self.previous)
+
+    local afterIdx = love.math.random(2, #self.previous)
     local after = self.previous[afterIdx]
     self.after = after
   end
