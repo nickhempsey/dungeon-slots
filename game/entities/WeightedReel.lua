@@ -117,7 +117,7 @@ end
     2. Binary‐searches cumulative[] for the first weight ≥ r
 --]]
 function Reel:spinSlot()
-  local r = math.random(1, self.tempReel.totalWeight)
+  local r = love.math.random(1, self.tempReel.totalWeight)
   local lo, hi = 1, #self.tempReel.cumulative
 
   while lo < hi do

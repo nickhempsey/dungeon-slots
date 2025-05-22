@@ -77,11 +77,14 @@ function scene.load()
     GameState.initiative:advanceInitiative()
   end)
   Spin = Button:new("Spin", 8, 160, function()
-    GameState.initiative.actor.reel:spinReel()
-    LogManager.info(GameState.hero.reel.current)
+    GameState.hero.reel:spinReel()
+    -- LogManager.info(GameState.hero.reel.current)
   end)
   RerollLair:set('width', 160)
   -- TEMP END
+
+  scene.x = 338
+  scene.y = 254
 end
 
 -- Scene updates loop
@@ -102,40 +105,41 @@ end
 -- Scene draw loop
 function scene.draw()
   GameState.lair:draw()
-  EntityManager.draw()
+  -- EntityManager.draw()
 
-  if GameState.hero.reel.before then
-    local start_x = 337
-    for i, symbol in ipairs(GameState.hero.reel.before) do
-      local image = symbol.assets.images.reel.image
-      if i > 1 then
-        start_x = start_x + 9 + image:getWidth()
-      end
-      love.graphics.draw(image, start_x, 280 - image:getHeight() - 5)
-    end
-  end
+  -- if GameState.hero.reel.before then
+  --   local start_x = 337
+  --   for i, symbol in ipairs(GameState.hero.reel.before) do
+  --     local image = symbol.assets.images.reel.image
+  --     if i > 1 then
+  --       start_x = start_x + 9 + image:getWidth()
+  --     end
+  --     love.graphics.draw(image, start_x, 280 - image:getHeight() - 5)
+  --   end
+  -- end
 
-  if GameState.hero.reel.current then
-    local start_x = 337
-    for i, symbol in ipairs(GameState.hero.reel.current) do
-      local image = symbol.assets.images.reel.image
-      if i > 1 then
-        start_x = start_x + 9 + image:getWidth()
-      end
-      love.graphics.draw(image, start_x, 280)
-    end
-  end
 
-  if GameState.hero.reel.after then
-    local start_x = 337
-    for i, symbol in ipairs(GameState.hero.reel.after) do
-      local image = symbol.assets.images.reel.image
-      if i > 1 then
-        start_x = start_x + 9 + image:getWidth()
-      end
-      love.graphics.draw(image, start_x, 280 + image:getHeight() + 5)
-    end
-  end
+  -- if GameState.hero.reel.current then
+  --   local start_x = 337
+  --   for i, symbol in ipairs(GameState.hero.reel.current) do
+  --     local image = symbol.assets.images.reel.image
+  --     if i > 1 then
+  --       start_x = start_x + 9 + image:getWidth()
+  --     end
+  --     love.graphics.draw(image, start_x, 280)
+  --   end
+  -- end
+
+  -- if GameState.hero.reel.after then
+  --   local start_x = 337
+  --   for i, symbol in ipairs(GameState.hero.reel.after) do
+  --     local image = symbol.assets.images.reel.image
+  --     if i > 1 then
+  --       start_x = start_x + 9 + image:getWidth()
+  --     end
+  --     love.graphics.draw(image, start_x, 280 + image:getHeight() + 5)
+  --   end
+  -- end
 
 
 
@@ -146,6 +150,23 @@ function scene.draw()
   DecrementPhase:draw()
   RerollLair:draw()
   Spin:draw()
+
+  -- Define the mask shape
+  love.graphics.stencil(function()
+    love.graphics.rectangle("fill", scene.x, scene.y, 32 * 3 + 20, 91)
+  end, "replace", 1)
+
+  -- Only draw where the stencil value is 1
+  love.graphics.setStencilTest("equal", 1)
+  -- love.graphics.draw(img, 100, 100)
+  Reel:drawReel(GameState.hero.reel, GameState.hero.reel.current, scene.x, scene.y, 9, 5)
+  love.graphics.setStencilTest()  -- Reset
+
+  love.graphics.setColor(1, 0, 0) -- Red (RGB, 0-1)
+  love.graphics.setLineWidth(3)
+  love.graphics.line(288, 96, 416, 96)
+  love.graphics.line(288, 128 + 5, 416, 128 + 5)
+  love.graphics.setColor(1, 1, 1)
   -- TEMP END
 end
 

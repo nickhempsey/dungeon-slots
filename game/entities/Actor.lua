@@ -53,11 +53,9 @@ function Actor:new(actorType, actorId)
 
     -- handle initial symbol setup
     if instance.symbols then
-        instance.symbolBank = Bank:new(instance.symbols, instance.uid)
-        instance.reel       = Reel:new(instance.symbols, instance.uid)
+        instance.symbolBank = Bank:new(instance.symbols)
+        instance.reel       = Reel:new(instance.symbols)
     end
-
-
 
     return instance
 end

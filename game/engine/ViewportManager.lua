@@ -34,7 +34,7 @@ function ViewportManager:apply()
 end
 
 function ViewportManager:clearCanvas()
-  love.graphics.setCanvas(self.canvas)
+  love.graphics.setCanvas({ self.canvas, stencil = true })
   love.graphics.clear(1, 1, 1, 1)
 end
 
