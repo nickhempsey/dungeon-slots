@@ -110,7 +110,7 @@ end
 -- Scene draw loop
 function scene.draw()
   GameState.lair:draw()
-  -- EntityManager.draw()
+  EntityManager.draw()
 
   -- if GameState.hero.reel.before then
   --   local start_x = 337
@@ -165,12 +165,12 @@ function scene.draw()
   love.graphics.setStencilTest("equal", 1)
   -- love.graphics.draw(img, 100, 100)
   Reel:drawReel(GameState.hero.reel, GameState.hero.reel.current, scene.x, scene.y, 9, 5)
-  love.graphics.setStencilTest()  -- Reset
+  love.graphics.setStencilTest() -- Reset
 
-  love.graphics.setColor(1, 0, 0) -- Red (RGB, 0-1)
-  love.graphics.setLineWidth(3)
-  love.graphics.line(288, 96, 416, 96)
-  love.graphics.line(288, 128 + 5, 416, 128 + 5)
+  love.graphics.setColor(1, 0, 0, 0.5)
+  love.graphics.setLineWidth(1)
+  love.graphics.line(337, 283, 450, 283)
+  love.graphics.line(337, 320, 450, 320)
   love.graphics.setColor(1, 1, 1)
   -- TEMP END
 end
