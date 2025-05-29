@@ -18,8 +18,8 @@ local TYPES = readonly({
     UPGRADE_1      = {
         id = 'UPGRADE_1',
         name = 'Upgrade/maintain your symbols and abilities.',
-        prev = 'ROLL',
-        next = 'END',
+        prev = 'RESOLVE_STATUS',
+        next = 'ROLL',
     },
     ROLL           = {
         id = 'ROLL',
@@ -31,7 +31,7 @@ local TYPES = readonly({
         id = 'MAIN',
         name = 'Play your abilities.',
         prev = 'ROLL',
-        next = 'UPGRADE',
+        next = 'UPGRADE_2',
     },
     UPGRADE_2      = {
         id = 'UPGRADE_2',

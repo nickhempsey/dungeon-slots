@@ -44,9 +44,10 @@ end
 ---
 ---@param event string
 ---@param callback function
----@param owner string
+---@param owner table
 ---@param priority number
-function EventBusManager:once(event, callback, owner, priority)
+---@param context table
+function EventBusManager:once(event, callback, owner, priority, context)
   assert(type(event) == "string", "Function 'once': first parameter must be a string.")
   assert(type(callback) == "function", "Function 'once': second parameter must be a function.")
 
@@ -55,7 +56,7 @@ function EventBusManager:once(event, callback, owner, priority)
     self:unsubscribe(event, wrapper)
     callback(...)
   end
-  self:subscribe(event, wrapper, owner, priority)
+  self:subscribe(event, wrapper, owner, priority, context)
 end
 
 --- Unsubscribe a specific callback from an event

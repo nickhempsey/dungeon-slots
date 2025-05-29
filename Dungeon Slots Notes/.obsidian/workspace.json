@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "+ Level and Room Design/Mystery Room.md",
+                "file": "+ Combat/Combat Overview.md",
                 "mode": "source",
                 "source": false,
                 "backlinks": true,
@@ -28,7 +28,7 @@
                 }
               },
               "icon": "lucide-file",
-              "title": "Mystery Room"
+              "title": "Combat Overview"
             }
           }
         ]
@@ -88,8 +88,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 240.5,
-    "collapsed": true
+    "width": 240.5
   },
   "right": {
     "id": "e4ee41ab424d00fc",
@@ -182,16 +181,17 @@
   },
   "active": "650fceff67bca8de",
   "lastOpenFiles": [
+    "+ Level and Room Design/+ Level Layouts.canvas",
+    "+ Combat/Combat Overview.md",
+    "Game Design Document.md",
+    "+ Level and Room Design/Mystery Room.md",
     "+ Enemy Designs/+ Enemy Design Overview.md",
     "Tech Debt & Bugs/+ Tech Debt & Bugs.md",
-    "+ Combat/Combat Overview.md",
     "Roadmap/+ Development Roadmap.md",
     "Roadmap/0.0.3 Combat System.md",
     "Roadmap/0.0.2 Manifest and Asset Manager.md",
     "+ Enemy Designs/Beastiary.md",
-    "+ Level and Room Design/+ Level Layouts.canvas",
     "Game Loop.canvas",
-    "Game Design Document.md",
     "+ Level and Room Design/+Levels and Rooms Overview.md",
     "Untitled Kanban.md",
     "+ Combat/Combat setup sequence.canvas",
@@ -201,7 +201,6 @@
     "+ Level and Room Design/Level Start.md",
     "+ Level and Room Design/Shop Room.md",
     "+ Level and Room Design/Rest Room.md",
-    "+ Level and Room Design/Mystery Room.md",
     "+ Combat",
     "Technical Notes/+ Technical Style Guide.md",
     "Combat System",
@@ -230,7 +229,6 @@
     "Art",
     "untitled folder",
     "Technical Notes/Managers/Manifests.md",
-    "Technical Notes/Managers/Logs and Debugging.md",
     "Technical Notes/Managers"
   ]
 }

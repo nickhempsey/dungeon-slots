@@ -6,9 +6,9 @@ Symbol.__index = Symbol
 
 function Symbol:new(initialValues)
   local instance = setmetatable(tableMerge({
-    qty         = 0,
-    cap         = 10,
-    probability = 0,
+    x = 0,
+    y = 0,
+
   }, initialValues), self)
 
   return instance
@@ -16,6 +16,9 @@ end
 
 function Symbol:load()
 
+end
+
+function Symbol:isHover()
 end
 
 return Symbol

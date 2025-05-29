@@ -2,7 +2,6 @@ local deepcopy = require "utils.deepcopy"
 local uuid = require "utils.uuid"
 
 --[[
-
 --]]
 
 local PhysicalReel = {}
@@ -12,7 +11,6 @@ PhysicalReel.debug = Debug
 PhysicalReel.debugLabel = LogManagerColor.colorf('{green}[Reel]{reset}')
 
 --[[
-
 --]]
 function PhysicalReel:new(symbols)
   assert(type(symbols) == "table", "symbols must be a table")
@@ -83,6 +81,8 @@ function PhysicalReel:spinReel()
     local selectedSymbol = self.slots[i][rng]
     table.insert(self.current.selected, selectedSymbol)
   end
+
+  EventBusManager:publish('reel_spun_end', self.current)
 
   LogManager.info("-------- START RESULTS--------")
   LogManager.info(self.current.selected)

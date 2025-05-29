@@ -79,8 +79,6 @@ function scene.load()
   RerollLair:set('width', 160)
 
   Spin = Button:new("Spin", 8, 160, function()
-    -- LogManager.info('SPIN!')
-    -- LogManager.info(GameState.hero.reel)
     if GameState.hero.reel then
       GameState.hero.reel:spinReel()
     end
@@ -112,41 +110,6 @@ function scene.draw()
   GameState.lair:draw()
   EntityManager.draw()
 
-  -- if GameState.hero.reel.before then
-  --   local start_x = 337
-  --   for i, symbol in ipairs(GameState.hero.reel.before) do
-  --     local image = symbol.assets.images.reel.image
-  --     if i > 1 then
-  --       start_x = start_x + 9 + image:getWidth()
-  --     end
-  --     love.graphics.draw(image, start_x, 280 - image:getHeight() - 5)
-  --   end
-  -- end
-
-
-  -- if GameState.hero.reel.current then
-  --   local start_x = 337
-  --   for i, symbol in ipairs(GameState.hero.reel.current) do
-  --     local image = symbol.assets.images.reel.image
-  --     if i > 1 then
-  --       start_x = start_x + 9 + image:getWidth()
-  --     end
-  --     love.graphics.draw(image, start_x, 280)
-  --   end
-  -- end
-
-  -- if GameState.hero.reel.after then
-  --   local start_x = 337
-  --   for i, symbol in ipairs(GameState.hero.reel.after) do
-  --     local image = symbol.assets.images.reel.image
-  --     if i > 1 then
-  --       start_x = start_x + 9 + image:getWidth()
-  --     end
-  --     love.graphics.draw(image, start_x, 280 + image:getHeight() + 5)
-  --   end
-  -- end
-
-
 
   -- TEMP START
   IncrementTurn:draw()
@@ -163,10 +126,11 @@ function scene.draw()
 
   -- Only draw where the stencil value is 1
   love.graphics.setStencilTest("equal", 1)
-  -- love.graphics.draw(img, 100, 100)
   Reel:drawReel(GameState.hero.reel, GameState.hero.reel.current, scene.x, scene.y, 9, 5)
   love.graphics.setStencilTest() -- Reset
 
+
+  -- DEBUG RED LINES
   love.graphics.setColor(1, 0, 0, 0.5)
   love.graphics.setLineWidth(1)
   love.graphics.line(337, 283, 450, 283)

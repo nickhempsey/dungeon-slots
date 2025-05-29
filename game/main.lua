@@ -41,6 +41,8 @@ Reel            = require "entities.PhysicalReel"
 WeightedReel    = require "entities.WeightedReel"
 StatusEffect    = require "entities.StatusEffect"
 Symbol          = require "entities.Symbol"
+BankSymbol      = require "entities.BankSymbol"
+ReelSymbol      = require "entities.ReelSymbol"
 
 
 local sceneLabel = LogManagerColor.colorf('{green}[GameLoop]{reset}')
