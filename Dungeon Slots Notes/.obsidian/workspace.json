@@ -11,24 +11,16 @@
             "id": "650fceff67bca8de",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "kanban",
               "state": {
-                "file": "+ Level and Room Design/Mystery Room.md",
-                "mode": "source",
-                "source": false,
-                "backlinks": true,
-                "backlinkOpts": {
-                  "collapseAll": false,
-                  "extraContext": false,
-                  "sortOrder": "alphabetical",
-                  "showSearch": false,
-                  "searchQuery": "",
-                  "backlinkCollapsed": false,
-                  "unlinkedCollapsed": true
+                "file": "Untitled Kanban 1.md",
+                "kanbanViewState": {
+                  "kanban-plugin": "board",
+                  "list-collapse": []
                 }
               },
-              "icon": "lucide-file",
-              "title": "Mystery Room"
+              "icon": "lucide-trello",
+              "title": "Untitled Kanban 1"
             }
           }
         ]
@@ -182,6 +174,8 @@
   },
   "active": "650fceff67bca8de",
   "lastOpenFiles": [
+    "+ Level and Room Design/Mystery Room.md",
+    "Untitled Kanban 1.md",
     "+ Enemy Designs/+ Enemy Design Overview.md",
     "Tech Debt & Bugs/+ Tech Debt & Bugs.md",
     "+ Combat/Combat Overview.md",
@@ -201,7 +195,6 @@
     "+ Level and Room Design/Level Start.md",
     "+ Level and Room Design/Shop Room.md",
     "+ Level and Room Design/Rest Room.md",
-    "+ Level and Room Design/Mystery Room.md",
     "+ Combat",
     "Technical Notes/+ Technical Style Guide.md",
     "Combat System",
@@ -230,7 +223,6 @@
     "Art",
     "untitled folder",
     "Technical Notes/Managers/Manifests.md",
-    "Technical Notes/Managers/Logs and Debugging.md",
     "Technical Notes/Managers"
   ]
 }
